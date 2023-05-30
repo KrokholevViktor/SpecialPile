@@ -1,0 +1,18 @@
+@font-face {
+    font-family: 'Bebas Neue';
+    font-display: swap;
+    src: local('bebas-neue-bold'),
+        url('../fonts/bebas-neue-bold.woff2') format('woff2'),
+        url('../fonts/bebas-neue-bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-display: swap;
+    src: local('OpenSans-400'),
+        url('../fonts/OpenSans-400.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}

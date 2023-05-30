@@ -1,0 +1,44 @@
+.header {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    &__wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 0px;
+        gap: 545px;
+    }
+    &__info {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        padding: 0px;
+        gap: 40px;
+        &_email {
+            color: #000;
+            text-decoration: none;
+        }
+    }
+    &__devider {
+        width: 1160px;
+        height: 1px;
+        margin: 0 auto;
+        border-bottom: 1px solid #333333;
+        padding-top: 15px;
+        opacity: 0.25;
+    }
+    &__menu {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 15px 0px 0px 0px;
+        gap: 35px;
+        a {
+            text-decoration: none;
+            color:#000
+        }
+        
+    }
+
+}
