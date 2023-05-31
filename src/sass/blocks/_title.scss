@@ -1,0 +1,11 @@
+.title {
+    color: $title-color;
+    &_promo {
+        font-family: 'Bebas Neue';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 64px;
+        line-height: 64px;
+        color: $title-color;
+    }
+}

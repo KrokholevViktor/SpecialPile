@@ -1,0 +1,19 @@
+.button {
+    color: white;
+    background-color: $pink-color;
+    width: 160px;
+    height: 42px;
+    border: none;
+    font-family: 'Bebas Neue';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 16px;
+    &_black {
+        border: none;
+        color: white;
+        width: 260px;
+        height: 56px;
+        background-color: $black-color;
+    }
+}

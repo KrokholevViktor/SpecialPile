@@ -1,0 +1,41 @@
+.promo {
+    position: relative;
+    height: 630px;
+    padding-top: 258px;
+    padding-bottom: 60px;
+    &_wrapper {
+
+    }
+    &__title {
+        width: 560px;
+        height: 192px;
+        padding-bottom: 60px;
+    }
+    &__img {
+        position: absolute;
+        right: 0px;
+        top: 258px;
+        width: 712px;
+        height: 584px;
+        z-index: -1;
+    }
+    &__services {
+        margin-top: 170px;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        height: 152px;
+        box-shadow: 0px 0px 32px rgba(168, 168, 168, 0.6);
+        background: #FFFFFF;
+        &_item {
+            height: 72px;
+            width: 305px;
+            padding: 40px;
+            text-align: left;
+            border: 1px solid #333333;
+            p {
+                color: $pink-color;
+            }
+        }   
+    }
+}

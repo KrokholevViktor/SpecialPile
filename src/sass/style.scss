@@ -1,5 +1,5 @@
 @import 'libs/font';
-
+@import 'base/variables';
 
 
 * {
@@ -13,4 +13,24 @@
     margin: 0 auto;
 }
 
+.fz-16-bn {
+    font-family: 'Bebas Neue';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 16px;
+ }
+
+.fz-24-bn {
+    font-family: 'Bebas Neue';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+}
+
 @import 'blocks/header';
+@import 'blocks/button';
+@import 'blocks/title';
+@import 'blocks/promo';
+
