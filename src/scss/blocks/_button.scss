@@ -9,11 +9,19 @@
     font-weight: 700;
     font-size: 16px;
     line-height: 16px;
+    cursor: pointer;
+    &_form {
+        width: 160px;
+        height: 56px;
+    }
     &_black {
         border: none;
         color: white;
         width: 260px;
         height: 56px;
         background-color: $black-color;
+        // &:disabled {
+        //     background-color: $disabled-color;
+        // }
     }
 }
