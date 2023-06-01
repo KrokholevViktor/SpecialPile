@@ -29,8 +29,25 @@
     line-height: 24px;
 }
 
+.fz-32-bn {
+    font-family: 'Bebas Neue';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 32px;
+}
+
+.fz-48-bn {
+    font-family: 'Bebas Neue';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 48px;
+}
+
 @import 'blocks/header';
 @import 'blocks/button';
 @import 'blocks/title';
 @import 'blocks/promo';
-
+@import 'blocks/characteristics';
+@import 'blocks/form-slider';
