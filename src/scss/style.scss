@@ -1,9 +1,18 @@
 @import 'libs/font';
 @import 'base/variables';
 
+@import 'blocks/header';
+@import 'blocks/button';
+@import 'blocks/title';
+@import 'blocks/promo';
+@import 'blocks/characteristics';
+@import 'blocks/form-slider';
+@import 'blocks/advantages';
+@import 'blocks/stages';
+@import 'blocks/info';
 
 * {
-    // box-sizing: border-box;
+    box-sizing: border-box;
     scroll-behavior: smooth;
     font-family: 'Bebas Neue';
     margin: 0;
@@ -54,6 +63,14 @@
     line-height: 32px;
 }
 
+.fz-36-bn {
+    font-family: 'Bebas Neue';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 36px;
+}
+
 .fz-48-bn {
     font-family: 'Bebas Neue';
     font-style: normal;
@@ -62,9 +79,13 @@
     line-height: 48px;
 }
 
-@import 'blocks/header';
-@import 'blocks/button';
-@import 'blocks/title';
-@import 'blocks/promo';
-@import 'blocks/characteristics';
-@import 'blocks/form-slider';
+.fz-64-bn {
+    font-family: 'Bebas Neue';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 64px;
+    line-height: 64px;
+}
+
+
+    

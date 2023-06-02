@@ -1,6 +1,6 @@
 .promo {
     position: relative;
-    height: 630px;
+    height: 948px;
     padding-top: 258px;
     padding-bottom: 60px;
     &_wrapper {
@@ -9,7 +9,8 @@
     &__title {
         width: 560px;
         height: 192px;
-        padding-bottom: 60px;
+        // padding-bottom: 60px;
+        margin-bottom: 60px;
     }
     &__img {
         position: absolute;
@@ -28,8 +29,8 @@
         box-shadow: 0px 0px 32px rgba(168, 168, 168, 0.6);
         background: #FFFFFF;
         &_item {
-            height: calc(100% - 80px);
-            width: 305px;
+            height: 152px;
+            width: 387px;
             padding: 40px;
             text-align: left;
             border: 1px solid #333333;

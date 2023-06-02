@@ -121,8 +121,7 @@ slides.forEach(slide => {
 });
 hideElements();
 showTitle();
-// disabledPrev();
-
+disabledPrev();
 function showTitle() {
   titles.forEach(title => title.style.display = 'none');
   titles[slideIndex - 1].style.display = '';
@@ -146,9 +145,8 @@ next.addEventListener('click', () => {
   }
   hideElements();
   showTitle();
-  // disabledPrev();
+  disabledPrev();
 });
-
 prev.addEventListener('click', () => {
   if (offset == 0) {
     offset = +width.slice(0, width.length - 2) * (slides.length - 1);
@@ -168,17 +166,16 @@ prev.addEventListener('click', () => {
   }
   hideElements();
   showTitle();
-  // disabledPrev();
+  disabledPrev();
 });
-
-// function disabledPrev() {
-//     if ((slideIndex - 1) == 0) {
-//         prev.disabled = true;
-//     } else {
-//         prev.disabled = false;
-//     }
-// };
-
+function disabledPrev() {
+  if (slideIndex - 1 == 0) {
+    prev.disabled = true;
+  } else {
+    prev.disabled = false;
+  }
+}
+;
 function hideElements() {
   if (slideIndex == slides.length) {
     counter.style.visibility = 'hidden';

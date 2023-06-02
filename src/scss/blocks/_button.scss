@@ -10,6 +10,9 @@
     font-size: 16px;
     line-height: 16px;
     cursor: pointer;
+    &:hover {
+        background-color: $pink-color-hover;
+    }
     &_form {
         width: 160px;
         height: 56px;
@@ -20,8 +23,11 @@
         width: 260px;
         height: 56px;
         background-color: $black-color;
-        // &:disabled {
-        //     background-color: $disabled-color;
-        // }
+        &:hover {
+            background-color: $black-color-hover;
+        }
+        &:disabled {
+           visibility: hidden;
+        }
     }
 }

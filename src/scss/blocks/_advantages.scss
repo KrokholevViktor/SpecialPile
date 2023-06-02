@@ -1,0 +1,71 @@
+.advantages {
+    height: 800px;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    &__title {
+        text-align: left;
+    }
+    &__wrapper {
+        padding-top: 40px;
+        display: flex;
+        flex-direction: row;
+    }
+    &__card {
+        width: 290px;
+        height: 592px;
+        &_header {
+            height: 76px;
+            img {
+                width: 100px;
+                height: 76px;
+                object-fit: cover;
+            }
+        }
+        &_body {
+            height: 516px;
+            background-color: $background-color-gray;
+            padding: 20px;
+            &:hover {
+                border: 1px solid $black-color;
+                background-color: $background-color-white;
+                padding: 19px;
+            }
+            div {
+                div {
+                    margin-left: 45px;
+                    margin-top: 20px;
+                    font-family: inherit;
+                    font-size: inherit;
+                    line-height: 125%;
+                }
+            }
+        }
+    
+    }
+    &_mark {
+        position: relative;
+            &:before {
+                content: '';
+                position: absolute;
+                width: 15px;
+                height: 5px;
+                border-top: 1px solid $black-color;
+                left: -35px;
+                top: 50%;
+            }
+    }
+    &_check-mark {
+        position: relative;
+            &:before {
+                content: '';
+                position: absolute;
+                left: -40px;
+                top: 50%;
+                transform: translateY(-50%);
+                background-image: url('../../img/icon/check-mark.svg');
+                width: 15px;
+                height: 12px;
+            }
+        
+    }
+}

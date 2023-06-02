@@ -30,7 +30,7 @@ slides.forEach(slide => {
 });
 hideElements();
 showTitle();
-// disabledPrev();
+disabledPrev();
 
 
 function showTitle() {
@@ -61,7 +61,7 @@ next.addEventListener('click', () => {
     }
     hideElements();
     showTitle();
-    // disabledPrev();
+    disabledPrev();
 });
 
 prev.addEventListener('click', () => {
@@ -86,16 +86,16 @@ prev.addEventListener('click', () => {
     }
     hideElements();
     showTitle();
-    // disabledPrev();
+    disabledPrev();
 });
 
-// function disabledPrev() {
-//     if ((slideIndex - 1) == 0) {
-//         prev.disabled = true;
-//     } else {
-//         prev.disabled = false;
-//     }
-// };
+function disabledPrev() {
+    if ((slideIndex - 1) == 0) {
+        prev.disabled = true;
+    } else {
+        prev.disabled = false;
+    }
+};
 
 function hideElements() {
     if (slideIndex == slides.length) {
