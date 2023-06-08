@@ -86,6 +86,96 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/js/modules/examples-slider.js":
+/*!*******************************************!*\
+  !*** ./src/js/modules/examples-slider.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function examplesSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
+  const slides = document.querySelectorAll(slidesItems),
+    prev = document.querySelector(prevBtn),
+    next = document.querySelector(nextBtn),
+    slidesWrapper = document.querySelector(sliderWrapper),
+    slidesInner = document.querySelector(sliderInner),
+    width = window.getComputedStyle(slidesWrapper).width;
+  let slideIndex = 1;
+  let offset = 0;
+  slidesInner.style.width = 100 * slides.length + '%';
+  slides.forEach(slide => {
+    slide.style.width = width; // ширина слайда
+  });
+
+  disabledNext();
+  disabledPrev();
+  console.log(slides.length);
+  next.addEventListener('click', () => {
+    console.log(slideIndex);
+    if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
+      offset = 0;
+    } else {
+      offset += +width.slice(0, width.length - 2);
+    }
+    slidesInner.style.transform = `translateX(-${offset}px)`;
+    if (slideIndex == slides.length) {
+      slideIndex = 1;
+    } else {
+      slideIndex++;
+    }
+    if (slides.length < 10) {
+      current.textContent = `0${slideIndex}`;
+    } else {
+      current.textContent = slideIndex;
+    }
+    disabledNext();
+    disabledPrev();
+    console.log(slideIndex);
+  });
+  prev.addEventListener('click', () => {
+    if (offset == 0) {
+      offset = +width.slice(0, width.length - 2) * (slides.length - 1);
+    } else {
+      offset -= +width.slice(0, width.length - 2);
+    }
+    slidesInner.style.transform = `translateX(-${offset}px)`;
+    if (slideIndex == 1) {
+      slideIndex = slides.length;
+    } else {
+      slideIndex--;
+    }
+    if (slides.length < 10) {
+      current.textContent = `0${slideIndex}`;
+    } else {
+      current.textContent = slideIndex;
+    }
+    disabledNext();
+    disabledPrev();
+  });
+  function disabledPrev() {
+    if (slideIndex == 1) {
+      prev.disabled = true;
+    } else {
+      prev.disabled = false;
+    }
+  }
+  ;
+  function disabledNext() {
+    if (slideIndex == slides.length) {
+      next.disabled = true;
+    } else {
+      next.disabled = false;
+    }
+  }
+  ;
+}
+;
+/* harmony default export */ __webpack_exports__["default"] = (examplesSlider);
+
+/***/ }),
+
 /***/ "./src/js/modules/form-slider.js":
 /*!***************************************!*\
   !*** ./src/js/modules/form-slider.js ***!
@@ -97,15 +187,15 @@
 __webpack_require__.r(__webpack_exports__);
 /// slider
 
-function formSlider() {
-  const slides = document.querySelectorAll('.form-slider__item'),
-    prev = document.querySelector('#prev'),
-    next = document.querySelector('.form-slider__navigation_next'),
+function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
+  const slides = document.querySelectorAll(slidesItems),
+    prev = document.querySelector(prevBtn),
+    next = document.querySelector(nextBtn),
     total = document.querySelector('#total'),
     current = document.querySelector('#current'),
     counter = document.querySelector('.form-slider__counter'),
-    slidesWrapper = document.querySelector('.form-slider__wrapper'),
-    slidesField = document.querySelector('.form-slider__inner'),
+    slidesWrapper = document.querySelector(sliderWrapper),
+    slidesInner = document.querySelector(sliderInner),
     width = window.getComputedStyle(slidesWrapper).width,
     titles = document.querySelectorAll('.form-slider__title'),
     buttonForm = document.querySelector('.form-slider__navigation_btn-form');
@@ -118,7 +208,7 @@ function formSlider() {
     total.textContent = slides.length - 1;
     current.textContent = slideIndex;
   }
-  slidesField.style.width = 100 * slides.length + '%';
+  slidesInner.style.width = 100 * slides.length + '%';
   slides.forEach(slide => {
     slide.style.width = width;
   });
@@ -135,7 +225,7 @@ function formSlider() {
     } else {
       offset += +width.slice(0, width.length - 2);
     }
-    slidesField.style.transform = `translateX(-${offset}px)`;
+    slidesInner.style.transform = `translateX(-${offset}px)`;
     if (slideIndex == slides.length) {
       slideIndex = 1;
     } else {
@@ -156,7 +246,7 @@ function formSlider() {
     } else {
       offset -= +width.slice(0, width.length - 2);
     }
-    slidesField.style.transform = `translateX(-${offset}px)`;
+    slidesInner.style.transform = `translateX(-${offset}px)`;
     if (slideIndex == 1) {
       slideIndex = slides.length;
     } else {
@@ -196,6 +286,96 @@ function formSlider() {
 
 /***/ }),
 
+/***/ "./src/js/modules/reviews.js":
+/*!***********************************!*\
+  !*** ./src/js/modules/reviews.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function reviewsSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
+  const slides = document.querySelectorAll(slidesItems),
+    prev = document.querySelector(prevBtn),
+    next = document.querySelector(nextBtn),
+    slidesWrapper = document.querySelector(sliderWrapper),
+    slidesInner = document.querySelector(sliderInner),
+    width = window.getComputedStyle(slidesWrapper).width;
+  let slideIndex = 1;
+  let offset = 0;
+  slidesInner.style.width = 100 * slides.length + '%';
+  slides.forEach(slide => {
+    slide.style.width = width; // ширина слайда
+  });
+
+  disabledNext();
+  disabledPrev();
+  console.log(slides.length);
+  next.addEventListener('click', () => {
+    console.log(slideIndex);
+    if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
+      offset = 0;
+    } else {
+      offset += +width.slice(0, width.length - 2);
+    }
+    slidesInner.style.transform = `translateX(-${offset}px)`;
+    if (slideIndex == slides.length) {
+      slideIndex = 1;
+    } else {
+      slideIndex++;
+    }
+    if (slides.length < 10) {
+      current.textContent = `0${slideIndex}`;
+    } else {
+      current.textContent = slideIndex;
+    }
+    disabledNext();
+    disabledPrev();
+    console.log(slideIndex);
+  });
+  prev.addEventListener('click', () => {
+    if (offset == 0) {
+      offset = +width.slice(0, width.length - 2) * (slides.length - 1);
+    } else {
+      offset -= +width.slice(0, width.length - 2);
+    }
+    slidesInner.style.transform = `translateX(-${offset}px)`;
+    if (slideIndex == 1) {
+      slideIndex = slides.length;
+    } else {
+      slideIndex--;
+    }
+    if (slides.length < 10) {
+      current.textContent = `0${slideIndex}`;
+    } else {
+      current.textContent = slideIndex;
+    }
+    disabledNext();
+    disabledPrev();
+  });
+  function disabledPrev() {
+    if (slideIndex == 1) {
+      prev.disabled = true;
+    } else {
+      prev.disabled = false;
+    }
+  }
+  ;
+  function disabledNext() {
+    if (slideIndex == slides.length) {
+      next.disabled = true;
+    } else {
+      next.disabled = false;
+    }
+  }
+  ;
+}
+;
+/* harmony default export */ __webpack_exports__["default"] = (reviewsSlider);
+
+/***/ }),
+
 /***/ "./src/js/script.js":
 /*!**************************!*\
   !*** ./src/js/script.js ***!
@@ -206,9 +386,15 @@ function formSlider() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_form_slider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/form-slider */ "./src/js/modules/form-slider.js");
+/* harmony import */ var _modules_examples_slider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/examples-slider */ "./src/js/modules/examples-slider.js");
+/* harmony import */ var _modules_reviews__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/reviews */ "./src/js/modules/reviews.js");
+
+
 
 window.addEventListener('DOMContentLoaded', function () {
-  Object(_modules_form_slider__WEBPACK_IMPORTED_MODULE_0__["default"])();
+  Object(_modules_form_slider__WEBPACK_IMPORTED_MODULE_0__["default"])('.form-slider__navigation_prev', '.form-slider__navigation_next', '.form-slider__item', '.form-slider__wrapper', '.form-slider__inner');
+  Object(_modules_examples_slider__WEBPACK_IMPORTED_MODULE_1__["default"])('.examples__navigation .navigation_prev .button_black', '.examples__navigation .navigation_next .button_black', '.examples__slide', '.examples__wrapper', '.examples__inner');
+  Object(_modules_reviews__WEBPACK_IMPORTED_MODULE_2__["default"])('.reviews__navigation .navigation_prev .button_black', '.reviews__navigation .navigation_next .button_black', '.reviews__slide', '.reviews__wrapper', '.reviews__inner'); // init slider for reviews
 });
 
 /***/ })

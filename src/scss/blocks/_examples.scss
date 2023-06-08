@@ -4,12 +4,13 @@
     &__title {
         text-align: left;
     }
-    &__wrapper{
-        margin: 40px auto 0 auto;
+    &__slide-container {
         width: 1440px;
-        display: grid;
-        grid-template-rows: auto auto;
-        row-gap: 10px;
+        margin: 40px auto 0 auto;
+    }
+    &__wrapper{
+        width: 100%;
+        overflow: hidden;
         &_row-1, &_row-2 {
             display: grid;
             column-gap: 10px;
@@ -22,13 +23,30 @@
             grid-template-columns: 250px 398px 290px 452px;
         }  
     }
+    &__inner {
+
+        display: flex;
+        transition: 0.5s all;
+        max-height: 900px;
+    }
+    &__slide {
+        
+        padding: 1px;
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        grid-auto-rows: 1fr;
+        row-gap: 10px;
+        grid-auto-flow: row;
+        }
     &__item {
+        display: block;
         border: 1px solid $black-color;
         width: 100%;
+        min-height: 367px;
         &_wide {
             img {
                 display: block;
-                height: 303px;
+                height: 300px;
                 object-fit: cover;
                 width: inherit;
             }
@@ -36,14 +54,21 @@
         &_harrow {
             img {
                 display: block;
-                height: 303px;
+                height: 300px;
                 object-fit: cover;
                 width: inherit;
             }
         }
         &_descr {
+            // overflow: hidden;
             border-top: 1px solid $black-color;
             padding: 20px;
+            p {
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;  
+                overflow: hidden;
+            }
         }
        
     }
@@ -54,68 +79,11 @@
         .button_black {
             height: 60px;
             width: 60px;
-        }
-        &_next {
-            margin-left: 40px;
-            .arrow-right {
-                position: relative;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 12px;
-                height: 8px;
-                display: flex;
-                    &:after {
-                        content: '';
-                        position: absolute;
-                        width: 6px;
-                        height: 6px;
-                        border-bottom: 1px solid white;
-                        border-right: 1px solid white;
-                        border-radius: 1px;
-                        top: 1px;
-                        right: 0px;
-                        transform: rotate(-45deg);
-                    }
-                    &:before {
-                        content: '';
-                        position: absolute;
-                        width: 12px;
-                        height: 1px;
-                        background-color: white;
-                        border-radius: 5px;
-                        top: 50%;
-                    }
+            &:disabled {
+                visibility: visible;
+                background-color: $black-color-hover;
             }
         }
-        &_prev {
-            .arrow-left {
-                position: relative;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 12px;
-                height: 8px;
-                display: flex;
-                    &:after {
-                        content: '';
-                        position: absolute;
-                        width: 6px;
-                        height: 6px;
-                        border-top: 1px solid white;
-                        border-left: 1px solid white;
-                        border-radius: 1px;
-                        top: 1px;
-                        transform: rotate(-45deg);
-                    }
-                    &:before {
-                        content: '';
-                        position: absolute;
-                        width: 12px;
-                        height: 1px;
-                        background-color: white;
-                        border-radius: 5px;
-                        top: 50%;
-                    }
-            }
-        }
+        
     }
 }

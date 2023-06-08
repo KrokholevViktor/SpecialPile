@@ -1,14 +1,14 @@
 /// slider
 
-function formSlider() {
-    const slides = document.querySelectorAll('.form-slider__item'),
-      prev = document.querySelector('#prev'),
-      next = document.querySelector('.form-slider__navigation_next'),
+function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
+    const slides = document.querySelectorAll(slidesItems),
+      prev = document.querySelector(prevBtn),
+      next = document.querySelector(nextBtn),
       total = document.querySelector('#total'),
       current = document.querySelector('#current'),
       counter = document.querySelector('.form-slider__counter'),
-      slidesWrapper = document.querySelector('.form-slider__wrapper'),
-      slidesField = document.querySelector('.form-slider__inner'),
+      slidesWrapper = document.querySelector(sliderWrapper),
+      slidesInner = document.querySelector(sliderInner),
       width = window.getComputedStyle(slidesWrapper).width,
       titles = document.querySelectorAll('.form-slider__title'),
       buttonForm = document.querySelector('.form-slider__navigation_btn-form');
@@ -25,7 +25,7 @@ if (slides.length < 10) {
 }
 
 
-slidesField.style.width = 100 * slides.length + '%';
+slidesInner.style.width = 100 * slides.length + '%';
 slides.forEach(slide => {
     slide.style.width = width;
 });
@@ -47,7 +47,7 @@ next.addEventListener('click', () => {
         offset += +width.slice(0, width.length - 2)
     }
 
-    slidesField.style.transform = `translateX(-${offset}px)`;
+    slidesInner.style.transform = `translateX(-${offset}px)`;
 
     if (slideIndex == slides.length) {
         slideIndex = 1;
@@ -72,7 +72,7 @@ prev.addEventListener('click', () => {
         offset -= +width.slice(0, width.length - 2)
     }
 
-    slidesField.style.transform = `translateX(-${offset}px)`;
+    slidesInner.style.transform = `translateX(-${offset}px)`;
 
     if (slideIndex == 1) {
         slideIndex = slides.length;
