@@ -4,23 +4,21 @@ function reviewsSlider (prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInne
     prev = document.querySelector(prevBtn),
     next = document.querySelector(nextBtn),
     slidesWrapper = document.querySelector(sliderWrapper),
-    slidesInner = document.querySelector(sliderInner),
-    width = window.getComputedStyle(slidesWrapper).width;
+    slidesInner = document.querySelector(sliderInner);
+    
 
+    slidesInner.style.width = 100 * slides.length + '%';
+    const width = window.getComputedStyle(document.querySelector('.reviews__slide')).width;
+    
 let slideIndex = 1;
 let offset = 0;
 
 
-slidesInner.style.width = 100 * slides.length + '%';
-slides.forEach(slide => {
-slide.style.width = width; // ширина слайда
-});
+
 disabledNext();
 disabledPrev();
-console.log(slides.length);
 
 next.addEventListener('click', () => {
-    console.log(slideIndex);
     if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
         offset = 0;
     } else {
@@ -42,7 +40,6 @@ next.addEventListener('click', () => {
     }
     disabledNext();
     disabledPrev();
-    console.log(slideIndex);
 });
 
 prev.addEventListener('click', () => {

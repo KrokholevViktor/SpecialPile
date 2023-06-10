@@ -17,16 +17,31 @@
     
     }
     &__inner {
-        width: 300%;
         position: relative;
         display: flex;
+        transition: 0.5s all;
     }
     &__slide {
+        box-shadow: 0px 0px 32px rgba(168, 168, 168, 0.6);
         padding: 40px;
         margin-right: 40px;
         width: 760px;
         height: 442px;
         border: 1px solid $black-color;
+        &_date {
+            margin-top: 15px;
+            color: $title-color;
+            opacity: 0.5;
+        }
+        &_descr {
+            margin-top: 40px;
+            p {
+                display: -webkit-box;
+                -webkit-line-clamp: 10;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+        }
     }
     &__navigation {
         padding-top: 40px;

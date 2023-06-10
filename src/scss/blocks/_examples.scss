@@ -5,8 +5,10 @@
         text-align: left;
     }
     &__slide-container {
-        width: 1440px;
+        width: 1420px;
         margin: 40px auto 0 auto;
+        // padding-left: 10px;
+        // padding-right: 10px;
     }
     &__wrapper{
         width: 100%;
@@ -30,8 +32,6 @@
         max-height: 900px;
     }
     &__slide {
-        
-        padding: 1px;
         display: grid;
         grid-template-rows: 1fr 1fr;
         grid-auto-rows: 1fr;

@@ -111,9 +111,8 @@ function examplesSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInne
 
   disabledNext();
   disabledPrev();
-  console.log(slides.length);
+  console.log(prev);
   next.addEventListener('click', () => {
-    console.log(slideIndex);
     if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
       offset = 0;
     } else {
@@ -132,7 +131,6 @@ function examplesSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInne
     }
     disabledNext();
     disabledPrev();
-    console.log(slideIndex);
   });
   prev.addEventListener('click', () => {
     if (offset == 0) {
@@ -286,10 +284,10 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
 
 /***/ }),
 
-/***/ "./src/js/modules/reviews.js":
-/*!***********************************!*\
-  !*** ./src/js/modules/reviews.js ***!
-  \***********************************/
+/***/ "./src/js/modules/reviews-slider.js":
+/*!******************************************!*\
+  !*** ./src/js/modules/reviews-slider.js ***!
+  \******************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -300,20 +298,14 @@ function reviewsSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner
     prev = document.querySelector(prevBtn),
     next = document.querySelector(nextBtn),
     slidesWrapper = document.querySelector(sliderWrapper),
-    slidesInner = document.querySelector(sliderInner),
-    width = window.getComputedStyle(slidesWrapper).width;
+    slidesInner = document.querySelector(sliderInner);
+  slidesInner.style.width = 100 * slides.length + '%';
+  const width = window.getComputedStyle(document.querySelector('.reviews__slide')).width;
   let slideIndex = 1;
   let offset = 0;
-  slidesInner.style.width = 100 * slides.length + '%';
-  slides.forEach(slide => {
-    slide.style.width = width; // ширина слайда
-  });
-
   disabledNext();
   disabledPrev();
-  console.log(slides.length);
   next.addEventListener('click', () => {
-    console.log(slideIndex);
     if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
       offset = 0;
     } else {
@@ -332,7 +324,6 @@ function reviewsSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner
     }
     disabledNext();
     disabledPrev();
-    console.log(slideIndex);
   });
   prev.addEventListener('click', () => {
     if (offset == 0) {
@@ -387,14 +378,14 @@ function reviewsSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_form_slider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/form-slider */ "./src/js/modules/form-slider.js");
 /* harmony import */ var _modules_examples_slider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/examples-slider */ "./src/js/modules/examples-slider.js");
-/* harmony import */ var _modules_reviews__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/reviews */ "./src/js/modules/reviews.js");
+/* harmony import */ var _modules_reviews_slider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/reviews-slider */ "./src/js/modules/reviews-slider.js");
 
 
 
 window.addEventListener('DOMContentLoaded', function () {
-  Object(_modules_form_slider__WEBPACK_IMPORTED_MODULE_0__["default"])('.form-slider__navigation_prev', '.form-slider__navigation_next', '.form-slider__item', '.form-slider__wrapper', '.form-slider__inner');
+  Object(_modules_form_slider__WEBPACK_IMPORTED_MODULE_0__["default"])('.form-slider__navigation_prev .button_black', '.form-slider__navigation_next .button_black', '.form-slider__item', '.form-slider__wrapper', '.form-slider__inner');
   Object(_modules_examples_slider__WEBPACK_IMPORTED_MODULE_1__["default"])('.examples__navigation .navigation_prev .button_black', '.examples__navigation .navigation_next .button_black', '.examples__slide', '.examples__wrapper', '.examples__inner');
-  Object(_modules_reviews__WEBPACK_IMPORTED_MODULE_2__["default"])('.reviews__navigation .navigation_prev .button_black', '.reviews__navigation .navigation_next .button_black', '.reviews__slide', '.reviews__wrapper', '.reviews__inner'); // init slider for reviews
+  Object(_modules_reviews_slider__WEBPACK_IMPORTED_MODULE_2__["default"])('.reviews__navigation .navigation_prev .button_black', '.reviews__navigation .navigation_next .button_black', '.reviews__slide', '.reviews__wrapper', '.reviews__inner'); // init slider for reviews
 });
 
 /***/ })

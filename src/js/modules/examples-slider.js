@@ -9,17 +9,15 @@ function examplesSlider (prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInn
     let slideIndex = 1;
     let offset = 0;
 
-
     slidesInner.style.width = 100 * slides.length + '%';
     slides.forEach(slide => {
     slide.style.width = width; // ширина слайда
     });
     disabledNext();
     disabledPrev();
-    console.log(slides.length);
+    console.log(prev);
 
     next.addEventListener('click', () => {
-        console.log(slideIndex);
         if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
             offset = 0;
         } else {
@@ -41,7 +39,6 @@ function examplesSlider (prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInn
         }
         disabledNext();
         disabledPrev();
-        console.log(slideIndex);
     });
 
     prev.addEventListener('click', () => {
