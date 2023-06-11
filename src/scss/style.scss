@@ -12,6 +12,9 @@
 @import 'blocks/info';
 @import 'blocks/examples';
 @import 'blocks/reviews';
+@import 'blocks/questions';
+@import 'blocks/animation';
+@import 'blocks/contacts';
 
 * {
     box-sizing: border-box;
@@ -87,6 +90,10 @@
     font-weight: 700;
     font-size: 64px;
     line-height: 64px;
+}
+
+.fadeInDown {
+    animation: fadeIn 0.2s ease-in both;
 }
 
 .navigation {

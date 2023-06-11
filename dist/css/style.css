@@ -255,11 +255,13 @@
   background-color: #FFFFFF;
 }
 .form-slider__item__card:hover .form-slider__item__card__title {
-  display: none;
+  color: #FFFFFF;
+  border: none;
 }
 .form-slider__item__card:hover img {
   filter: saturate(1);
   transition: 0.5 all;
+  transform: translateY(-50px) scale(1.2);
 }
 .form-slider__item__card__title {
   height: 72px;
@@ -760,6 +762,81 @@
   background-color: #515151;
 }
 
+.questions {
+  background-color: #F7F7F7;
+  min-height: 588px;
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+.questions__title {
+  text-align: left;
+}
+.questions__accordion {
+  margin-top: 40px;
+}
+.questions__accordion__item {
+  position: relative;
+  padding: 30px;
+  background-color: #FFFFFF;
+}
+.questions__accordion__item:before, .questions__accordion__item:after {
+  transform-origin: center;
+  background-color: #D22043;
+  content: "";
+  top: 30px;
+  right: 30px;
+  position: absolute;
+  width: 22px;
+  height: 2px;
+  transition: transform 0.5s ease;
+}
+.questions__accordion__item:before {
+  transform: translate(-50%, -50%);
+}
+.questions__accordion__item:after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+.questions__accordion__item .questions__accordion__descr {
+  display: none;
+}
+.questions__accordion__item_active .questions__accordion__descr {
+  display: block;
+}
+.questions__accordion__item_active:before {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+.questions__accordion__item_active:after {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.questions__accordion__descr {
+  margin-top: 20px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.contacts {
+  height: 653px;
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+.contacts__wrapper {
+  display: flex;
+  width: 1160px;
+}
+.contacts__block {
+  width: 50%;
+  padding: 30px;
+}
+.contacts__iframe {
+  width: 50%;
+}
+
 * {
   box-sizing: border-box;
   scroll-behavior: smooth;
@@ -834,6 +911,10 @@
   font-weight: 700;
   font-size: 64px;
   line-height: 64px;
+}
+
+.fadeInDown {
+  animation: fadeIn 0.2s ease-in both;
 }
 
 .navigation_next {

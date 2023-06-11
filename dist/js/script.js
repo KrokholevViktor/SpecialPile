@@ -86,6 +86,40 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/js/modules/accordion.js":
+/*!*************************************!*\
+  !*** ./src/js/modules/accordion.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const accordion = (triggersSelector, itemsSelector) => {
+  const triggers = document.querySelectorAll(triggersSelector),
+    blocks = document.querySelectorAll(itemsSelector);
+  blocks.forEach(block => {
+    block.classList.add('fadeInDown');
+  });
+  triggers.forEach(trigger => {
+    trigger.addEventListener('click', function () {
+      if (!this.classList.contains('questions__accordion__item_active')) {
+        triggers.forEach(trigger => {
+          // trigger.classList.remove('questions__accordion__item_active');
+        }); //первый вариант
+
+        this.classList.add('questions__accordion__item_active');
+      } else {
+        this.classList.remove('questions__accordion__item_active'); // второй вариант
+      }
+    });
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (accordion);
+
+/***/ }),
+
 /***/ "./src/js/modules/examples-slider.js":
 /*!*******************************************!*\
   !*** ./src/js/modules/examples-slider.js ***!
@@ -379,6 +413,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_form_slider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/form-slider */ "./src/js/modules/form-slider.js");
 /* harmony import */ var _modules_examples_slider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/examples-slider */ "./src/js/modules/examples-slider.js");
 /* harmony import */ var _modules_reviews_slider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/reviews-slider */ "./src/js/modules/reviews-slider.js");
+/* harmony import */ var _modules_accordion__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/accordion */ "./src/js/modules/accordion.js");
+
 
 
 
@@ -386,6 +422,7 @@ window.addEventListener('DOMContentLoaded', function () {
   Object(_modules_form_slider__WEBPACK_IMPORTED_MODULE_0__["default"])('.form-slider__navigation_prev .button_black', '.form-slider__navigation_next .button_black', '.form-slider__item', '.form-slider__wrapper', '.form-slider__inner');
   Object(_modules_examples_slider__WEBPACK_IMPORTED_MODULE_1__["default"])('.examples__navigation .navigation_prev .button_black', '.examples__navigation .navigation_next .button_black', '.examples__slide', '.examples__wrapper', '.examples__inner');
   Object(_modules_reviews_slider__WEBPACK_IMPORTED_MODULE_2__["default"])('.reviews__navigation .navigation_prev .button_black', '.reviews__navigation .navigation_next .button_black', '.reviews__slide', '.reviews__wrapper', '.reviews__inner'); // init slider for reviews
+  Object(_modules_accordion__WEBPACK_IMPORTED_MODULE_3__["default"])('.questions__accordion__item', '.questions__accordion__descr');
 });
 
 /***/ })

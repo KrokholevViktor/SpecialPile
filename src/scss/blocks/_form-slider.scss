@@ -60,11 +60,13 @@
             }
             &:hover {
                 .form-slider__item__card__title {
-                    display: none;
+                    color: $background-color-white;
+                    border: none;
                 }
                 img {
                     filter: saturate(1);
                     transition: 0.5 all;
+                    transform: translateY(-50px) scale(1.2);
                 }
             }
             &__title {
