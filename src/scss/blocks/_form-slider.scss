@@ -29,18 +29,20 @@
         transition: 0.5s all;
     }
     &__img {
+        position: relative;
         flex-grow: 1;
         // border-top: 1px solid $border-color;
         // border-bottom: 1px solid $border-color;
         height: 100%;
         overflow: hidden;
+        background-color: $pink-color;
             img {
                 display: block;
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
-                transition: 0.5 all;
                 filter: saturate(0);
+                transition: 0.5s all;
             }
     }
     &__item {
@@ -57,23 +59,50 @@
             background-color: $background-color-white;
             &-form {
                 background-color: $background-color-white;
+                &_select {
+                    padding: 30px;
+                }
+                &:hover {
+                    .form-slider__item__card-form_select {
+                        background-color: rgba($pink-color, 0.75);
+                        height: 100%;
+                        width: 100%;
+                    }
+                }
+                img {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
             }
             &:hover {
                 .form-slider__item__card__title {
                     color: $background-color-white;
                     border: none;
+                    background-color: transparent;
+                    text-shadow: 1px 0 1px #000, 
+                                0 1px 1px #000, 
+                                -1px 0 1px #000, 
+                                0 -1px 1px #000;
                 }
-                img {
-                    filter: saturate(1);
-                    transition: 0.5 all;
-                    transform: translateY(-50px) scale(1.2);
+                .form-slider__img {
+                    img {
+                        filter: saturate(1);
+                        
+                    }
                 }
+                
             }
             &__title {
+                position: absolute;
                 height: 72px;
+                width: 100%;
                 padding: 20px;
                 background-color: $background-color-white;
-                border-bottom: 1px solid $black-color
+                border-bottom: 1px solid $black-color;
+                z-index: 1;
+                // transition: 0.5s all;
             }
         }
         
@@ -125,7 +154,9 @@
 
    .form-slider__form {
         background-color: white;
+        height: 100%;
             &-main {
+                
                 display: flex;
                 flex-direction: column;
                 align-items: flex-start;

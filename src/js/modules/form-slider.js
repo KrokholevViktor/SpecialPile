@@ -32,6 +32,11 @@ slides.forEach(slide => {
 hideElements();
 showTitle();
 disabledPrev();
+setTimeout(() => {
+    next.click();
+    prev.click();
+}, 10)
+
 
 
 function showTitle() {

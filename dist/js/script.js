@@ -145,7 +145,6 @@ function examplesSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInne
 
   disabledNext();
   disabledPrev();
-  console.log(prev);
   next.addEventListener('click', () => {
     if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
       offset = 0;
@@ -247,6 +246,10 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
   hideElements();
   showTitle();
   disabledPrev();
+  setTimeout(() => {
+    next.click();
+    prev.click();
+  }, 10);
   function showTitle() {
     titles.forEach(title => title.style.display = 'none');
     titles[slideIndex - 1].style.display = '';
@@ -315,6 +318,62 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
   ;
 }
 /* harmony default export */ __webpack_exports__["default"] = (formSlider);
+
+/***/ }),
+
+/***/ "./src/js/modules/form.js":
+/*!********************************!*\
+  !*** ./src/js/modules/form.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const form = () => {
+  const formWrapper = document.querySelectorAll('form'),
+    inputs = document.querySelectorAll('input');
+  const message = {
+    loading: 'Загрузка...',
+    success: 'Заявка успешно отправленна! Спасибо! Cкоро мы с вами свяжемся!',
+    failure: 'Что-то пошло не так...'
+  };
+  const postData = async (url, data) => {
+    document.querySelector('.status').textContent = message.loading;
+    let res = await fetch(url, {
+      method: "POST",
+      body: data
+    });
+    return await res.text();
+  };
+  const clearInputs = () => {
+    inputs.forEach(input => {
+      input.value = '';
+    });
+  };
+  formWrapper.forEach(item => {
+    item.addEventListener('submit', e => {
+      e.preventDefault();
+      let statusMessage = document.createElement('div');
+      statusMessage.classList.add('status');
+      item.appendChild(statusMessage);
+      console.log(item);
+      const formData = new FormData(item);
+      postData('server.php', formData).then(res => {
+        console.log(res);
+        statusMessage.textContent = message.success;
+      }).catch(() => {
+        statusMessage.textContent = message.failure;
+      }).finally(() => {
+        clearInputs();
+        setTimeout(() => {
+          statusMessage.remove();
+        }, 5000);
+      });
+    });
+  });
+};
+/* harmony default export */ __webpack_exports__["default"] = (form);
 
 /***/ }),
 
@@ -414,15 +473,46 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_examples_slider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/examples-slider */ "./src/js/modules/examples-slider.js");
 /* harmony import */ var _modules_reviews_slider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/reviews-slider */ "./src/js/modules/reviews-slider.js");
 /* harmony import */ var _modules_accordion__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/accordion */ "./src/js/modules/accordion.js");
+/* harmony import */ var _modules_form__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/form */ "./src/js/modules/form.js");
+
 
 
 
 
 window.addEventListener('DOMContentLoaded', function () {
+  "use strict";
+
   Object(_modules_form_slider__WEBPACK_IMPORTED_MODULE_0__["default"])('.form-slider__navigation_prev .button_black', '.form-slider__navigation_next .button_black', '.form-slider__item', '.form-slider__wrapper', '.form-slider__inner');
   Object(_modules_examples_slider__WEBPACK_IMPORTED_MODULE_1__["default"])('.examples__navigation .navigation_prev .button_black', '.examples__navigation .navigation_next .button_black', '.examples__slide', '.examples__wrapper', '.examples__inner');
   Object(_modules_reviews_slider__WEBPACK_IMPORTED_MODULE_2__["default"])('.reviews__navigation .navigation_prev .button_black', '.reviews__navigation .navigation_next .button_black', '.reviews__slide', '.reviews__wrapper', '.reviews__inner'); // init slider for reviews
   Object(_modules_accordion__WEBPACK_IMPORTED_MODULE_3__["default"])('.questions__accordion__item', '.questions__accordion__descr');
+  Object(_modules_form__WEBPACK_IMPORTED_MODULE_4__["default"])();
+  const slides = document.querySelectorAll('.form-slider__item');
+  slides.forEach(slide => {
+    const images = slide.querySelectorAll('.form-slider__img img'),
+      cardAskSelects = slide.querySelectorAll('.form-slider__item__card-form_select');
+    images.forEach(element => {
+      element.addEventListener('click', () => {
+        images.forEach(element => {
+          element.classList.remove('img-selected');
+        });
+        element.classList.add('img-selected');
+        if (!element.classList.contains('img-selected')) {
+          element.previousElementSibling.style.cssText = "border-bottom: 1px solid $black-color;";
+        } else {
+          element.previousElementSibling.style.cssText = "background-color: transparent; border-bottom: none; color: white";
+        }
+      });
+    });
+    cardAskSelects.forEach(select => {
+      select.addEventListener('click', () => {
+        cardAskSelects.forEach(select => {
+          select.classList.remove('ask-selected');
+        });
+        select.classList.add('ask-selected');
+      });
+    });
+  });
 });
 
 /***/ })

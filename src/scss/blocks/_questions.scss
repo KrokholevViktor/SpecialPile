@@ -8,6 +8,12 @@
     }
     &__accordion {
         margin-top: 40px;
+        &__title {
+            &:hover {
+                color: $pink-color;
+                cursor: pointer;
+            }
+        }
         &__item {
             position: relative;
             padding: 30px;

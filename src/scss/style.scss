@@ -92,6 +92,22 @@
     line-height: 64px;
 }
 
+.img-selected {
+    opacity: 0.25; ///уменьшая opacity создаётся розовый фильтр из-за background
+}
+.ask-selected {
+    background-color: rgba($pink-color, 0.75);
+    height: 100%;
+}
+.status {
+    margin: 0px 40px 0px 40px;
+    font-family: 'Bebas Neue';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+}
+
 .fadeInDown {
     animation: fadeIn 0.2s ease-in both;
 }

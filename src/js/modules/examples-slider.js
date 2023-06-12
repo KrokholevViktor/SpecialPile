@@ -15,7 +15,6 @@ function examplesSlider (prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInn
     });
     disabledNext();
     disabledPrev();
-    console.log(prev);
 
     next.addEventListener('click', () => {
         if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
