@@ -48,7 +48,37 @@ window.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    // slides.forEach(slide => {
+    //     const images = slide.querySelectorAll('.form-slider__img img'),
+    //           cardAskSelects = slide.querySelectorAll('.form-slider__item__card-form_select');
 
+    //     images.forEach(element => {
+    //         element.addEventListener('click', () => {
+    //             images.forEach(element => {
+    //                 element.classList.remove('img-selected');
+    //             });
+    //             element.classList.add('img-selected');
+    
+    //             if (!element.classList.contains('img-selected')) {
+    //                 element.previousElementSibling.style.cssText = "border-bottom: 1px solid $black-color;"
+                   
+    //             } else {
+    //                 element.previousElementSibling.style.cssText = "background-color: transparent; border-bottom: none; color: white"
+    //             }
+    //         });
+    //     });
+
+    //     cardAskSelects.forEach(select => {
+    //         select.addEventListener('click', () => {
+    //             cardAskSelects.forEach(select => {
+    //                 select.classList.remove('ask-selected');
+    //             });
+    //             select.classList.add('ask-selected');
+    
+                
+    //         });
+    //     });
+    // });
     
 
     
