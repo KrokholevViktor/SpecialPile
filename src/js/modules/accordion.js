@@ -3,19 +3,16 @@ const accordion = (triggersSelector, itemsSelector) => {
           blocks = document.querySelectorAll(itemsSelector);
 
     blocks.forEach(block => {
-        block.classList.add('fadeInDown');
+        block.classList.add('fadeIn');
+        block.classList.add('fadeOut');
     });
 
     triggers.forEach(trigger => {
         trigger.addEventListener('click', function() {
             if (!this.classList.contains('questions__accordion__item_active')) {
-                triggers.forEach(trigger => {
-                    // trigger.classList.remove('questions__accordion__item_active');
-                }); //первый вариант
-                
-                this.classList.add ('questions__accordion__item_active');
+                this.classList.add('questions__accordion__item_active');
             } else {
-                this.classList.remove('questions__accordion__item_active') // второй вариант
+                this.classList.remove('questions__accordion__item_active'); // второй вариант
             }
         })
     })

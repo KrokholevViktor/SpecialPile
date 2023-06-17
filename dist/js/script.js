@@ -99,15 +99,12 @@ const accordion = (triggersSelector, itemsSelector) => {
   const triggers = document.querySelectorAll(triggersSelector),
     blocks = document.querySelectorAll(itemsSelector);
   blocks.forEach(block => {
-    block.classList.add('fadeInDown');
+    block.classList.add('fadeIn');
+    block.classList.add('fadeOut');
   });
   triggers.forEach(trigger => {
     trigger.addEventListener('click', function () {
       if (!this.classList.contains('questions__accordion__item_active')) {
-        triggers.forEach(trigger => {
-          // trigger.classList.remove('questions__accordion__item_active');
-        }); //первый вариант
-
         this.classList.add('questions__accordion__item_active');
       } else {
         this.classList.remove('questions__accordion__item_active'); // второй вариант
@@ -117,6 +114,44 @@ const accordion = (triggersSelector, itemsSelector) => {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (accordion);
+
+/***/ }),
+
+/***/ "./src/js/modules/changeFormSliderSate.js":
+/*!************************************************!*\
+  !*** ./src/js/modules/changeFormSliderSate.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const changeFormSliderSate = state => {
+  const buldingType = document.querySelectorAll('.item-1 .form-slider__item__card'),
+    floorsNumber = document.querySelectorAll('.item-2 .form-slider__item__card'),
+    material = document.querySelectorAll('.item-3 .form-slider__item__card'),
+    soiltype = document.querySelectorAll('.item-4 .form-slider__item__card'),
+    planSelect = document.querySelectorAll('.item-5 .form-slider__item__card-form_select');
+  function bindActionToElems(elem, prop) {
+    elem.forEach(item => {
+      item.addEventListener('click', () => {
+        if (item.firstElementChild === null) {
+          state[prop] = item.textContent.replace(/\s+/g, ' ');
+        } else {
+          state[prop] = item.firstElementChild.textContent.replace(/\s+/g, ' ');
+        }
+        console.log(state);
+      });
+    });
+  }
+  ;
+  bindActionToElems(buldingType, 'buldingType');
+  bindActionToElems(floorsNumber, 'floorsNumber');
+  bindActionToElems(material, 'material');
+  bindActionToElems(soiltype, 'soiltype');
+  bindActionToElems(planSelect, 'planSelect');
+};
+/* harmony default export */ __webpack_exports__["default"] = (changeFormSliderSate);
 
 /***/ }),
 
@@ -239,21 +274,24 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
     total.textContent = slides.length - 1;
     current.textContent = slideIndex;
   }
+  ;
   slidesInner.style.width = 100 * slides.length + '%';
   slides.forEach(slide => {
     slide.style.width = width;
   });
   hideElements();
   showTitle();
-  disabledPrev();
-  setTimeout(() => {
-    next.click();
-    prev.click();
-  }, 10);
+  hidePrev();
+  // setTimeout(() => {
+  //     next.click();
+  //     prev.click();
+  // }, 10);
+
   function showTitle() {
     titles.forEach(title => title.style.display = 'none');
     titles[slideIndex - 1].style.display = '';
   }
+  ;
   next.addEventListener('click', () => {
     if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
       offset = 0;
@@ -273,7 +311,7 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
     }
     hideElements();
     showTitle();
-    disabledPrev();
+    hidePrev();
   });
   prev.addEventListener('click', () => {
     if (offset == 0) {
@@ -292,15 +330,16 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
     } else {
       current.textContent = slideIndex;
     }
+    next.disabled = false;
     hideElements();
     showTitle();
-    disabledPrev();
+    hidePrev();
   });
-  function disabledPrev() {
+  function hidePrev() {
     if (slideIndex - 1 == 0) {
-      prev.disabled = true;
+      prev.style.visibility = 'hidden';
     } else {
-      prev.disabled = false;
+      prev.style.visibility = '';
     }
   }
   ;
@@ -321,21 +360,27 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
 
 /***/ }),
 
-/***/ "./src/js/modules/form.js":
-/*!********************************!*\
-  !*** ./src/js/modules/form.js ***!
-  \********************************/
+/***/ "./src/js/modules/forms.js":
+/*!*********************************!*\
+  !*** ./src/js/modules/forms.js ***!
+  \*********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-const form = () => {
+const forms = state => {
   const formWrapper = document.querySelectorAll('form'),
-    inputs = document.querySelectorAll('input');
+    inputs = document.querySelectorAll('input'),
+    phoneInputs = document.querySelectorAll('input[name="phone"]');
+  phoneInputs.forEach(input => {
+    input.addEventListener('input', () => {
+      input.value = input.value.replace(/\D/, '');
+    });
+  });
   const message = {
     loading: 'Загрузка...',
-    success: 'Заявка успешно отправленна! Спасибо! Cкоро мы с вами свяжемся!',
+    success: 'Заявка успешно отправленна!',
     failure: 'Что-то пошло не так...'
   };
   const postData = async (url, data) => {
@@ -357,8 +402,12 @@ const form = () => {
       let statusMessage = document.createElement('div');
       statusMessage.classList.add('status');
       item.appendChild(statusMessage);
-      console.log(item);
       const formData = new FormData(item);
+      if (item.getAttribute('data-calc') === "end") {
+        for (let key in state) {
+          formData.append(key, state[key]);
+        }
+      }
       postData('server.php', formData).then(res => {
         console.log(res);
         statusMessage.textContent = message.success;
@@ -368,12 +417,52 @@ const form = () => {
         clearInputs();
         setTimeout(() => {
           statusMessage.remove();
-        }, 5000);
+        }, 50000);
       });
     });
   });
 };
-/* harmony default export */ __webpack_exports__["default"] = (form);
+/* harmony default export */ __webpack_exports__["default"] = (forms);
+
+/***/ }),
+
+/***/ "./src/js/modules/modals.js":
+/*!**********************************!*\
+  !*** ./src/js/modules/modals.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const modals = () => {
+  function bindModal(triggersSelector, modalSelctor, closeSelector) {
+    const triggers = document.querySelectorAll(triggersSelector),
+      modal = document.querySelector(modalSelctor),
+      close = document.querySelector(closeSelector);
+    triggers.forEach(trigger => {
+      trigger.addEventListener('click', e => {
+        if (e.target) {
+          e.preventDefault();
+        }
+        modal.style.display = "block";
+        document.body.style.overflow = "hidden";
+        close.addEventListener('click', () => {
+          modal.style.display = "none";
+          document.body.style.overflow = "";
+        });
+        modal.addEventListener('click', e => {
+          if (e.target === modal) {
+            modal.style.display = "none";
+            document.body.style.overflow = "";
+          }
+        });
+      });
+    });
+  }
+  bindModal('.modal-btn', '.modal', '.modal__close');
+};
+/* harmony default export */ __webpack_exports__["default"] = (modals);
 
 /***/ }),
 
@@ -460,6 +549,55 @@ function reviewsSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner
 
 /***/ }),
 
+/***/ "./src/js/modules/slideSelect.js":
+/*!***************************************!*\
+  !*** ./src/js/modules/slideSelect.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const slideSelect = () => {
+  const slides = document.querySelectorAll('.form-slider__item'),
+    next = document.querySelector('.form-slider__navigation_next .button_black');
+  //   prev = document.querySelector('.form-slider__navigation_prev .button_black');
+  next.disabled = true;
+  slides.forEach(slide => {
+    const images = slide.querySelectorAll('.form-slider__img'),
+      cardAskSelects = slide.querySelectorAll('.form-slider__item__card-form_select');
+    images.forEach(element => {
+      element.addEventListener('click', () => {
+        images.forEach(element => {
+          element.children[1].classList.remove('img-selected');
+        });
+        element.children[1].classList.add('img-selected');
+        next.disabled = false;
+        if (!element.children[1].classList.contains('img-selected')) {
+          element.children[1].previousElementSibling.style.cssText = "border-bottom: 1px solid $black-color;";
+        } else {
+          images.forEach(element => {
+            element.children[1].previousElementSibling.style.cssText = "border-bottom: 1px solid $black-color;";
+          });
+          element.children[1].previousElementSibling.style.cssText = "background-color: transparent; border-bottom: none; color: white; text-shadow: 1px 0 1px #000, 0 1px 1px #000, -1px 0 1px #000, 0 -1px 1px #000;";
+        }
+      });
+    });
+    cardAskSelects.forEach(select => {
+      select.addEventListener('click', () => {
+        next.disabled = false;
+        cardAskSelects.forEach(select => {
+          select.classList.remove('ask-selected');
+        });
+        select.classList.add('ask-selected');
+      });
+    });
+  });
+};
+/* harmony default export */ __webpack_exports__["default"] = (slideSelect);
+
+/***/ }),
+
 /***/ "./src/js/script.js":
 /*!**************************!*\
   !*** ./src/js/script.js ***!
@@ -473,7 +611,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_examples_slider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/examples-slider */ "./src/js/modules/examples-slider.js");
 /* harmony import */ var _modules_reviews_slider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/reviews-slider */ "./src/js/modules/reviews-slider.js");
 /* harmony import */ var _modules_accordion__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/accordion */ "./src/js/modules/accordion.js");
-/* harmony import */ var _modules_form__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/form */ "./src/js/modules/form.js");
+/* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
+/* harmony import */ var _modules_modals__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/modals */ "./src/js/modules/modals.js");
+/* harmony import */ var _modules_changeFormSliderSate__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/changeFormSliderSate */ "./src/js/modules/changeFormSliderSate.js");
+/* harmony import */ var _modules_slideSelect__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/slideSelect */ "./src/js/modules/slideSelect.js");
+
+
+
 
 
 
@@ -482,37 +626,15 @@ __webpack_require__.r(__webpack_exports__);
 window.addEventListener('DOMContentLoaded', function () {
   "use strict";
 
+  let formSliderState = {};
+  Object(_modules_changeFormSliderSate__WEBPACK_IMPORTED_MODULE_6__["default"])(formSliderState);
   Object(_modules_form_slider__WEBPACK_IMPORTED_MODULE_0__["default"])('.form-slider__navigation_prev .button_black', '.form-slider__navigation_next .button_black', '.form-slider__item', '.form-slider__wrapper', '.form-slider__inner');
   Object(_modules_examples_slider__WEBPACK_IMPORTED_MODULE_1__["default"])('.examples__navigation .navigation_prev .button_black', '.examples__navigation .navigation_next .button_black', '.examples__slide', '.examples__wrapper', '.examples__inner');
   Object(_modules_reviews_slider__WEBPACK_IMPORTED_MODULE_2__["default"])('.reviews__navigation .navigation_prev .button_black', '.reviews__navigation .navigation_next .button_black', '.reviews__slide', '.reviews__wrapper', '.reviews__inner'); // init slider for reviews
   Object(_modules_accordion__WEBPACK_IMPORTED_MODULE_3__["default"])('.questions__accordion__item', '.questions__accordion__descr');
-  Object(_modules_form__WEBPACK_IMPORTED_MODULE_4__["default"])();
-  const slides = document.querySelectorAll('.form-slider__item');
-  slides.forEach(slide => {
-    const images = slide.querySelectorAll('.form-slider__img img'),
-      cardAskSelects = slide.querySelectorAll('.form-slider__item__card-form_select');
-    images.forEach(element => {
-      element.addEventListener('click', () => {
-        images.forEach(element => {
-          element.classList.remove('img-selected');
-        });
-        element.classList.add('img-selected');
-        if (!element.classList.contains('img-selected')) {
-          element.previousElementSibling.style.cssText = "border-bottom: 1px solid $black-color;";
-        } else {
-          element.previousElementSibling.style.cssText = "background-color: transparent; border-bottom: none; color: white";
-        }
-      });
-    });
-    cardAskSelects.forEach(select => {
-      select.addEventListener('click', () => {
-        cardAskSelects.forEach(select => {
-          select.classList.remove('ask-selected');
-        });
-        select.classList.add('ask-selected');
-      });
-    });
-  });
+  Object(_modules_forms__WEBPACK_IMPORTED_MODULE_4__["default"])(formSliderState);
+  Object(_modules_modals__WEBPACK_IMPORTED_MODULE_5__["default"])();
+  Object(_modules_slideSelect__WEBPACK_IMPORTED_MODULE_7__["default"])();
 });
 
 /***/ })

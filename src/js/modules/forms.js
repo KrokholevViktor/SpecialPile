@@ -1,10 +1,17 @@
-const form = () => {
+const forms = (state) => {
     const formWrapper = document.querySelectorAll('form'),
-          inputs = document.querySelectorAll('input');
+          inputs = document.querySelectorAll('input'),
+          phoneInputs = document.querySelectorAll('input[name="phone"]');
+
+    phoneInputs.forEach(input => {
+        input.addEventListener('input', () => {
+            input.value = input.value.replace(/\D/, '')
+        });
+    });
 
     const message = {
         loading: 'Загрузка...',
-        success: 'Заявка успешно отправленна! Спасибо! Cкоро мы с вами свяжемся!',
+        success: 'Заявка успешно отправленна!',
         failure: 'Что-то пошло не так...'
     };
 
@@ -14,7 +21,6 @@ const form = () => {
             method: "POST",
             body: data
         });
-
         return await res.text();
     };
 
@@ -31,10 +37,14 @@ const form = () => {
             let statusMessage = document.createElement('div');
             statusMessage.classList.add('status');
             item.appendChild(statusMessage);
-            
-            console.log(item);
 
             const formData = new FormData(item);
+
+            if (item.getAttribute('data-calc')  === "end") {
+                for (let key in state) {
+                    formData.append(key, state[key]);
+                }
+            }
 
             postData('server.php', formData)
                 .then(res => {
@@ -48,10 +58,10 @@ const form = () => {
                     clearInputs();
                     setTimeout(() => {
                         statusMessage.remove();
-                    }, 5000);
+                    }, 50000);
                 });
         });
     });
 };
 
-export default form;
+export default forms;

@@ -1,0 +1,40 @@
+.footer {
+    height: 150px;
+    background-color: $footer-color;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    &__wrapper {
+        display: flex;
+        justify-content: space-between;
+    }
+    &__item {
+        width: 490px;
+        padding: 5px 0 5px 0;
+        text-align: right;
+        &:first-child{
+            padding: 0;
+            text-align: left;
+            width: 260px;
+            display: flex;
+            flex-direction: column;
+        }
+    }
+    &__privacy-policy {
+        display: inline-block;
+        margin-top: 15px;
+        color: $footer-text-color;
+        text-decoration: none;
+        &:hover {
+            color: $pink-color;
+        }
+    }
+    &__link {
+        margin-left: 15px;
+        text-decoration: none;
+        color: $footer-text-color;
+        line-height: 30px;
+        &:hover {
+            color: $pink-color;
+        }
+    }
+}

@@ -16,6 +16,12 @@
     &_form {
         width: 160px;
         height: 56px;
+        &-modal {
+            margin: 0 auto;
+            width: 100%;
+            height: 56px;
+            padding: 20px;
+        }
     }
     &_black {
         border: none;
@@ -23,11 +29,13 @@
         width: 260px;
         height: 56px;
         background-color: $black-color;
+        cursor: pointer;
         &:hover {
             background-color: $black-color-hover;
         }
         &:disabled {
-           visibility: hidden;
+            background-color: $black-color-hover;
+            opacity: 0.5;
         }
     }
 }

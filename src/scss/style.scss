@@ -15,6 +15,8 @@
 @import 'blocks/questions';
 @import 'blocks/animation';
 @import 'blocks/contacts';
+@import 'blocks/footer';
+@import 'blocks/modal';
 
 * {
     box-sizing: border-box;
@@ -26,6 +28,14 @@
 .container {
     max-width: 1160px;
     margin: 0 auto;
+}
+
+.fz-12-os {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 150%;
 }
 
 .fz-14-os {
@@ -108,7 +118,11 @@
     line-height: 24px;
 }
 
-.fadeInDown {
+.fadeIn {
+    animation: fadeIn 0.2s ease-in both;
+}
+
+.fadeOut {
     animation: fadeIn 0.2s ease-in both;
 }
 
