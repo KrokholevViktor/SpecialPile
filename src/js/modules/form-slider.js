@@ -32,10 +32,10 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
     hideElements();
     showTitle();
     hidePrev();
-    // setTimeout(() => {
-    //     next.click();
-    //     prev.click();
-    // }, 10);
+    setTimeout(() => {
+        next.click();
+        prev.click();
+    }, 10);
 
 
 
