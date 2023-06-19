@@ -15,6 +15,7 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
 
     let slideIndex = 1;
     let offset = 0;
+    let slideCounter = 0;
 
     if (slides.length < 10) {
         total.textContent = `0${slides.length - 1}`;
@@ -29,13 +30,15 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
     slides.forEach(slide => {
         slide.style.width = width;
     });
+    next.disabled = true;
+
     hideElements();
     showTitle();
     hidePrev();
-    setTimeout(() => {
-        next.click();
-        prev.click();
-    }, 10);
+    // setTimeout(() => {
+    //     next.click();
+    //     prev.click();
+    // }, 10);
 
 
 
@@ -65,9 +68,13 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
         } else {
             current.textContent = slideIndex;
         }
+        next.disabled = true;
         hideElements();
         showTitle();
         hidePrev();
+        slideCounter++
+        console.log(slideCounter);
+        checkSelecteditems(slideCounter);
     });
 
     prev.addEventListener('click', () => {
@@ -90,10 +97,12 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
         } else {
             current.textContent = slideIndex;
         }
-        next.disabled = false;
         hideElements();
         showTitle();
         hidePrev();
+        slideCounter--
+        console.log(slideCounter);
+        checkSelecteditems(slideCounter);
     });
 
     function hidePrev() {
@@ -115,6 +124,78 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
             buttonForm.style.display = 'none';
         }
     };
+
+    const slideSelect = () => {    
+
+        slides.forEach(slide => {
+            const images = slide.querySelectorAll('.form-slider__img'),
+                cardAskSelects = slide.querySelectorAll('.form-slider__item__card-form_select');
+
+            images.forEach(element => {
+
+                element.addEventListener('click', () => {
+                    images.forEach(element => {
+                        element.children[1].classList.remove('img-selected');
+                    });
+                    element.children[1].classList.add('img-selected');
+                    next.disabled = false;
+                    if (!element.children[1].classList.contains('img-selected')) {
+                        element.children[1].previousElementSibling.style.cssText = "border-bottom: 1px solid $black-color;"
+                    } else {
+                        images.forEach(element => {
+                            element.children[1].previousElementSibling.style.cssText = "border-bottom: 1px solid $black-color;"
+                        });
+                        element.children[1].previousElementSibling.style.cssText = "background-color: transparent; border-bottom: none; color: white; text-shadow: 1px 0 1px #000, 0 1px 1px #000, -1px 0 1px #000, 0 -1px 1px #000;";
+                    }
+                });
+            });
+
+            cardAskSelects.forEach(select => {
+                select.addEventListener('click', () => {
+                    next.disabled = false;
+                    cardAskSelects.forEach(select => {
+                        select.classList.remove('ask-selected');
+                    });
+                    select.classList.add('ask-selected');
+
+                    
+                });
+            });
+        });
+    };
+    slideSelect();
+
+    function checkSelecteditems(i) {
+        let slidesItems = slides[i].querySelectorAll('.form-slider__img');
+        let askitems = slides[i].querySelectorAll('.form-slider__item__card-form_select');
+        function chek(typeSlide) {
+                for (i = 0; i < typeSlide.length; i++) {
+                    console.log(typeSlide[i]);
+
+                    try {
+                        if (!(typeSlide[i].children[1].classList.contains('img-selected'))) {
+                            next.disabled = true;
+                        } else {
+                            next.disabled = false;
+                            return
+                        }
+                    } catch (error) {
+                        if (!(typeSlide[i].classList.contains('ask-selected'))) {
+                            next.disabled = true;
+                        } else {
+                            next.disabled = false;
+                            return
+                        }
+                    }
+
+
+                   
+                };
+        };
+        chek(slidesItems);
+        chek(askitems);
+    };
+
 }
 
 export default formSlider;

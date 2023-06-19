@@ -5,7 +5,6 @@ import accordion from "./modules/accordion";
 import forms from "./modules/forms";
 import modals from "./modules/modals";
 import changeFormSliderSate from "./modules/changeFormSliderSate";
-import slideSelect from "./modules/slideSelect";
 
 window.addEventListener('DOMContentLoaded', function () {
     "use strict";
@@ -19,6 +18,5 @@ window.addEventListener('DOMContentLoaded', function () {
     accordion('.questions__accordion__item', '.questions__accordion__descr');
     forms(formSliderState);
     modals();
-    slideSelect();
     
 });

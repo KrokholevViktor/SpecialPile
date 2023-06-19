@@ -267,6 +267,7 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
     buttonForm = document.querySelector('.form-slider__navigation_btn-form');
   let slideIndex = 1;
   let offset = 0;
+  let slideCounter = 0;
   if (slides.length < 10) {
     total.textContent = `0${slides.length - 1}`;
     current.textContent = `0${slideIndex}`;
@@ -279,6 +280,7 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
   slides.forEach(slide => {
     slide.style.width = width;
   });
+  next.disabled = true;
   hideElements();
   showTitle();
   hidePrev();
@@ -309,9 +311,13 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
     } else {
       current.textContent = slideIndex;
     }
+    next.disabled = true;
     hideElements();
     showTitle();
     hidePrev();
+    slideCounter++;
+    console.log(slideCounter);
+    checkSelecteditems(slideCounter);
   });
   prev.addEventListener('click', () => {
     if (offset == 0) {
@@ -330,10 +336,12 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
     } else {
       current.textContent = slideIndex;
     }
-    next.disabled = false;
     hideElements();
     showTitle();
     hidePrev();
+    slideCounter--;
+    console.log(slideCounter);
+    checkSelecteditems(slideCounter);
   });
   function hidePrev() {
     if (slideIndex - 1 == 0) {
@@ -353,6 +361,68 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
       next.style.display = '';
       buttonForm.style.display = 'none';
     }
+  }
+  ;
+  const slideSelect = () => {
+    slides.forEach(slide => {
+      const images = slide.querySelectorAll('.form-slider__img'),
+        cardAskSelects = slide.querySelectorAll('.form-slider__item__card-form_select');
+      images.forEach(element => {
+        element.addEventListener('click', () => {
+          images.forEach(element => {
+            element.children[1].classList.remove('img-selected');
+          });
+          element.children[1].classList.add('img-selected');
+          next.disabled = false;
+          if (!element.children[1].classList.contains('img-selected')) {
+            element.children[1].previousElementSibling.style.cssText = "border-bottom: 1px solid $black-color;";
+          } else {
+            images.forEach(element => {
+              element.children[1].previousElementSibling.style.cssText = "border-bottom: 1px solid $black-color;";
+            });
+            element.children[1].previousElementSibling.style.cssText = "background-color: transparent; border-bottom: none; color: white; text-shadow: 1px 0 1px #000, 0 1px 1px #000, -1px 0 1px #000, 0 -1px 1px #000;";
+          }
+        });
+      });
+      cardAskSelects.forEach(select => {
+        select.addEventListener('click', () => {
+          next.disabled = false;
+          cardAskSelects.forEach(select => {
+            select.classList.remove('ask-selected');
+          });
+          select.classList.add('ask-selected');
+        });
+      });
+    });
+  };
+  slideSelect();
+  function checkSelecteditems(i) {
+    let slidesItems = slides[i].querySelectorAll('.form-slider__img');
+    let askitems = slides[i].querySelectorAll('.form-slider__item__card-form_select');
+    function chek(typeSlide) {
+      for (i = 0; i < typeSlide.length; i++) {
+        console.log(typeSlide[i]);
+        try {
+          if (!typeSlide[i].children[1].classList.contains('img-selected')) {
+            next.disabled = true;
+          } else {
+            next.disabled = false;
+            return;
+          }
+        } catch (error) {
+          if (!typeSlide[i].classList.contains('ask-selected')) {
+            next.disabled = true;
+          } else {
+            next.disabled = false;
+            return;
+          }
+        }
+      }
+      ;
+    }
+    ;
+    chek(slidesItems);
+    chek(askitems);
   }
   ;
 }
@@ -549,55 +619,6 @@ function reviewsSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner
 
 /***/ }),
 
-/***/ "./src/js/modules/slideSelect.js":
-/*!***************************************!*\
-  !*** ./src/js/modules/slideSelect.js ***!
-  \***************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-const slideSelect = () => {
-  const slides = document.querySelectorAll('.form-slider__item'),
-    next = document.querySelector('.form-slider__navigation_next .button_black');
-  //   prev = document.querySelector('.form-slider__navigation_prev .button_black');
-  next.disabled = true;
-  slides.forEach(slide => {
-    const images = slide.querySelectorAll('.form-slider__img'),
-      cardAskSelects = slide.querySelectorAll('.form-slider__item__card-form_select');
-    images.forEach(element => {
-      element.addEventListener('click', () => {
-        images.forEach(element => {
-          element.children[1].classList.remove('img-selected');
-        });
-        element.children[1].classList.add('img-selected');
-        next.disabled = false;
-        if (!element.children[1].classList.contains('img-selected')) {
-          element.children[1].previousElementSibling.style.cssText = "border-bottom: 1px solid $black-color;";
-        } else {
-          images.forEach(element => {
-            element.children[1].previousElementSibling.style.cssText = "border-bottom: 1px solid $black-color;";
-          });
-          element.children[1].previousElementSibling.style.cssText = "background-color: transparent; border-bottom: none; color: white; text-shadow: 1px 0 1px #000, 0 1px 1px #000, -1px 0 1px #000, 0 -1px 1px #000;";
-        }
-      });
-    });
-    cardAskSelects.forEach(select => {
-      select.addEventListener('click', () => {
-        next.disabled = false;
-        cardAskSelects.forEach(select => {
-          select.classList.remove('ask-selected');
-        });
-        select.classList.add('ask-selected');
-      });
-    });
-  });
-};
-/* harmony default export */ __webpack_exports__["default"] = (slideSelect);
-
-/***/ }),
-
 /***/ "./src/js/script.js":
 /*!**************************!*\
   !*** ./src/js/script.js ***!
@@ -614,8 +635,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
 /* harmony import */ var _modules_modals__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/modals */ "./src/js/modules/modals.js");
 /* harmony import */ var _modules_changeFormSliderSate__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/changeFormSliderSate */ "./src/js/modules/changeFormSliderSate.js");
-/* harmony import */ var _modules_slideSelect__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/slideSelect */ "./src/js/modules/slideSelect.js");
-
 
 
 
@@ -634,7 +653,6 @@ window.addEventListener('DOMContentLoaded', function () {
   Object(_modules_accordion__WEBPACK_IMPORTED_MODULE_3__["default"])('.questions__accordion__item', '.questions__accordion__descr');
   Object(_modules_forms__WEBPACK_IMPORTED_MODULE_4__["default"])(formSliderState);
   Object(_modules_modals__WEBPACK_IMPORTED_MODULE_5__["default"])();
-  Object(_modules_slideSelect__WEBPACK_IMPORTED_MODULE_7__["default"])();
 });
 
 /***/ })
