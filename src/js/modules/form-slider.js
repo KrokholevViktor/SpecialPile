@@ -35,10 +35,6 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
     hideElements();
     showTitle();
     hidePrev();
-    // setTimeout(() => {
-    //     next.click();
-    //     prev.click();
-    // }, 10);
 
 
 
@@ -165,6 +161,8 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
     };
     slideSelect();
 
+
+    // проверяет карточки в слайдере на наличие класса и включает или оключает кнопку next 
     function checkSelecteditems(i) {
         let slidesItems = slides[i].querySelectorAll('.form-slider__img');
         let askitems = slides[i].querySelectorAll('.form-slider__item__card-form_select');
@@ -187,9 +185,6 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
                             return
                         }
                     }
-
-
-                   
                 };
         };
         chek(slidesItems);
