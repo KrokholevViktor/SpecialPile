@@ -95,24 +95,27 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-const accordion = (triggersSelector, itemsSelector) => {
+const accordion = (triggersSelector, descrSelector) => {
   const triggers = document.querySelectorAll(triggersSelector),
-    blocks = document.querySelectorAll(itemsSelector);
-  blocks.forEach(block => {
-    block.classList.add('fadeIn');
-    block.classList.add('fadeOut');
-  });
+    blocks = document.querySelectorAll(descrSelector);
   triggers.forEach(trigger => {
     trigger.addEventListener('click', function () {
       if (!this.classList.contains('questions__accordion__item_active')) {
         this.classList.add('questions__accordion__item_active');
+        this.lastElementChild.classList.remove('fadeOut');
+        this.lastElementChild.classList.add('fadeIn');
+        console.log(this.lastElementChild);
       } else {
-        this.classList.remove('questions__accordion__item_active'); // второй вариант
+        this.lastElementChild.classList.remove('fadeIn');
+        this.lastElementChild.classList.add('fadeOut');
+        setTimeout(() => {
+          this.classList.remove('questions__accordion__item_active');
+        }, 250);
+        console.log(this.lastElementChild);
       }
     });
   });
 };
-
 /* harmony default export */ __webpack_exports__["default"] = (accordion);
 
 /***/ }),
@@ -140,7 +143,6 @@ const changeFormSliderSate = state => {
         } else {
           state[prop] = item.firstElementChild.textContent.replace(/\s+/g, ' ');
         }
-        console.log(state);
       });
     });
   }
@@ -150,7 +152,8 @@ const changeFormSliderSate = state => {
   bindActionToElems(material, 'material');
   bindActionToElems(soiltype, 'soiltype');
   bindActionToElems(planSelect, 'planSelect');
-};
+}; // при клике по картчоке в слайдере добавляет свойство prop в объект state с текстом заголовка картоки
+
 /* harmony default export */ __webpack_exports__["default"] = (changeFormSliderSate);
 
 /***/ }),
@@ -280,15 +283,13 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
   slides.forEach(slide => {
     slide.style.width = width;
   });
-  next.disabled = true;
   hideElements();
   showTitle();
   hidePrev();
-  // setTimeout(() => {
-  //     next.click();
-  //     prev.click();
-  // }, 10);
-
+  setTimeout(() => {
+    next.click();
+    prev.click();
+  }, 10);
   function showTitle() {
     titles.forEach(title => title.style.display = 'none');
     titles[slideIndex - 1].style.display = '';
@@ -316,7 +317,6 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
     showTitle();
     hidePrev();
     slideCounter++;
-    console.log(slideCounter);
     checkSelecteditems(slideCounter);
   });
   prev.addEventListener('click', () => {
@@ -340,7 +340,6 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
     showTitle();
     hidePrev();
     slideCounter--;
-    console.log(slideCounter);
     checkSelecteditems(slideCounter);
   });
   function hidePrev() {
@@ -396,12 +395,13 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
     });
   };
   slideSelect();
+
+  // проверяет карточки в слайдере на наличие класса и включает или оключает кнопку next 
   function checkSelecteditems(i) {
     let slidesItems = slides[i].querySelectorAll('.form-slider__img');
     let askitems = slides[i].querySelectorAll('.form-slider__item__card-form_select');
     function chek(typeSlide) {
       for (i = 0; i < typeSlide.length; i++) {
-        console.log(typeSlide[i]);
         try {
           if (!typeSlide[i].children[1].classList.contains('img-selected')) {
             next.disabled = true;
@@ -442,7 +442,8 @@ __webpack_require__.r(__webpack_exports__);
 const forms = state => {
   const formWrapper = document.querySelectorAll('form'),
     inputs = document.querySelectorAll('input'),
-    phoneInputs = document.querySelectorAll('input[name="phone"]');
+    phoneInputs = document.querySelectorAll('input[name="phone"]'),
+    upload = document.querySelectorAll('[name="file"]');
   phoneInputs.forEach(input => {
     input.addEventListener('input', () => {
       input.value = input.value.replace(/\D/, '');
@@ -465,7 +466,19 @@ const forms = state => {
     inputs.forEach(input => {
       input.value = '';
     });
+    upload.forEach(item => {
+      item.previousElementSibling.textContent = 'Прикрепить файл';
+    });
   };
+  upload.forEach(item => {
+    item.addEventListener('input', () => {
+      let dots;
+      const arr = item.files[0].name.split('.');
+      arr[0].length > 15 ? dots = "..." : dots = '.';
+      const name = arr[0].substring(0, 15) + dots + arr[1];
+      item.previousElementSibling.textContent = name;
+    });
+  });
   formWrapper.forEach(item => {
     item.addEventListener('submit', e => {
       e.preventDefault();
@@ -493,6 +506,58 @@ const forms = state => {
   });
 };
 /* harmony default export */ __webpack_exports__["default"] = (forms);
+
+/***/ }),
+
+/***/ "./src/js/modules/mask.js":
+/*!********************************!*\
+  !*** ./src/js/modules/mask.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const mask = selector => {
+  let setCursorPosition = (pos, elem) => {
+    elem.focus();
+    if (elem.setSelectionRange) {
+      elem.setSelectionRange(pos, pos);
+    } else if (elem.createTextRange) {
+      let range = elem.createTextRange();
+      range.collapse(true);
+      range.moveEnd('character', pos);
+      range.moveStart('character', pos);
+      range.select();
+    }
+  };
+  function createMask(event) {
+    let matrix = '+7 (___) ___ __ __',
+      i = 0,
+      def = matrix.replace(/\D/g, ''),
+      val = this.value.replace(/\D/g, '');
+    if (def.length >= val.length) {
+      val = def;
+    }
+    this.value = matrix.replace(/./g, function (a) {
+      return /[_\d]/.test(a) && i < val.length ? val.charAt(i++) : i >= val.length ? '' : a;
+    });
+    if (event.type === 'blur') {
+      if (this.value.length == 2) {
+        this.value = '';
+      }
+    } else {
+      setCursorPosition(this.value.length, this);
+    }
+  }
+  let inputs = document.querySelectorAll(selector);
+  inputs.forEach(input => {
+    input.addEventListener('input', createMask);
+    input.addEventListener('focus', createMask);
+    input.addEventListener('blur', createMask);
+  });
+};
+/* harmony default export */ __webpack_exports__["default"] = (mask);
 
 /***/ }),
 
@@ -635,6 +700,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
 /* harmony import */ var _modules_modals__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/modals */ "./src/js/modules/modals.js");
 /* harmony import */ var _modules_changeFormSliderSate__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/changeFormSliderSate */ "./src/js/modules/changeFormSliderSate.js");
+/* harmony import */ var _modules_mask__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/mask */ "./src/js/modules/mask.js");
+
 
 
 
@@ -646,13 +713,14 @@ window.addEventListener('DOMContentLoaded', function () {
   "use strict";
 
   let formSliderState = {};
-  Object(_modules_changeFormSliderSate__WEBPACK_IMPORTED_MODULE_6__["default"])(formSliderState);
   Object(_modules_form_slider__WEBPACK_IMPORTED_MODULE_0__["default"])('.form-slider__navigation_prev .button_black', '.form-slider__navigation_next .button_black', '.form-slider__item', '.form-slider__wrapper', '.form-slider__inner');
+  Object(_modules_changeFormSliderSate__WEBPACK_IMPORTED_MODULE_6__["default"])(formSliderState);
   Object(_modules_examples_slider__WEBPACK_IMPORTED_MODULE_1__["default"])('.examples__navigation .navigation_prev .button_black', '.examples__navigation .navigation_next .button_black', '.examples__slide', '.examples__wrapper', '.examples__inner');
   Object(_modules_reviews_slider__WEBPACK_IMPORTED_MODULE_2__["default"])('.reviews__navigation .navigation_prev .button_black', '.reviews__navigation .navigation_next .button_black', '.reviews__slide', '.reviews__wrapper', '.reviews__inner'); // init slider for reviews
   Object(_modules_accordion__WEBPACK_IMPORTED_MODULE_3__["default"])('.questions__accordion__item', '.questions__accordion__descr');
   Object(_modules_forms__WEBPACK_IMPORTED_MODULE_4__["default"])(formSliderState);
   Object(_modules_modals__WEBPACK_IMPORTED_MODULE_5__["default"])();
+  Object(_modules_mask__WEBPACK_IMPORTED_MODULE_7__["default"])('[name="phone"]');
 });
 
 /***/ })

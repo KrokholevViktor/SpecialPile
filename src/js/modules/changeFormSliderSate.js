@@ -14,7 +14,6 @@ const changeFormSliderSate = (state) => {
                 } else {
                     state[prop] = item.firstElementChild.textContent.replace(/\s+/g,' ');
                 }
-                console.log(state);
             })
         });
     };
@@ -24,6 +23,6 @@ const changeFormSliderSate = (state) => {
     bindActionToElems(material, 'material');
     bindActionToElems(soiltype, 'soiltype');
     bindActionToElems(planSelect, 'planSelect');
-};
+}; // при клике по картчоке в слайдере добавляет свойство prop в объект state с текстом заголовка картоки
 
 export default changeFormSliderSate;

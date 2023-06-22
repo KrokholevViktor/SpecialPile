@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @font-face {
   font-family: "Bebas Neue";
   font-display: swap;
@@ -42,6 +43,7 @@
   text-decoration: none;
 }
 .header__devider {
+  display: block;
   width: 1160px;
   height: 1px;
   margin: 0 auto;
@@ -139,8 +141,7 @@
   position: absolute;
   right: 0px;
   top: 258px;
-  width: 712px;
-  height: 584px;
+  width: 61%;
   z-index: -1;
 }
 .promo__services {
@@ -190,7 +191,7 @@
   align-items: center;
   padding: 30px;
   height: 140px;
-  width: 940px;
+  width: 100%;
 }
 .characteristics_item span {
   margin-left: 20px;
@@ -840,6 +841,7 @@
 }
 .questions__accordion {
   margin-top: 40px;
+  transition: transform 0.5s ease;
 }
 .questions__accordion__title:hover {
   color: #D22043;
@@ -849,6 +851,7 @@
   position: relative;
   padding: 30px;
   background-color: #FFFFFF;
+  transition: transform 0.5s ease;
 }
 .questions__accordion__item:before, .questions__accordion__item:after {
   transform-origin: center;
@@ -883,20 +886,24 @@
   margin-top: 20px;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0; /* Начальная прозрачность 0 */
+    transform: scale(0.8) translateY(-20px);
   }
-  to {
-    opacity: 1;
+  100% {
+    opacity: 1; /* Конечная прозрачность 1 */
+    transform: scale(1) translateY(0px);
   }
 }
-@keyframes fadeOut {
-  from {
-    opacity: 1;
+@keyframes fadeOutAnimation {
+  0% {
+    opacity: 1; /* Начальная прозрачность 1 */
+    transform: scale(1);
   }
-  to {
-    opacity: 0;
+  100% {
+    opacity: 0; /* Конечная прозрачность 0 */
+    transform: scale(0.8) translateY(-20px);
   }
 }
 .contacts {
@@ -1162,11 +1169,11 @@
 }
 
 .fadeIn {
-  animation: fadeIn 0.2s ease-in both;
+  animation: fadeInAnimation 0.3s ease forwards;
 }
 
 .fadeOut {
-  animation: fadeIn 0.2s ease-in both;
+  animation: fadeOutAnimation 0.3s ease forwards;
 }
 
 .navigation_next {
@@ -1228,4 +1235,62 @@
   background-color: white;
   border-radius: 5px;
   top: 50%;
+}
+
+@media (max-width: 1439px) {
+  .container {
+    max-width: 960px;
+  }
+  .header__wrapper {
+    gap: 345px;
+  }
+  .header__devider {
+    width: 960px;
+  }
+  .header__info_phone {
+    white-space: nowrap;
+  }
+  .header__menu {
+    white-space: nowrap;
+    gap: 25px;
+  }
+  .characteristics {
+    display: none;
+  }
+  .characteristics__wrapper {
+    width: 840px;
+  }
+  .characteristics_item {
+    width: 100%;
+  }
+  .characteristics img {
+    left: 730px;
+  }
+  .form-slider {
+    display: none;
+  }
+  .examples {
+    display: none;
+  }
+  .advantages {
+    display: none;
+  }
+  .stages {
+    display: none;
+  }
+  .info {
+    display: none;
+  }
+  .reviews {
+    display: none;
+  }
+  .questions {
+    display: none;
+  }
+  .contacts {
+    display: none;
+  }
+  .footer {
+    display: none;
+  }
 }

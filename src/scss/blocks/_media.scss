@@ -1,0 +1,68 @@
+@media (max-width: 1439px) {
+    .container {
+        max-width: 960px;
+    }
+    .header {
+        &__wrapper {
+            gap: 345px;
+        }
+        &__devider {
+            width: 960px;
+        }
+        &__info {
+            &_phone {
+                white-space: nowrap;
+            }
+        }
+        &__menu {
+            white-space: nowrap;
+            gap: 25px;
+        }
+    }
+    .promo {
+        // display: none;
+    }
+    .characteristics {
+        display: none;
+        &__wrapper {
+            width: 840px;
+        }
+        &_item {
+            width: 100%;
+        }
+        img {
+            left: 730px;
+        }
+    }
+    .form-slider {
+        display: none;
+    }
+    .examples {
+        display: none;
+    }
+    .advantages {
+        display: none;
+    }
+    .stages {
+        display: none;
+    }
+    .info {
+        display: none;
+    }
+    .reviews {
+        display: none;
+    }
+    .questions {
+        display: none;
+    }
+    .contacts {
+        display: none;
+    }
+    .footer {
+        display: none;
+    }
+}
+
+@media (max-width: 1200px) {
+    
+    }

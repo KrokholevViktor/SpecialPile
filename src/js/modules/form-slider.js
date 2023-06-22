@@ -30,11 +30,14 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
     slides.forEach(slide => {
         slide.style.width = width;
     });
-    next.disabled = true;
 
     hideElements();
     showTitle();
     hidePrev();
+    setTimeout(() => {
+        next.click();
+        prev.click();
+    }, 10);
 
 
 
@@ -69,7 +72,6 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
         showTitle();
         hidePrev();
         slideCounter++
-        console.log(slideCounter);
         checkSelecteditems(slideCounter);
     });
 
@@ -97,7 +99,6 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
         showTitle();
         hidePrev();
         slideCounter--
-        console.log(slideCounter);
         checkSelecteditems(slideCounter);
     });
 
@@ -168,8 +169,6 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
         let askitems = slides[i].querySelectorAll('.form-slider__item__card-form_select');
         function chek(typeSlide) {
                 for (i = 0; i < typeSlide.length; i++) {
-                    console.log(typeSlide[i]);
-
                     try {
                         if (!(typeSlide[i].children[1].classList.contains('img-selected'))) {
                             next.disabled = true;
