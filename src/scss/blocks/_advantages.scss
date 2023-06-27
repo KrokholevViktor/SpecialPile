@@ -32,11 +32,11 @@
             }
             div {
                 div {
-                    margin-left: 45px;
-                    margin-top: 20px;
+                    margin-left: 25px;
+                    margin-top: 24px;
                     font-family: inherit;
                     font-size: inherit;
-                    line-height: 125%;
+                    line-height: 116%;
                 }
             }
         }
@@ -50,7 +50,7 @@
                 width: 15px;
                 height: 5px;
                 border-top: 1px solid $black-color;
-                left: -35px;
+                left: -25px;
                 top: 50%;
             }
     }
@@ -59,7 +59,7 @@
             &:before {
                 content: '';
                 position: absolute;
-                left: -40px;
+                left: -25px;
                 top: 50%;
                 transform: translateY(-50%);
                 background-image: url('../img/icon/check-mark.svg');

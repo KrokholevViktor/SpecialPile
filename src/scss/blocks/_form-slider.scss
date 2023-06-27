@@ -7,6 +7,7 @@
     &__head {
         display: flex;
         justify-content: space-between;
+        // gap: 545px;
     }
     &__title {
         display: inline-block;
@@ -15,6 +16,8 @@
     &__counter {
         display: inline-block;
         #current {
+            display: inline-block;
+            margin-right: 5px;
             color: $pink-color;
         }
     }

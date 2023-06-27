@@ -5,11 +5,12 @@
     padding-bottom: 60px;
     background-color: $background-color-gray;
     &__title_end {
-        margin: 0 0 0 auto;
+        margin: -5px 0 0 auto;
         // padding-top: 20px;
         width: 460px;
         height: 192px;
         text-align: left;
+        line-height: 68px;
 
     }
     &__wrapper {
@@ -23,7 +24,7 @@
             &:first-child{
                 .stages__item {
                     &:first-child {
-                        margin-top: 107px;
+                        margin-top: 82px;
                     }
                     &:nth-child(3) {
                         margin-top: 228px;
@@ -54,7 +55,11 @@
         margin-top: 216px;
         max-height: 200px;
         &_header {
+            display: grid;
+            grid-template-columns: 29px 311px;
+            column-gap: 20px;
             span {
+                display: inline-block;
                 color: $pink-color;
                 margin-right: 20px;
             }
@@ -68,7 +73,7 @@
             grid-column: 3/4;
             transform: translateX(-100px);
             .button {
-                margin-top: 60px;
+                margin-top: 68px;
             }
         }
     }

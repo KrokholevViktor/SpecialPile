@@ -1,7 +1,7 @@
 .promo {
     position: relative;
-    height: 948px;
-    padding-top: 258px;
+    height: 746px;
+    padding-top: 101px;
     padding-bottom: 60px;
     &_wrapper {
 
@@ -10,17 +10,20 @@
         width: 560px;
         height: 192px;
         // padding-bottom: 60px;
-        margin-bottom: 60px;
+        // margin-bottom: 60px;
+    }
+    .button_black {
+        margin-top: 70px;
     }
     &__img {
         position: absolute;
         right: 0px;
-        top: 258px;
+        top: 64px;
         width: 61%;
         z-index: -1;
     }
     &__services {
-        margin-top: 170px;
+        margin-top: 120px;
         display: flex;
         flex-direction: row;
         align-items: flex-start;

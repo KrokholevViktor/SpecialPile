@@ -1,7 +1,7 @@
 .reviews {
     overflow: hidden;
     width: 100%;
-    padding-top: 60px;
+    padding-top: 54px;
     padding-bottom: 60px;
     &__title {
         text-align: left;
@@ -9,8 +9,8 @@
     &__slide-container {
         
         width: 1440px;
-        padding-left: 140px;
-        margin: 40px auto 0 auto;
+        padding-left: 132px;
+        margin: 45px auto 0 auto;
     }
     &__wrapper {
         width: 100%;
@@ -34,7 +34,8 @@
             opacity: 0.5;
         }
         &_descr {
-            margin-top: 40px;
+            margin-top: 42px;
+            width: 630px;
             p {
                 display: -webkit-box;
                 -webkit-line-clamp: 10;
@@ -44,7 +45,7 @@
         }
     }
     &__navigation {
-        padding-top: 40px;
+        padding-top: 20px;
         display: flex;
         justify-content: end;
         .button_black {

@@ -2,10 +2,10 @@
     position: relative;
     padding-top: 60px;
     padding-bottom: 96px;
-    height: 924px;
+    height: 945px;
     &__wrapper {
         position: relative;
-        margin-top: 40px;
+        margin-top: 45px;
         width: 940px;
         display: flex;
         flex-direction: column;
@@ -23,12 +23,16 @@
         height: 140px;
         width: 100%;
         span {
+            display: inline-block;
+            margin-top: -8px;
             margin-left: 20px;
+            text-align: left;
+            vertical-align: bottom;
         }
     }
     &__bg {
         position: absolute;
-        top: 150px;
-        left: 830px;
+        top: 148px;
+        left: 826px;
     }
 }

@@ -8,8 +8,8 @@
         justify-content: space-between;
     }
     &__item {
-        width: 490px;
-        padding: 5px 0 5px 0;
+        width: 492px;
+        height: 47px;
         text-align: right;
         &:first-child{
             padding: 0;
@@ -17,6 +17,18 @@
             width: 260px;
             display: flex;
             flex-direction: column;
+        }
+        &:last-child {
+            display: flex;
+            justify-content: space-between;
+            justify-items: stretch;
+            flex-direction: column;
+            margin-top: 3px;
+            div {
+                display: flex;
+                justify-content: flex-end;
+                gap: 15px;
+            }
         }
     }
     &__privacy-policy {
@@ -29,7 +41,6 @@
         }
     }
     &__link {
-        margin-left: 15px;
         text-decoration: none;
         color: $footer-text-color;
         line-height: 30px;

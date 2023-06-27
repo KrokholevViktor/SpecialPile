@@ -1,3 +1,36 @@
+@media (max-width: 1441px) {
+    .stages {
+        &__title_end {
+            line-height: 64px;
+        }
+    }
+    .reviews {
+        &__slide {
+            &_title {
+                line-height: 22px;
+            }
+        }
+    }
+    .questions {
+        &__accordion {
+            &__title {
+                line-height: 24px;
+            }
+            &__descr {
+                line-height: 16px;
+            }
+        }
+    }
+    .contacts {
+        &__title {
+            line-height: 36px;
+        }
+        &__link {
+            line-height: 36px;
+        }
+    }
+}
+
 @media (max-width: 1439px) {
     .container {
         max-width: 960px;
@@ -21,9 +54,14 @@
     }
     .promo {
         // display: none;
+        &__img {
+            top: 145px;
+        }
+        .title_promo {
+            font-size: 60px;
+        }
     }
     .characteristics {
-        display: none;
         &__wrapper {
             width: 840px;
         }
@@ -35,7 +73,18 @@
         }
     }
     .form-slider {
-        display: none;
+        &__navigation {
+            width: 100%;
+        }
+        &__item {
+            input {
+                width: 320px;
+            }
+            .label-upload {
+                width: 320px;
+            }
+        }
+        
     }
     .examples {
         display: none;

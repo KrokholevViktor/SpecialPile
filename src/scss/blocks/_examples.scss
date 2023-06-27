@@ -68,12 +68,13 @@
                 -webkit-line-clamp: 3;
                 -webkit-box-orient: vertical;  
                 overflow: hidden;
+                margin-top: 3px;
             }
         }
        
     }
     &__navigation {
-        padding-top: 40px;
+        padding-top: 20px;
         display: flex;
         justify-content: end;
         .button_black {
