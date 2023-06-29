@@ -20,6 +20,7 @@
         grid-row-gap: 20px;
         column-gap: 140px;
         padding-top: 40px;
+        justify-content: space-around;
         &_col {
             &:first-child{
                 .stages__item {

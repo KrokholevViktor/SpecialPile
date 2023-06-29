@@ -10,8 +10,8 @@
         width: 1160px;
         margin-top: 40px;
         display: grid;
-        grid-template-rows: 245px 245px;
-        grid-template-columns: 385px 385px 386px;
+        grid-template-rows: 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
         background-color: $black-color;
         grid-gap: 1px;
         border: 1px solid $black-color;

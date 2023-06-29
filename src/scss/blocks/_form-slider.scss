@@ -118,7 +118,7 @@
     .item-1, .item-3, .item-4 {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: 257px 257px;
+        grid-template-rows: 1fr 1fr;
     }
     .item-2 {
         display: grid;

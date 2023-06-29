@@ -1,4 +1,7 @@
 @media (max-width: 1441px) {
+    body {
+        overflow-x: hidden;
+    }
     .stages {
         &__title_end {
             line-height: 64px;
@@ -30,8 +33,19 @@
         }
     }
 }
-
+/////////////////////////////////////////////////////////next width
 @media (max-width: 1439px) {
+
+    .fz-64-bn {
+        font-size: 60px;
+    }
+    .fz-36-bn {
+        font-size: 32px;
+    }
+    .fz-32-bn {
+        font-size: 30px;
+    }
+
     .container {
         max-width: 960px;
     }
@@ -57,52 +71,270 @@
         &__img {
             top: 145px;
         }
-        .title_promo {
-            font-size: 60px;
-        }
     }
+
     .characteristics {
         &__wrapper {
-            width: 840px;
+            width: 800px;
         }
         &_item {
             width: 100%;
         }
-        img {
-            left: 730px;
+        &__bg {
+            height: 70%;
+            left: 700px;
+            top: 220px;
         }
     }
+
     .form-slider {
         &__navigation {
             width: 100%;
+            
         }
         &__item {
+            .fz-14-os {
+                font-size: 12px;
+            }
             input {
-                width: 320px;
+                width: 415px;
             }
             .label-upload {
-                width: 320px;
+                width: 415px;
+            }
+            &__card {
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
             }
         }
         
     }
+
+    .advantages {
+        &__card_body {
+            .fz-16-os {
+                font-size: 14px;
+            }
+        }
+    }
+    .stages {
+        &__wrapper {
+            grid-template-columns: 340px 100px 340px;
+            column-gap: 90px;
+        }
+        &__item {
+            &_description {
+                width: 290px;
+            }
+            &_title-btn {
+                transform: translateX(-10px);
+            }
+        }
+    }
+
+    .info {
+        &__wrapper {
+            width: 100%;
+            &_item_header {
+
+            }
+        }
+    }
+
     .examples {
+        &__slide-container {
+            width: 1160px;
+            
+        }
+        &__wrapper_row-1 {
+            grid-template-columns: 387px 225px 333px 185px;
+            
+        }
+        &__wrapper_row-2 {
+            grid-template-columns:  185px 333px 225px 387px;
+        }
+        &__item {
+            min-height: 335px;
+            img {
+                height: 260px;
+            }
+            &_descr {
+                padding: 10px;
+            }
+            
+        }
+        &__navigation {
+            padding-top: 10px;
+        }
+    }
+    
+
+
+    .reviews {
+        &__slide {
+            width: 740px;
+            height: 400px;
+        }
+    }
+    .questions {
+        
+    }
+    .contacts {
+        &__wrapper {
+            width: 100%;
+        }
+    }
+    .footer {
+        
+    }
+}
+/////////////////////////////////////////////////////////next width
+@media (max-width: 1200px) {
+    .fz-64-bn {
+        font-size: 54px;
+    }
+    .header {
+        &__wrapper {
+            gap: 315px;
+        }
+        &__devider {
+            width: 900px;
+        }
+        &__menu {
+            gap: 19px;
+        }
+    }
+    .promo {
+       &__title {
+            width: 390px;
+            min-height: 250px;
+            h1 {
+                font-size: 58px;
+            }
+       }
+        &__services {
+                margin-top: 60px;
+                &_item {
+                    padding: 20px;
+                    height: 120px;
+            }
+       }
+    }
+
+    .characteristics {
+       &__wrapper {
+        width: 710px;
+       }
+    }
+
+    .form-slider {
+        &__navigation {
+            padding: 20px;
+            height: 95px;
+        }
+    }
+
+    .advantages {
+    
+    }
+    .stages {
+        &__wrapper {
+            column-gap: 60px;
+        }
+        &__item_title-btn {
+            .title {
+                width: 420px;
+            }
+        }
+    }
+
+    .info {
+        
+    }
+
+    .examples {
+        .fz-24-bn {
+            font-size: 20px;
+        }
+        &__item {
+            min-height: 334px;
+        }
+        &__slide-container {
+            width: 960px;
+            
+        }
+        &__wrapper_row-1 {
+            grid-template-columns: 337px 175px 283px 135px;
+            
+        }
+        &__wrapper_row-2 {
+            grid-template-columns:  135px 283px 175px 337px;
+        }
+    }
+
+    .reviews {
+        
+    }
+    .questions {
+        .fz-32-bn {
+            font-size: 30px;
+        }
+    }
+    .contacts {
+       
+    }
+    .footer {
+        
+    }
+}
+
+@media (max-width: 992px) {
+    .container {
+        max-width: 720px;
+        }
+    .header {
+        &__wrapper {
+            gap: 100px;
+        }
+        &__devider {
+            width: 720px;
+        }
+    }
+    .promo {
         display: none;
     }
-    .advantages {
+
+    .characteristics {
         display: none;
+    }
+
+    .form-slider {
+        display: none;
+    }
+
+    .advantages {
+        display: none; 
     }
     .stages {
         display: none;
     }
+
     .info {
         display: none;
     }
+
+    .examples {
+        display: none;
+    }
+
     .reviews {
         display: none;
     }
     .questions {
-        display: none;
+       display: none;
     }
     .contacts {
         display: none;
@@ -112,6 +344,6 @@
     }
 }
 
-@media (max-width: 1200px) {
-    
-    }
+@media (max-width: 768px) {
+
+}
