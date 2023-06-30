@@ -6,6 +6,7 @@ import forms from "./modules/forms";
 import modals from "./modules/modals";
 import changeFormSliderSate from "./modules/changeFormSliderSate";
 import mask from "./modules/mask";
+import burger from "./modules/burger";
 
 window.addEventListener('DOMContentLoaded', function () {
     "use strict";
@@ -19,6 +20,7 @@ window.addEventListener('DOMContentLoaded', function () {
     forms(formSliderState);
     modals();
     mask('[name="phone"]');
+    burger('.header__menu_burger', '.burger')
     
 });
 
