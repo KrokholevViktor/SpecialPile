@@ -39,7 +39,8 @@
             margin-top: 2px;
         }
         .burger {
-            display: flex;
+            
+            display: none;
             flex-direction: column;
             justify-content: center;
             align-items: center;
@@ -55,7 +56,7 @@
               }
         }
         .active .bar:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
+            transform: rotate(45deg) translate(3px, 4px);
             }
             
         .active .bar:nth-child(2) {

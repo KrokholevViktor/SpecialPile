@@ -158,7 +158,36 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
                     
                 });
             });
+
+            //////////////////////////////////////// заменяет чёрточку в counter у form-slider
+            const counterDivider = document.querySelector('.form-slider__counter_divider');
+            
+            if (window.screen.availWidth < 768) {
+                counterDivider.textContent = '';
+                images.forEach(element => {
+                    element.children[1].style.display = 'none'
+                });
+            }
+            window.addEventListener('resize', () => {
+                
+                if (window.screen.availWidth < 768) {
+                    counterDivider.textContent = '';
+                    images.forEach(element => {
+                        element.children[1].style.display = 'none'
+                    });
+                } else {
+                    counterDivider.textContent = '/';
+                    images.forEach(element => {
+                        element.children[1].style.display = ''
+                    });
+                }
+            })
+            /////////////////////////////////////////////
+
         });
+
+
+
     };
     slideSelect();
 
@@ -189,6 +218,7 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
         chek(slidesItems);
         chek(askitems);
     };
+
 
 }
 

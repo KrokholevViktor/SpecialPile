@@ -131,10 +131,16 @@ const accordion = (triggersSelector, descrSelector) => {
 __webpack_require__.r(__webpack_exports__);
 const burger = (menuSelector, burgerSelector) => {
   const menuElem = document.querySelector(menuSelector),
-    burgerElem = document.querySelector(burgerSelector);
+    burgerElem = document.querySelector(burgerSelector),
+    phone = document.querySelector('.header__info_e_p .header__info_phone ');
   menuElem.style.display = 'none';
   burgerElem.addEventListener('click', () => {
     burgerElem.classList.toggle('active');
+    if (burgerElem.classList.contains('active')) {
+      phone.style.visibility = 'hidden';
+    } else {
+      phone.style.visibility = 'visible';
+    }
     if (menuElem.style.display == 'none' && window.screen.availWidth < 993) {
       menuElem.style.display = '';
       menuElem.classList.add('fadeIn');
@@ -429,8 +435,32 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
           select.classList.add('ask-selected');
         });
       });
+
+      //////////////////////////////////////// заменяет чёрточку в counter у form-slider
+      const counterDivider = document.querySelector('.form-slider__counter_divider');
+      if (window.screen.availWidth < 768) {
+        counterDivider.textContent = '';
+        images.forEach(element => {
+          element.children[1].style.display = 'none';
+        });
+      }
+      window.addEventListener('resize', () => {
+        if (window.screen.availWidth < 768) {
+          counterDivider.textContent = '';
+          images.forEach(element => {
+            element.children[1].style.display = 'none';
+          });
+        } else {
+          counterDivider.textContent = '/';
+          images.forEach(element => {
+            element.children[1].style.display = '';
+          });
+        }
+      });
+      /////////////////////////////////////////////
     });
   };
+
   slideSelect();
 
   // проверяет карточки в слайдере на наличие класса и включает или оключает кнопку next 

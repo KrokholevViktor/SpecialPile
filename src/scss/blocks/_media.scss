@@ -316,7 +316,7 @@
                 display: none;
             }
             .burger {
-                display: block;
+                display: flex;
                 border: none;
                 background-color: white;
                 cursor: pointer;
@@ -336,7 +336,7 @@
     }
     .promo {
         padding-top: 30px;
-        height: 560px;
+        min-height: 560px;
         &__title {
             width: 100%;
             min-height: 150px;
@@ -449,27 +449,183 @@
     }
 
     .info {
-        display: none;
+        &__wrapper {
+            grid-template-columns: 1fr 1fr;
+            :nth-child(3n) {
+                grid-row: 3;
+            }
+            &_item {
+                
+                &_link {
+                    z-index: 100;
+                }
+                &_img {
+                    width: 175px;
+                    height: 135px;
+                }
+            }
+        }
     }
 
     .examples {
-        display: none;
+        &__slide-container {
+            width: 720px;
+            
+        }
+        &__wrapper {
+            &_row-1 {
+                > *:nth-child(n+2) {
+                display: none;
+               }
+               grid-template-columns: 1fr;
+            }
+            &_row-2 {
+                > *:nth-child(n+3) {
+                    display: none;
+                   }
+                   grid-template-columns: 0.5fr 0.5fr;
+            }
+            
+        }
+        &__item {
+            overflow: hidden;
+            display: block;
+            img {
+
+                
+            }
+        }
     }
 
     .reviews {
-        display: none;
+        &__slide {
+            width: 500px;
+        }
     }
     .questions {
-       display: none;
+       
     }
     .contacts {
-        display: none;
+        &__wrapper {
+            flex-direction: column;
+            height: 1000px;
+        }
+        &__block {
+            width: 100%;
+        }
+        &__iframe {
+            width: 100%;
+            height: 100%;
+            iframe {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
     }
     .footer {
-        display: none;
+        &__wrapper {
+            flex-direction: column;
+            gap: 10px;
+            > *:nth-child(1) {
+                a {
+                    display: none;
+                }
+            }
+        }
+        &__item {
+            div {
+                display: flex;
+                justify-content: flex-start;
+                gap: 15px;
+            }
+        }
+        .sm-w {
+            display: block;
+            text-align: left;
+        }
     }
 }
 
 @media (max-width: 768px) {
+    .fz-32-bn {
+        font-size: 20px;
+    }
+    .container {
+        max-width: 540px;
+        }
+    .header {
+        &__wrapper {
+            gap: 185px;
+        }
+    }
+    .promo {
+        height: auto;
+        .title_promo {
+            font-size: 40px;
+        }
+        &__img {
+            top: 180px;
+        }
+        &__services {
+            margin-top: 160px;
+            display: flex;
+            flex-direction: column;
+            font-size: 20px;
+            &_item {
+                width: 100%;
+                height: auto;
+                
+            }
+        }
+    }
+    .characteristics {
+        height: auto;
+        &__bg {
+            left: 333px;
+            top: 450px;
+            height: 48%;
+        }
+        &_item {
+            padding: 25px;
+        }
+    }
+    .form-slider {
+        &__title {
+            width: 330px;
+        }
+        &__counter {
+            display: flex;
+            flex-direction: column;
+            &_divider {
+                // color: $background-color-gray;
+                &:after {
+                    display: block;
+                    content: "";
+                    width: 45px;
+                    height: 5px;
+                    background-color: #333333;
+                    transform: translateX(-5px);
+                }
+            }
+        }
+        &__inner {
+            .item-1, .item-2, .item-3, .item-4 {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+        }
+        &__item {
+            &__card {
+                &__title {
+                    height: 100%;
+                    border-bottom: none;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 576px) {
 
 }
