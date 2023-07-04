@@ -9,9 +9,15 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
         counter = document.querySelector('.form-slider__counter'),
         slidesWrapper = document.querySelector(sliderWrapper),
         slidesInner = document.querySelector(sliderInner),
-        width = window.getComputedStyle(slidesWrapper).width,
+        // width = window.getComputedStyle(slidesWrapper).width,
         titles = document.querySelectorAll('.form-slider__title'),
         buttonForm = document.querySelector('.form-slider__navigation_btn-form');
+
+    let width = window.getComputedStyle(slidesWrapper).width;
+
+    window.addEventListener('resize', () => {
+        width = window.getComputedStyle(slidesWrapper).width
+    });
 
     let slideIndex = 1;
     let offset = 0;
@@ -25,11 +31,20 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
         current.textContent = slideIndex;
     };
 
+    function setSlideWidth() {
+        slidesInner.style.width = 100 * slides.length + '%';
+        slides.forEach(slide => {
+            slide.style.width = width;
+        });
+    }
+    setSlideWidth();
 
-    slidesInner.style.width = 100 * slides.length + '%';
-    slides.forEach(slide => {
-        slide.style.width = width;
+
+    window.addEventListener('resize', () => {
+        setSlideWidth();
     });
+
+    
 
     hideElements();
     showTitle();
