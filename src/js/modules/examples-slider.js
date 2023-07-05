@@ -3,18 +3,34 @@ function examplesSlider (prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInn
         prev = document.querySelector(prevBtn),
         next = document.querySelector(nextBtn),
         slidesWrapper = document.querySelector(sliderWrapper),
-        slidesInner = document.querySelector(sliderInner),
-        width = window.getComputedStyle(slidesWrapper).width;
+        slidesInner = document.querySelector(sliderInner);
+
+    let width = window.getComputedStyle(slidesWrapper).width;
+    window.addEventListener('resize', () => {
+        width = window.getComputedStyle(slidesWrapper).width
+    });
 
     let slideIndex = 1;
     let offset = 0;
 
-    slidesInner.style.width = 100 * slides.length + '%';
-    slides.forEach(slide => {
-    slide.style.width = width; // ширина слайда
-    });
+
     disabledNext();
     disabledPrev();
+
+    function setSlideWidth() {
+        slidesInner.style.width = 100 * slides.length + '%';
+        slides.forEach(slide => {
+            slide.style.width = width;
+        });
+        console.log('1');
+    }
+    setSlideWidth();
+
+
+    window.addEventListener('resize', () => {
+        setSlideWidth();
+    });
+
 
     next.addEventListener('click', () => {
         if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
