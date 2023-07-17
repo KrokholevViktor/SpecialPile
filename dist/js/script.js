@@ -120,6 +120,101 @@ const accordion = (triggersSelector, descrSelector) => {
 
 /***/ }),
 
+/***/ "./src/js/modules/advantagesSlider.js":
+/*!********************************************!*\
+  !*** ./src/js/modules/advantagesSlider.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function advantagesSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
+  const slides = document.querySelectorAll(slidesItems),
+    prev = document.querySelector(prevBtn),
+    next = document.querySelector(nextBtn),
+    slidesWrapper = document.querySelector(sliderWrapper),
+    slidesInner = document.querySelector(sliderInner);
+  let width = window.getComputedStyle(slidesWrapper).width;
+  window.addEventListener('resize', () => {
+    width = window.getComputedStyle(slidesWrapper).width;
+  });
+  let slideIndex = 1;
+  let offset = 0;
+  function setSlideWidth() {
+    slidesInner.style.width = `calc((100 * ${slides.length}%) + (10 * ${slides.length - 1}px))`;
+    slides.forEach(slide => {
+      slide.style.width = width;
+    });
+  }
+  setSlideWidth();
+  window.addEventListener('resize', () => {
+    setSlideWidth();
+  });
+  disabledNext();
+  disabledPrev();
+  next.addEventListener('click', () => {
+    if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
+      offset = 0;
+    } else {
+      offset += +width.slice(0, width.length - 2) + 10;
+    }
+    slidesInner.style.transform = `translateX(-${offset}px)`;
+    if (slideIndex == slides.length) {
+      slideIndex = 1;
+    } else {
+      slideIndex++;
+    }
+    if (slides.length < 10) {
+      current.textContent = `0${slideIndex}`;
+    } else {
+      current.textContent = slideIndex;
+    }
+    disabledNext();
+    disabledPrev();
+  });
+  prev.addEventListener('click', () => {
+    if (offset == 0) {
+      offset = +width.slice(0, width.length - 2) * (slides.length - 1);
+    } else {
+      offset -= +width.slice(0, width.length - 2) + 10;
+    }
+    slidesInner.style.transform = `translateX(-${offset}px)`;
+    if (slideIndex == 1) {
+      slideIndex = slides.length;
+    } else {
+      slideIndex--;
+    }
+    if (slides.length < 10) {
+      current.textContent = `0${slideIndex}`;
+    } else {
+      current.textContent = slideIndex;
+    }
+    disabledNext();
+    disabledPrev();
+  });
+  function disabledPrev() {
+    if (slideIndex == 1) {
+      prev.disabled = true;
+    } else {
+      prev.disabled = false;
+    }
+  }
+  ;
+  function disabledNext() {
+    if (slideIndex == slides.length) {
+      next.disabled = true;
+    } else {
+      next.disabled = false;
+    }
+  }
+  ;
+}
+;
+/* harmony default export */ __webpack_exports__["default"] = (advantagesSlider);
+
+/***/ }),
+
 /***/ "./src/js/modules/burger.js":
 /*!**********************************!*\
   !*** ./src/js/modules/burger.js ***!
@@ -201,10 +296,10 @@ const changeFormSliderSate = state => {
 
 /***/ }),
 
-/***/ "./src/js/modules/examples-slider.js":
-/*!*******************************************!*\
-  !*** ./src/js/modules/examples-slider.js ***!
-  \*******************************************/
+/***/ "./src/js/modules/examplesSlider.js":
+/*!******************************************!*\
+  !*** ./src/js/modules/examplesSlider.js ***!
+  \******************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -225,11 +320,11 @@ function examplesSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInne
   disabledNext();
   disabledPrev();
   function setSlideWidth() {
-    slidesInner.style.width = 100 * slides.length + '%';
+    slidesInner.style.width = `calc((100 * ${slides.length}%) + (10 * ${slides.length - 1}px))`;
+    // slidesInner.style.width = 100 * slides.length + '%';
     slides.forEach(slide => {
       slide.style.width = width;
     });
-    console.log('1');
   }
   setSlideWidth();
   window.addEventListener('resize', () => {
@@ -241,7 +336,7 @@ function examplesSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInne
     } else {
       offset += +width.slice(0, width.length - 2);
     }
-    slidesInner.style.transform = `translateX(-${offset}px)`;
+    slidesInner.style.transform = `translateX(-${offset + 10}px`;
     if (slideIndex == slides.length) {
       slideIndex = 1;
     } else {
@@ -297,10 +392,10 @@ function examplesSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInne
 
 /***/ }),
 
-/***/ "./src/js/modules/form-slider.js":
-/*!***************************************!*\
-  !*** ./src/js/modules/form-slider.js ***!
-  \***************************************/
+/***/ "./src/js/modules/formSlider.js":
+/*!**************************************!*\
+  !*** ./src/js/modules/formSlider.js ***!
+  \**************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -336,7 +431,7 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
   }
   ;
   function setSlideWidth() {
-    slidesInner.style.width = 100 * slides.length + '%';
+    slidesInner.style.width = `calc((100 * ${slides.length}%) + (10 * ${slides.length - 1}px))`;
     slides.forEach(slide => {
       slide.style.width = width;
     });
@@ -361,7 +456,7 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
     if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
       offset = 0;
     } else {
-      offset += +width.slice(0, width.length - 2);
+      offset += +width.slice(0, width.length - 2) + 10;
     }
     slidesInner.style.transform = `translateX(-${offset}px)`;
     if (slideIndex == slides.length) {
@@ -385,7 +480,7 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
     if (offset == 0) {
       offset = +width.slice(0, width.length - 2) * (slides.length - 1);
     } else {
-      offset -= +width.slice(0, width.length - 2);
+      offset -= +width.slice(0, width.length - 2) + 10;
     }
     slidesInner.style.transform = `translateX(-${offset}px)`;
     if (slideIndex == 1) {
@@ -687,10 +782,10 @@ const modals = () => {
 
 /***/ }),
 
-/***/ "./src/js/modules/reviews-slider.js":
-/*!******************************************!*\
-  !*** ./src/js/modules/reviews-slider.js ***!
-  \******************************************/
+/***/ "./src/js/modules/reviewsSlider.js":
+/*!*****************************************!*\
+  !*** ./src/js/modules/reviewsSlider.js ***!
+  \*****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -712,7 +807,7 @@ function reviewsSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner
     if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
       offset = 0;
     } else {
-      offset += +width.slice(0, width.length - 2);
+      offset += +width.slice(0, width.length - 2) + 40;
     }
     slidesInner.style.transform = `translateX(-${offset}px)`;
     if (slideIndex == slides.length) {
@@ -732,7 +827,7 @@ function reviewsSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner
     if (offset == 0) {
       offset = +width.slice(0, width.length - 2) * (slides.length - 1);
     } else {
-      offset -= +width.slice(0, width.length - 2);
+      offset -= +width.slice(0, width.length - 2) + 40;
     }
     slidesInner.style.transform = `translateX(-${offset}px)`;
     if (slideIndex == 1) {
@@ -779,15 +874,17 @@ function reviewsSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _modules_form_slider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/form-slider */ "./src/js/modules/form-slider.js");
-/* harmony import */ var _modules_examples_slider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/examples-slider */ "./src/js/modules/examples-slider.js");
-/* harmony import */ var _modules_reviews_slider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/reviews-slider */ "./src/js/modules/reviews-slider.js");
+/* harmony import */ var _modules_formSlider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/formSlider */ "./src/js/modules/formSlider.js");
+/* harmony import */ var _modules_examplesSlider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/examplesSlider */ "./src/js/modules/examplesSlider.js");
+/* harmony import */ var _modules_reviewsSlider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/reviewsSlider */ "./src/js/modules/reviewsSlider.js");
 /* harmony import */ var _modules_accordion__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/accordion */ "./src/js/modules/accordion.js");
 /* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
 /* harmony import */ var _modules_modals__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/modals */ "./src/js/modules/modals.js");
 /* harmony import */ var _modules_changeFormSliderSate__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/changeFormSliderSate */ "./src/js/modules/changeFormSliderSate.js");
 /* harmony import */ var _modules_mask__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/mask */ "./src/js/modules/mask.js");
 /* harmony import */ var _modules_burger__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/burger */ "./src/js/modules/burger.js");
+/* harmony import */ var _modules_advantagesSlider__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/advantagesSlider */ "./src/js/modules/advantagesSlider.js");
+
 
 
 
@@ -801,15 +898,16 @@ window.addEventListener('DOMContentLoaded', function () {
   "use strict";
 
   let formSliderState = {};
-  Object(_modules_form_slider__WEBPACK_IMPORTED_MODULE_0__["default"])('.form-slider__navigation_prev .button_black', '.form-slider__navigation_next .button_black', '.form-slider__item', '.form-slider__wrapper', '.form-slider__inner');
+  Object(_modules_formSlider__WEBPACK_IMPORTED_MODULE_0__["default"])('.form-slider__navigation_prev .button_black', '.form-slider__navigation_next .button_black', '.form-slider__item', '.form-slider__wrapper', '.form-slider__inner');
   Object(_modules_changeFormSliderSate__WEBPACK_IMPORTED_MODULE_6__["default"])(formSliderState);
-  Object(_modules_examples_slider__WEBPACK_IMPORTED_MODULE_1__["default"])('.examples__navigation .navigation_prev .button_black', '.examples__navigation .navigation_next .button_black', '.examples__slide', '.examples__wrapper', '.examples__inner');
-  Object(_modules_reviews_slider__WEBPACK_IMPORTED_MODULE_2__["default"])('.reviews__navigation .navigation_prev .button_black', '.reviews__navigation .navigation_next .button_black', '.reviews__slide', '.reviews__wrapper', '.reviews__inner'); // init slider for reviews
+  Object(_modules_examplesSlider__WEBPACK_IMPORTED_MODULE_1__["default"])('.examples__navigation .navigation_prev .button_black', '.examples__navigation .navigation_next .button_black', '.examples__slide', '.examples__wrapper', '.examples__inner');
+  Object(_modules_reviewsSlider__WEBPACK_IMPORTED_MODULE_2__["default"])('.reviews__navigation .navigation_prev .button_black', '.reviews__navigation .navigation_next .button_black', '.reviews__slide', '.reviews__wrapper', '.reviews__inner'); // init slider for reviews
   Object(_modules_accordion__WEBPACK_IMPORTED_MODULE_3__["default"])('.questions__accordion__item', '.questions__accordion__descr');
   Object(_modules_forms__WEBPACK_IMPORTED_MODULE_4__["default"])(formSliderState);
   Object(_modules_modals__WEBPACK_IMPORTED_MODULE_5__["default"])();
   Object(_modules_mask__WEBPACK_IMPORTED_MODULE_7__["default"])('[name="phone"]');
   Object(_modules_burger__WEBPACK_IMPORTED_MODULE_8__["default"])('.header__menu_burger', '.burger');
+  Object(_modules_advantagesSlider__WEBPACK_IMPORTED_MODULE_9__["default"])('.advantages__navigation .navigation_prev .button_black', '.advantages__navigation .navigation_next .button_black', '.advantages__slide', '.advantages__slider', '.advantages__inner');
 });
 
 /***/ })

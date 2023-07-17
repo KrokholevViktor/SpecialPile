@@ -32,7 +32,7 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
     };
 
     function setSlideWidth() {
-        slidesInner.style.width = 100 * slides.length + '%';
+        slidesInner.style.width = `calc((100 * ${slides.length}%) + (10 * ${slides.length - 1}px))`;
         slides.forEach(slide => {
             slide.style.width = width;
         });
@@ -61,12 +61,12 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
         titles[slideIndex - 1].style.display = '';
     };
 
-
     next.addEventListener('click', () => {
         if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
             offset = 0;
         } else {
-            offset += +width.slice(0, width.length - 2)
+            offset += +width.slice(0, width.length - 2) + 10
+            
         }
 
         slidesInner.style.transform = `translateX(-${offset}px)`;
@@ -94,7 +94,7 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
         if (offset == 0) {
             offset = +width.slice(0, width.length - 2) * (slides.length - 1)
         } else {
-            offset -= +width.slice(0, width.length - 2)
+            offset -= +width.slice(0, width.length - 2) + 10
         }
 
         slidesInner.style.transform = `translateX(-${offset}px)`;

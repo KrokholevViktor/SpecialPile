@@ -1,28 +1,24 @@
-function examplesSlider (prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
+function advantagesSlider (prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
         const slides = document.querySelectorAll(slidesItems),
         prev = document.querySelector(prevBtn),
         next = document.querySelector(nextBtn),
         slidesWrapper = document.querySelector(sliderWrapper),
         slidesInner = document.querySelector(sliderInner);
 
-    let width = window.getComputedStyle(slidesWrapper).width;
-    window.addEventListener('resize', () => {
-        width = window.getComputedStyle(slidesWrapper).width
-    });
+        let width = window.getComputedStyle(slidesWrapper).width;
+        
+        window.addEventListener('resize', () => {
+            width = window.getComputedStyle(slidesWrapper).width
+        });
 
     let slideIndex = 1;
     let offset = 0;
 
-
-    disabledNext();
-    disabledPrev();
-
     function setSlideWidth() {
-        slidesInner.style.width = 100 * slides.length + '%';
+        slidesInner.style.width = `calc((100 * ${slides.length}%) + (10 * ${slides.length - 1}px))`;
         slides.forEach(slide => {
             slide.style.width = width;
         });
-        console.log('1');
     }
     setSlideWidth();
 
@@ -31,12 +27,14 @@ function examplesSlider (prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInn
         setSlideWidth();
     });
 
+    disabledNext();
+    disabledPrev();
 
     next.addEventListener('click', () => {
         if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
             offset = 0;
         } else {
-            offset += +width.slice(0, width.length - 2)
+            offset += +width.slice(0, width.length - 2) + 10
         }
 
         slidesInner.style.transform = `translateX(-${offset}px)`;
@@ -60,7 +58,7 @@ function examplesSlider (prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInn
         if (offset == 0) {
             offset = +width.slice(0, width.length - 2) * (slides.length - 1)
         } else {
-            offset -= +width.slice(0, width.length - 2)
+            offset -= +width.slice(0, width.length - 2) + 10
         }
 
         slidesInner.style.transform = `translateX(-${offset}px)`;
@@ -97,4 +95,4 @@ function examplesSlider (prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInn
     };
 };
 
-export default examplesSlider;
+export default advantagesSlider;
