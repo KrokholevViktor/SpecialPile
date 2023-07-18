@@ -107,7 +107,8 @@
     opacity: 0.25; ///уменьшая opacity создаётся розовый фильтр из-за background
 }
 .ask-selected {
-    background-color: rgba($pink-color, 0.75);
+    background-color: $pink-color;
+    color: $background-color-white;
     height: 100%;
 }
 .status {

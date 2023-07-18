@@ -1,7 +1,7 @@
 .form-slider {
     padding-top: 60px;
     padding-bottom: 60px;
-    height: 836px;
+    min-height: 836px;
     background-color: $background-color-gray;
     width: 100%;
     &__head {
@@ -68,9 +68,12 @@
             height: 100%;
             background-color: $background-color-white;
             &-form {
-                background-color: $background-color-white;
+                // КАРТОЧКА СЕЛЕКТ ПЛАНА
+                // background-color: $background-color-white;
+                background-color: $pink-color;
                 &_select {
                     padding: 30px;
+                    background-color: $background-color-white;
                 }
                 &:hover {
                     .form-slider__item__card-form_select {
@@ -93,10 +96,10 @@
                     color: $background-color-white;
                     border: none;
                     background-color: transparent;
-                    text-shadow: 1px 0 1px #000, 
-                                0 1px 1px #000, 
-                                -1px 0 1px #000, 
-                                0 -1px 1px #000;
+                    // text-shadow: 1px 0 1px #000, 
+                    //             0 1px 1px #000, 
+                    //             -1px 0 1px #000, 
+                    //             0 -1px 1px #000;
                 }
                 .form-slider__img {
                     img {

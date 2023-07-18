@@ -142,7 +142,7 @@ function advantagesSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderIn
   let slideIndex = 1;
   let offset = 0;
   function setSlideWidth() {
-    slidesInner.style.width = `calc((100 * ${slides.length}%) + (10 * ${slides.length - 1}px))`;
+    slidesInner.style.width = `calc((100 * ${slides.length}%) + (130 * ${slides.length - 1}px))`;
     slides.forEach(slide => {
       slide.style.width = width;
     });
@@ -157,7 +157,7 @@ function advantagesSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderIn
     if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
       offset = 0;
     } else {
-      offset += +width.slice(0, width.length - 2) + 10;
+      offset += +width.slice(0, width.length - 2) + 130;
     }
     slidesInner.style.transform = `translateX(-${offset}px)`;
     if (slideIndex == slides.length) {
@@ -177,7 +177,7 @@ function advantagesSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderIn
     if (offset == 0) {
       offset = +width.slice(0, width.length - 2) * (slides.length - 1);
     } else {
-      offset -= +width.slice(0, width.length - 2) + 10;
+      offset -= +width.slice(0, width.length - 2) + 130;
     }
     slidesInner.style.transform = `translateX(-${offset}px)`;
     if (slideIndex == 1) {
@@ -536,7 +536,7 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
             images.forEach(element => {
               element.children[1].previousElementSibling.style.cssText = "border-bottom: 1px solid $black-color;";
             });
-            element.children[1].previousElementSibling.style.cssText = "background-color: transparent; border-bottom: none; color: white; text-shadow: 1px 0 1px #000, 0 1px 1px #000, -1px 0 1px #000, 0 -1px 1px #000;";
+            element.children[1].previousElementSibling.style.cssText = "background-color: transparent; border-bottom: none; color: white; ";
           }
         });
       });
@@ -807,7 +807,7 @@ function reviewsSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner
     if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
       offset = 0;
     } else {
-      offset += +width.slice(0, width.length - 2) + 40;
+      offset += +width.slice(0, width.length - 2) + 20;
     }
     slidesInner.style.transform = `translateX(-${offset}px)`;
     if (slideIndex == slides.length) {
@@ -827,7 +827,7 @@ function reviewsSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner
     if (offset == 0) {
       offset = +width.slice(0, width.length - 2) * (slides.length - 1);
     } else {
-      offset -= +width.slice(0, width.length - 2) + 40;
+      offset -= +width.slice(0, width.length - 2) + 20;
     }
     slidesInner.style.transform = `translateX(-${offset}px)`;
     if (slideIndex == 1) {

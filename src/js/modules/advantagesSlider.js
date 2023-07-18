@@ -15,7 +15,7 @@ function advantagesSlider (prevBtn, nextBtn, slidesItems, sliderWrapper, sliderI
     let offset = 0;
 
     function setSlideWidth() {
-        slidesInner.style.width = `calc((100 * ${slides.length}%) + (10 * ${slides.length - 1}px))`;
+        slidesInner.style.width = `calc((100 * ${slides.length}%) + (130 * ${slides.length - 1}px))`;
         slides.forEach(slide => {
             slide.style.width = width;
         });
@@ -34,7 +34,7 @@ function advantagesSlider (prevBtn, nextBtn, slidesItems, sliderWrapper, sliderI
         if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
             offset = 0;
         } else {
-            offset += +width.slice(0, width.length - 2) + 10
+            offset += +width.slice(0, width.length - 2) + 130
         }
 
         slidesInner.style.transform = `translateX(-${offset}px)`;
@@ -58,7 +58,7 @@ function advantagesSlider (prevBtn, nextBtn, slidesItems, sliderWrapper, sliderI
         if (offset == 0) {
             offset = +width.slice(0, width.length - 2) * (slides.length - 1)
         } else {
-            offset -= +width.slice(0, width.length - 2) + 10
+            offset -= +width.slice(0, width.length - 2) + 130
         }
 
         slidesInner.style.transform = `translateX(-${offset}px)`;

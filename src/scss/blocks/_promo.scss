@@ -17,10 +17,12 @@
     }
     &__img {
         position: absolute;
+        width: 711px;
+        height: 583px;
+        object-fit: cover;
+        top: 60px;
         right: 0px;
-        top: 64px;
-        width: 61%;
-        z-index: -1;
+        z-index: -10;
     }
     &__services {
         margin-top: 120px;

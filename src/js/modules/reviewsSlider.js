@@ -22,7 +22,7 @@ function reviewsSlider (prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInne
         if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
             offset = 0;
         } else {
-            offset += +width.slice(0, width.length - 2) + 40
+            offset += +width.slice(0, width.length - 2) + 20
         }
 
         slidesInner.style.transform = `translateX(-${offset}px)`;
@@ -46,7 +46,7 @@ function reviewsSlider (prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInne
         if (offset == 0) {
             offset = +width.slice(0, width.length - 2) * (slides.length - 1)
         } else {
-            offset -= +width.slice(0, width.length - 2) + 40
+            offset -= +width.slice(0, width.length - 2) + 20
         }
 
         slidesInner.style.transform = `translateX(-${offset}px)`;

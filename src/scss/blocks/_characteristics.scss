@@ -20,14 +20,11 @@
         display: flex;
         align-items: center;
         padding: 30px;
-        min-height: 140px;
         width: 100%;
-        span {
-            display: inline-block;
+        &_descr {
             margin-top: -8px;
             margin-left: 20px;
             text-align: left;
-            vertical-align: bottom;
         }
     }
     &__bg {

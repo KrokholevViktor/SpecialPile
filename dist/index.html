@@ -10,8 +10,8 @@
 <body>
 
 
-    <div class="container header">
-        <div class="header__wrapper">
+    <div class="header">
+        <div class="header__wrapper container">
             <img src="img/logo.png" alt="logo" class="header__logo">
             <div class="header__info">
                 <div class="header__info_e_p"> 
@@ -26,8 +26,8 @@
                 </button>
             </div>
         </div>
-        <div class="header__devider"></div>
-        <div class="header__menu fz-16-bn">
+        <div class="header__devider container"></div>
+        <div class="header__menu fz-16-bn container">
             <a href="#characteristics" class="header_link">Характеристики</a>
             <a href="#form-slider" class="header_link">Онлайн-калькулятор</a>
             <a href="#advantages" class="header_link">Преимущества</a>
@@ -78,24 +78,50 @@
             <h2 class="title">Характеристики железобетонных свай</h2>
             <div class="characteristics__wrapper">
                 <div class="characteristics_item fz-32-bn ">
-                    <img src="img/icon/length.png" alt="length" class="characteristics_icon">
-                    <span>Длина свай 3, 4 и 5 метров</span>
+                    <picture>
+                        <source media="(max-width: 576px)" srcset="img/icon/length-small.png">
+                        <source media="(min-width: 576px)" srcset="img/icon/length.png">
+                        <img src="img/icon/length.png" alt="length" class="characteristics_icon">
+                    </picture>
+                    <div class="characteristics_item_descr">Длина свай 3, 4 и 5 метров</div>
                 </div>
                 <div class="characteristics_item fz-32-bn ">
-                    <img src="img/icon/diameter.png" alt="diameter" class="characteristics_icon">
-                    <span>Размер свай (Сечение) 150х150 мм и 200х200 мм</span>
+                    <picture>
+                        <source media="(max-width: 576px)" srcset="img/icon/diameter-small.png">
+                        <source media="(min-width: 576px)" srcset="img/icon/diameter.png">
+                        <img src="img/icon/diameter.png" alt="diameter" class="characteristics_icon">
+                    </picture>
+                    
+                    <div class="characteristics_item_descr">Размер свай (Сечение) 150х150 мм и 200х200 мм</div>
                 </div>
-                <div class="characteristics_item fz-32-bn ">
-                    <img src="img/icon/section.png" alt="section" class="characteristics_icon">
-                    <span>Стержень квадратного сечения</span>
+                <div class="characteristics_item fz-32-bn">
+                    <picture>
+                        <source media="(max-width: 576px)" srcset="img/icon/section-small.png">
+                        <source media="(min-width: 576px)" srcset="img/icon/section.png">
+                        <img src="img/icon/section.png" alt="section" class="characteristics_icon">
+                    </picture>
+                    
+                    <div class="characteristics_item_descr">Стержень квадратного сечения</div>
                 </div>
-                <div class="characteristics_item fz-32-bn ">
-                    <img src="img/icon/certificate.png" alt="certificate" class="characteristics_icon">
-                    <span>Сваи выпускаются на ЖБИ-заводе по ГОСТ 19804-2012</span>
+                <div class="characteristics_item fz-32-bn">
+                    <picture>
+                        <source media="(max-width: 576px)" srcset="img/icon/certificate-small.png">
+                        <source media="(min-width: 576px)" srcset="img/icon/certificate.png">
+                        <img src="img/icon/certificate.png" alt="certificate" class="characteristics_icon">
+                    </picture>
+                    
+                    <div class="characteristics_item_descr">Сваи выпускаются на ЖБИ-заводе по ГОСТ 19804-2012</div>
                 </div>
-                <div class="characteristics_item fz-32-bn ">
-                    <img src="img/icon/standard.png" alt="standard" class="characteristics_icon">
-                    <span>Все сваи проходят статистические испытания с соблюдением нормативов и имеют подтверждающие сертификаты качества</span>
+                <div class="characteristics_item fz-32-bn">
+                    <div class="icon__wrapper">
+                        <picture>
+                            <source media="(max-width: 576px)" srcset="img/icon/standard-small.png">
+                            <source media="(min-width: 576px)" srcset="img/icon/standard.png">
+                            <img src="img/icon/standard.png" alt="standard" class="characteristics_icon">
+                        </picture>
+                    </div>
+                    
+                    <div class="characteristics_item_descr">Все сваи проходят статистические испытания с соблюдением нормативов и имеют подтверждающие сертификаты качества</div>
                 </div>
             </div>
             <img src="img/characteristics_bg.png" alt="characteristics_bg" class="characteristics__bg">
@@ -289,7 +315,7 @@
                                         <label class="label-upload fz-16-os" for="file">Прикрепить файл</label>
                                         <input class="input-upload" name="file" id="file" type="file" value="Прикрепить файл">
                                     </div>
-                                    <div class="form-main__item">
+                                    <div class="form-main__item form-main__item_policy">
                                         <input id="checkbox" name="checkbox" class="checkbox" type="checkbox" required>
                                         <label for="checkbox" class="fz-14-os">Я соглашаюсь с условиями <a class="fz-14-os" href="#"> политики конфиденциальности</a></label>
                                     </div>
@@ -317,8 +343,8 @@
     </div>
 
 
-    <div id="advantages" class="container">
-        <div class="advantages">
+    <div id="advantages" class="container__overflow_hidden">
+        <div class="advantages container">
             <h2 class="title advantages__title">Преимущества забивного свайного фундамента</h2>
 
             <div class="advantages__wrapper">
@@ -524,7 +550,7 @@
             <div class="info__wrapper">
                 <div class="info__wrapper_item">
                     <div class="info__wrapper_item_header fz-64-bn">879</div>
-                    <div class="info__wrapper_item_descr fz-36-bn">фундаментов <br>
+                    <div class="info__wrapper_item_descr fz-36-bn">фундаментов
                         на наших сваях</div>
                 </div>
                 <div class="info__wrapper_item">
@@ -663,6 +689,21 @@
                         <div class="reviews__slide_title fz-32-bn">Анжелика Алексеевна</div>
                         <div class="reviews__slide_date fz-14-os">14 мая 2019</div>
                         <div class="reviews__slide_descr"><p class="fz-16-os">Быстро отреагировали на запрос. Приехали все рассказали, дали совет. Хотели сделать ленточный фундамент, но по ходу строительства передумали и решили делать свайно-ростверковый и довольны. Сотрудники терпиливые и опытные, что не мало важно в этом деле. Спасибо за работу. Буду вас рекомендовать.</p></div>
+                    </div>
+                    <div class="reviews__slide">
+                        <div class="reviews__slide_title fz-32-bn">Дмитрий Шатов</div>
+                        <div class="reviews__slide_date fz-14-os">16 июля 2020</div>
+                        <div class="reviews__slide_descr fz-16-os"><p class="fz-16-os">При строительстве дома заказывали фундамент из железно-бетонных свай в этой компании. Работу выполнили качественно и в срок. Инженер выехал на место строительство, дал подробную информацию, ответил на все наши вопросы, спасибо ему огромное!Монатжники сделали свою работу качественно и быстро, сразу видно провессионалы своего дела! Рекомендую данную организацию. Быстро отреагировали на запрос. Приехали все рассказали, дали совет. Хотели сделать ленточный фундамент, но по ходу строительства передумали и решили делать свайно-ростверковый и довольны. Сотрудники терпиливые и опытные, что не мало важно в этом деле. Спасибо за работу. Буду вас рекомендовать.</p></div>
+                    </div>
+                    <div class="reviews__slide">
+                        <div class="reviews__slide_title fz-32-bn">Дмитрий Шатов</div>
+                        <div class="reviews__slide_date fz-14-os">16 июля 2020</div>
+                        <div class="reviews__slide_descr fz-16-os"><p class="fz-16-os">При строительстве дома заказывали фундамент из железно-бетонных свай в этой компании. Работу выполнили качественно и в срок. Инженер выехал на место строительство, дал подробную информацию, ответил на все наши вопросы, спасибо ему огромное!Монатжники сделали свою работу качественно и быстро, сразу видно провессионалы своего дела! Рекомендую данную организацию. Быстро отреагировали на запрос. Приехали все рассказали, дали совет. Хотели сделать ленточный фундамент, но по ходу строительства передумали и решили делать свайно-ростверковый и довольны. Сотрудники терпиливые и опытные, что не мало важно в этом деле. Спасибо за работу. Буду вас рекомендовать.</p></div>
+                    </div>
+                    <div class="reviews__slide">
+                        <div class="reviews__slide_title fz-32-bn">Дмитрий Шатов</div>
+                        <div class="reviews__slide_date fz-14-os">16 июля 2020</div>
+                        <div class="reviews__slide_descr fz-16-os"><p class="fz-16-os">При строительстве дома заказывали фундамент из железно-бетонных свай в этой компании. Работу выполнили качественно и в срок. Инженер выехал на место строительство, дал подробную информацию, ответил на все наши вопросы, спасибо ему огромное!Монатжники сделали свою работу качественно и быстро, сразу видно провессионалы своего дела! Рекомендую данную организацию. Быстро отреагировали на запрос. Приехали все рассказали, дали совет. Хотели сделать ленточный фундамент, но по ходу строительства передумали и решили делать свайно-ростверковый и довольны. Сотрудники терпиливые и опытные, что не мало важно в этом деле. Спасибо за работу. Буду вас рекомендовать.</p></div>
                     </div>
                     <div class="reviews__slide">
                         <div class="reviews__slide_title fz-32-bn">Дмитрий Шатов</div>
