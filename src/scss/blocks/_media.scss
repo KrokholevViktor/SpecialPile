@@ -99,22 +99,18 @@
     }
 
     .characteristics {
-        display: none;
         &__wrapper {
-            width: 800px;
+            width: 65vw;
         }
         &_item {
             width: 100%;
         }
         &__bg {
-            height: 70%;
-            left: 730px;
-            top: 240px;
+
         }
     }
 
     .form-slider {
-        display: none;
         &__navigation {
             width: 100%;
             
@@ -141,7 +137,6 @@
     }
 
     .advantages {
-        display: none;
         &__card_body {
             .fz-16-os {
                 font-size: 14px;
@@ -149,7 +144,6 @@
         }
     }
     .stages {
-        display: none;
         &__item {
             &_title-btn {
                 transform: translateX(-10px);
@@ -158,7 +152,6 @@
     }
 
     .info {
-        display: none;
         &__wrapper {
             width: 100%;
             &_item_header {
@@ -254,11 +247,10 @@
     }
     .characteristics {
        &__wrapper {
-        max-width: 710px;
+        // max-width: 710px;
        }
        &__bg {
-        left: 640px;
-        top: 240px;
+
        }
     }
     .form-slider {
@@ -362,11 +354,11 @@
 
     .characteristics {
         &__wrapper {
-            max-width: 515px;
+            // max-width: 515px;
         }
         &__bg {
-            left: 445px;
-            top: 305px;
+            height: 645px;
+            right: 70px;
         }
     }
 
@@ -384,6 +376,9 @@
                 }
             }
         }
+        .item-3, .item-4, .item-5, .item-6 {
+           
+        }
         .item-6 {
             grid-template-columns: 1fr;
             .form-slider__item__card {
@@ -397,9 +392,7 @@
             font-size: 30px;
         }
         &__card {
-            height: inherit;
             &_body {
-                height: inherit;
                 padding: 12px;
                 &:hover {
                     padding: 11px;
@@ -428,13 +421,20 @@
     }
 
     .info {
+        .fz-36-bn {
+            font-size: 28px;
+            line-height: 28px;
+        }
         &__wrapper {
             grid-template-columns: 1fr 1fr;
             :nth-child(3n) {
                 grid-row: 3;
             }
             &_item {
-                
+                &_header-pass {
+                    font-size: 24px;
+                    line-height: 24px;
+                }
                 &_link {
                     z-index: 100;
                 }
@@ -555,14 +555,13 @@
         }
     }
     .characteristics {
+        min-height: 200px;
         &__wrapper {
-            max-width: 415px;
+            // max-width: 415px;
         }
-        height: auto;
         &__bg {
-            left: 365px;
-            top: 490px;
-            height: 44%;
+            height: 545px;
+            right: 58px;
         }
         &_item {
             padding: 20px;
@@ -592,7 +591,9 @@
         &__inner {
             .item-1, .item-2, .item-3, .item-4 {
                 grid-template-columns: 1fr;
-                grid-template-rows: auto;
+                grid-template-rows: minmax(52px, auto);
+                grid-auto-rows: minmax(52px, auto);
+
             }
             .item-5 {
                 
@@ -603,6 +604,7 @@
                 &__title {
                     height: 100%;
                     border-bottom: none;
+                    padding: 15px;
                 }
             }
         }
@@ -708,12 +710,12 @@
         }
         &__menu {
             &_burger {
-                background-color: $background-color-white;
-                position: fixed;
-                width: 100%;
-                z-index: 10;
-                padding-top: 30px;
-                height: 100%;
+                // background-color: $background-color-white;
+                // position: fixed;
+                // width: 100%;
+                // z-index: 10;
+                // padding-top: 30px;
+                // height: 100%;
             }
         }
     }
@@ -749,22 +751,17 @@
         &__wrapper {
             display: flex;
             margin-top: 30px;
-            max-width: 220px;
+            // width: 74%;
         }
         &_item {
             position: relative;
-            // display: flex;
-            // flex: 1;
             align-items: flex-start;
             padding: 14px;
-            // min-height: auto;
-            // height: 100px;
             line-height: 16px;
             &_descr {
                 display: flex;
                 min-height: 30px;
                 align-items: center;
-                // border: 1px solid black;
                 margin-top: 0;
                 margin-left: 10px;
                 font-size: 16px;
@@ -778,9 +775,9 @@
             height: 30px;
         }
         &__bg {
-            height: 50%;
-            left: 204px;
-            top: 236px;
+            height: 295px;
+            right: 32px;
+            bottom: -22px;
         }
     }
     .modal {
@@ -900,7 +897,7 @@
         }
         &__navigation {
             padding: 15px;
-            gap: 10px;
+            // gap: 10px;
             height: auto;
             &_prev, &_next {
                 .button_black {

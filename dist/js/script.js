@@ -224,36 +224,58 @@ function advantagesSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderIn
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-const burger = (menuSelector, burgerSelector) => {
+const burger = (menuSelector, burgerSelector, menuLinks) => {
   const menuElem = document.querySelector(menuSelector),
     burgerElem = document.querySelector(burgerSelector),
-    phone = document.querySelector('.header__info_e_p .header__info_phone ');
+    phone = document.querySelector('.header__info_e_p .header__info_phone '),
+    links = document.querySelectorAll(menuLinks);
   menuElem.style.display = 'none';
+  function closeMenu() {
+    menuElem.classList.add('fadeOut');
+    menuElem.classList.remove('fadeIn');
+    setTimeout(() => {
+      menuElem.style.display = 'none';
+    }, 300);
+  }
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      burgerElem.click();
+    });
+  });
   burgerElem.addEventListener('click', () => {
     burgerElem.classList.toggle('active');
     if (burgerElem.classList.contains('active')) {
       phone.style.visibility = 'hidden';
+      document.body.style.overflow = 'hidden';
     } else {
       phone.style.visibility = 'visible';
+      document.body.style.overflow = '';
     }
-    if (menuElem.style.display == 'none' && window.screen.availWidth < 993) {
+    if (menuElem.style.display == 'none' && window.innerWidth < 993) {
       menuElem.style.display = '';
       menuElem.classList.add('fadeIn');
       menuElem.classList.remove('fadeOut');
     } else {
-      menuElem.classList.add('fadeOut');
-      menuElem.classList.remove('fadeIn');
-      setTimeout(() => {
-        menuElem.style.display = 'none';
-      }, 300);
+      closeMenu();
     }
+  });
+  let flagOrientation = false;
+  window.addEventListener('orientationchange', () => {
+    flagOrientation = true;
   });
   window.addEventListener('resize', () => {
     if (window.screen.availWidth > 992) {
       menuElem.style.display = 'none';
     }
+    if (menuElem.classList.contains('fadeIn') && flagOrientation) {
+      flagOrientation = false;
+    } else if (menuElem.classList.contains('fadeIn')) {
+      burgerElem.click();
+      // menuElem.classList.remove('fadeIn')
+    }
   });
 };
+
 /* harmony default export */ __webpack_exports__["default"] = (burger);
 
 /***/ }),
@@ -392,6 +414,110 @@ function examplesSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInne
 
 /***/ }),
 
+/***/ "./src/js/modules/fixedHeader.js":
+/*!***************************************!*\
+  !*** ./src/js/modules/fixedHeader.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// const fixedHeader = () => {
+//     const promo = document.querySelector('.promo'),
+//           header = document.querySelector('.header');
+//     let counter = 0;
+
+//     function fixed() {
+//         window.addEventListener('scroll', () => {
+//             let promoCenter = promo.offsetHeight / 2,
+//                 scrollTop = window.scrollY;
+
+//             if (scrollTop >= promoCenter) {
+//                 header.classList.add('fixed');
+//                 promo.style.marginTop = `${header.offsetHeight}px`;
+//             }  else {
+//                 header.classList.remove('fixed');
+//                 promo.style.marginTop = `0px`;
+//             } 
+//         })
+//     }
+
+//     let prevScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+
+//     window.addEventListener('scroll', function() {
+//       const currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+
+//       if (currentScrollPosition < prevScrollPosition) {
+//         console.log(counter);
+//         counter++;
+//         if (counter > 100) {
+//             header.classList.remove('fixed');
+//             promo.style.marginTop = `0px`;
+//         }
+//       } else {
+//         console.log(counter);
+//         fixed();
+//         counter = 0;
+//       }
+
+//       prevScrollPosition = currentScrollPosition;
+//     });
+// }
+
+// export default fixedHeader;
+
+const fixedHeader = () => {
+  const body = document.querySelector('body');
+  const header = document.querySelector('.header');
+  let prevScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+  let isFixed = false;
+  let scrollCounter = 0; // Добавляем счетчик прокрутки
+  const scrollThreshold = 25; // Значение прокрутки, после которого удаляем класс
+
+  function fixHeader() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    if (scrollTop > prevScrollPosition) {
+      // Прямой скролл (scroll down)
+      if (!isFixed) {
+        header.classList.add('fixed');
+        body.style.marginTop = `${header.offsetHeight}px`;
+        isFixed = true;
+      }
+    } else {
+      // Обратный скролл (scroll up)
+      if (isFixed) {
+        //   header.classList.remove('fixed');
+        //   body.style.marginTop = `0px`;
+        isFixed = false;
+      }
+    }
+
+    // Увеличиваем счетчик прокрутки при скролле обратно
+    if (!isFixed) {
+      scrollCounter++;
+    } else {
+      scrollCounter = 0;
+    }
+
+    // Удаляем класс, если счетчик достигнет определенного значения
+    if (scrollCounter >= scrollThreshold) {
+      header.classList.remove('fixed');
+      body.style.marginTop = `0px`;
+      isFixed = false;
+      scrollCounter = 0; // Сбрасываем счетчик
+    }
+
+    prevScrollPosition = scrollTop;
+  }
+
+  // Добавляем слушатель события прокрутки
+  window.addEventListener('scroll', fixHeader);
+};
+/* harmony default export */ __webpack_exports__["default"] = (fixedHeader);
+
+/***/ }),
+
 /***/ "./src/js/modules/formSlider.js":
 /*!**************************************!*\
   !*** ./src/js/modules/formSlider.js ***!
@@ -431,7 +557,8 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
   }
   ;
   function setSlideWidth() {
-    slidesInner.style.width = `calc((100 * ${slides.length}%) + (10 * ${slides.length - 1}px))`;
+    // slidesInner.style.width = `calc((100 * ${slides.length}%) + (10 * ${slides.length - 1}px))`;
+    slidesInner.style.width = `calc(100 * ${slides.length}%)`;
     slides.forEach(slide => {
       slide.style.width = width;
     });
@@ -439,6 +566,9 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
   setSlideWidth();
   window.addEventListener('resize', () => {
     setSlideWidth();
+    offset = +width.slice(0, width.length - 2) * (slideIndex - 1);
+    slidesInner.style.transition = `0s all`;
+    slidesInner.style.transform = `translateX(-${offset}px)`;
   });
   hideElements();
   showTitle();
@@ -453,10 +583,12 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
   }
   ;
   next.addEventListener('click', () => {
+    slidesInner.style.transition = `0.5s all`;
     if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
       offset = 0;
     } else {
-      offset += +width.slice(0, width.length - 2) + 10;
+      // offset += +width.slice(0, width.length - 2) + 10;
+      offset += +width.slice(0, width.length - 2);
     }
     slidesInner.style.transform = `translateX(-${offset}px)`;
     if (slideIndex == slides.length) {
@@ -480,7 +612,8 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
     if (offset == 0) {
       offset = +width.slice(0, width.length - 2) * (slides.length - 1);
     } else {
-      offset -= +width.slice(0, width.length - 2) + 10;
+      // offset -= +width.slice(0, width.length - 2) + 10;
+      offset -= +width.slice(0, width.length - 2);
     }
     slidesInner.style.transform = `translateX(-${offset}px)`;
     if (slideIndex == 1) {
@@ -552,14 +685,19 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
 
       //////////////////////////////////////// заменяет чёрточку в counter у form-slider
       const counterDivider = document.querySelector('.form-slider__counter_divider');
-      if (window.screen.availWidth < 768) {
+      if (window.innerWidth < 768 || window.screen.availWidth < 768) {
         counterDivider.textContent = '';
         images.forEach(element => {
           element.children[1].style.display = 'none';
         });
       }
+      // console.log(window.innerWidth < 768 || window.screen.availWidth < 768);
+      console.log(window.innerWidth);
+      console.log(window.screen.availWidth);
       window.addEventListener('resize', () => {
-        if (window.screen.availWidth < 768) {
+        console.log(window.innerWidth);
+        console.log(window.screen.availWidth);
+        if (window.innerWidth < 768 || window.screen.availWidth < 768) {
           counterDivider.textContent = '';
           images.forEach(element => {
             element.children[1].style.display = 'none';
@@ -884,6 +1022,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_mask__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/mask */ "./src/js/modules/mask.js");
 /* harmony import */ var _modules_burger__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/burger */ "./src/js/modules/burger.js");
 /* harmony import */ var _modules_advantagesSlider__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/advantagesSlider */ "./src/js/modules/advantagesSlider.js");
+/* harmony import */ var _modules_fixedHeader__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/fixedHeader */ "./src/js/modules/fixedHeader.js");
+
 
 
 
@@ -906,8 +1046,9 @@ window.addEventListener('DOMContentLoaded', function () {
   Object(_modules_forms__WEBPACK_IMPORTED_MODULE_4__["default"])(formSliderState);
   Object(_modules_modals__WEBPACK_IMPORTED_MODULE_5__["default"])();
   Object(_modules_mask__WEBPACK_IMPORTED_MODULE_7__["default"])('[name="phone"]');
-  Object(_modules_burger__WEBPACK_IMPORTED_MODULE_8__["default"])('.header__menu_burger', '.burger');
+  Object(_modules_burger__WEBPACK_IMPORTED_MODULE_8__["default"])('.header__menu_burger', '.burger', '.header__menu_burger .header_link');
   Object(_modules_advantagesSlider__WEBPACK_IMPORTED_MODULE_9__["default"])('.advantages__navigation .navigation_prev .button_black', '.advantages__navigation .navigation_next .button_black', '.advantages__slide', '.advantages__slider', '.advantages__inner');
+  Object(_modules_fixedHeader__WEBPACK_IMPORTED_MODULE_10__["default"])();
 });
 
 /***/ })

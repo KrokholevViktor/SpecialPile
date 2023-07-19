@@ -32,7 +32,8 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
     };
 
     function setSlideWidth() {
-        slidesInner.style.width = `calc((100 * ${slides.length}%) + (10 * ${slides.length - 1}px))`;
+        // slidesInner.style.width = `calc((100 * ${slides.length}%) + (10 * ${slides.length - 1}px))`;
+        slidesInner.style.width = `calc(100 * ${slides.length}%)`;
         slides.forEach(slide => {
             slide.style.width = width;
         });
@@ -41,7 +42,12 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
 
 
     window.addEventListener('resize', () => {
+        
         setSlideWidth();
+        offset = +width.slice(0, width.length - 2) * (slideIndex - 1);
+        slidesInner.style.transition = `0s all`;
+        slidesInner.style.transform = `translateX(-${offset}px)`;
+
     });
 
     
@@ -62,11 +68,12 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
     };
 
     next.addEventListener('click', () => {
+        slidesInner.style.transition = `0.5s all`;
         if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
             offset = 0;
         } else {
-            offset += +width.slice(0, width.length - 2) + 10
-            
+            // offset += +width.slice(0, width.length - 2) + 10;
+            offset += +width.slice(0, width.length - 2);
         }
 
         slidesInner.style.transform = `translateX(-${offset}px)`;
@@ -92,9 +99,10 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
 
     prev.addEventListener('click', () => {
         if (offset == 0) {
-            offset = +width.slice(0, width.length - 2) * (slides.length - 1)
+            offset = +width.slice(0, width.length - 2) * (slides.length - 1);
         } else {
-            offset -= +width.slice(0, width.length - 2) + 10
+            // offset -= +width.slice(0, width.length - 2) + 10;
+            offset -= +width.slice(0, width.length - 2);
         }
 
         slidesInner.style.transform = `translateX(-${offset}px)`;
@@ -177,15 +185,20 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
             //////////////////////////////////////// заменяет чёрточку в counter у form-slider
             const counterDivider = document.querySelector('.form-slider__counter_divider');
             
-            if (window.screen.availWidth < 768) {
+            if (window.innerWidth < 768 || window.screen.availWidth < 768) {
                 counterDivider.textContent = '';
                 images.forEach(element => {
                     element.children[1].style.display = 'none'
                 });
             }
+            // console.log(window.innerWidth < 768 || window.screen.availWidth < 768);
+            console.log(window.innerWidth);
+            console.log(window.screen.availWidth);
+
             window.addEventListener('resize', () => {
-                
-                if (window.screen.availWidth < 768) {
+                console.log(window.innerWidth);
+                console.log(window.screen.availWidth);
+                if (window.innerWidth < 768 || window.screen.availWidth < 768) {
                     counterDivider.textContent = '';
                     images.forEach(element => {
                         element.children[1].style.display = 'none'

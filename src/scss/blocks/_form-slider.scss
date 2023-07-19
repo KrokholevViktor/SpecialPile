@@ -32,7 +32,7 @@
     }
     &__inner {
         display: flex;
-        column-gap: 10px;
+        // column-gap: 10px;
         transition: 0.5s all;
 
     }
@@ -74,6 +74,7 @@
                 &_select {
                     padding: 30px;
                     background-color: $background-color-white;
+                    height: 100%;
                 }
                 &:hover {
                     .form-slider__item__card-form_select {
@@ -280,7 +281,8 @@
                 &:last-child {
                     display: flex;
                     flex-direction: row;
-                    justify-content: flex-start;
+                    // justify-content: stretch;
+                    align-items: center;
                     input {
                         width: 20px;
                         height: 20px;

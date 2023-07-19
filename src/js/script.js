@@ -8,6 +8,7 @@ import changeFormSliderSate from "./modules/changeFormSliderSate";
 import mask from "./modules/mask";
 import burger from "./modules/burger";
 import advantagesSlider from "./modules/advantagesSlider";
+import fixedHeader from "./modules/fixedHeader";
 
 window.addEventListener('DOMContentLoaded', function () {
     "use strict";
@@ -21,8 +22,9 @@ window.addEventListener('DOMContentLoaded', function () {
     forms(formSliderState);
     modals();
     mask('[name="phone"]');
-    burger('.header__menu_burger', '.burger');
+    burger('.header__menu_burger', '.burger', '.header__menu_burger .header_link');
     advantagesSlider('.advantages__navigation .navigation_prev .button_black', '.advantages__navigation .navigation_next .button_black', '.advantages__slide', '.advantages__slider', '.advantages__inner');
+    fixedHeader();
 });
 
 

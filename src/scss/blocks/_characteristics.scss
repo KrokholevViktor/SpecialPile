@@ -1,10 +1,8 @@
 .characteristics {
-    position: relative;
     padding-top: 60px;
     padding-bottom: 96px;
-    height: 945px;
+    min-height: 945px;
     &__wrapper {
-        position: relative;
         margin-top: 45px;
         width: 940px;
         display: flex;
@@ -15,6 +13,7 @@
         border-left: 1px solid $black-color;
     }
     &_item {
+        position: relative;
         border-right: 1px solid $black-color;
         border-bottom: 1px solid $black-color;
         display: flex;
@@ -28,8 +27,10 @@
         }
     }
     &__bg {
+        height: 745px;
         position: absolute;
-        top: 148px;
-        left: 826px;
+        bottom: -40px;
+        right: 80px;
+        transform: translateX(100%);
     }
 }

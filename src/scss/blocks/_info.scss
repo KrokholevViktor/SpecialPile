@@ -13,17 +13,21 @@
         display: grid;
         grid-template-rows: 1fr 1fr;
         grid-template-columns: 1fr 1fr 1fr;
-        background-color: $black-color;
+        // background-color: $black-color;
         grid-gap: 1px;
         border: 1px solid $black-color;
+        border-right: none;
+        border-bottom: none;
         &_item {
             position: relative;
-            background-color: $background-color-white;
+            // background-color: $background-color-white;
             padding: 22px 30px 22px 30px;
+            border-right: 1px solid $black-color;
+            border-bottom: 1px solid $black-color;
             &_header {
                 color: $pink-color;
                 &-pass {
-            
+                    z-index: 10;
                 }
             }
             &_descr {
@@ -38,12 +42,16 @@
                 color: $pink-color;
             }
             &_img {
+                z-index: -1;
                 position: absolute;
                 bottom: 0;
                 right: 0;
                 width: 245px;
                 height: 186px;
-                object-fit: cover;
+                img {
+                    height: 100%;
+                    object-fit: cover;
+                }
             }
         }
     }
