@@ -85,11 +85,21 @@
     }
     .promo {
         &__img {
-            top: 145px;
+            top: 70px;
+            height: 671px;
+            width: 543px;
+        }
+        &__services {
+            
+            &_item {
+                padding: 20px;
+               
+            }
         }
     }
 
     .characteristics {
+        display: none;
         &__wrapper {
             width: 800px;
         }
@@ -104,6 +114,7 @@
     }
 
     .form-slider {
+        display: none;
         &__navigation {
             width: 100%;
             
@@ -130,6 +141,7 @@
     }
 
     .advantages {
+        display: none;
         &__card_body {
             .fz-16-os {
                 font-size: 14px;
@@ -137,6 +149,7 @@
         }
     }
     .stages {
+        display: none;
         &__item {
             &_title-btn {
                 transform: translateX(-10px);
@@ -145,6 +158,7 @@
     }
 
     .info {
+        display: none;
         &__wrapper {
             width: 100%;
             &_item_header {
@@ -154,6 +168,7 @@
     }
 
     .examples {
+        display: none;
         &__item {
             min-height: 335px;
             img {
@@ -170,6 +185,7 @@
     }
 
     .reviews {
+        display: none;
         &__slide {
             width: 740px;
             padding: 28px;
@@ -190,13 +206,17 @@
             }
         }
     }
+    .questions {
+        display: none;
+    }
     .contacts {
+        display: none;
         &__wrapper {
             width: 100%;
         }
     }
     .footer {
-        
+        display: none;
     }
 }
 /////////////////////////////////////////////////////////next width
@@ -220,15 +240,15 @@
        &__title {
             width: 390px;
             min-height: 250px;
-            h1 {
+            .title_promo {
                 font-size: 58px;
+                line-height: 58px;
             }
        }
         &__services {
                 margin-top: 60px;
                 &_item {
                     padding: 20px;
-                    height: 120px;
             }
        }
     }
@@ -331,13 +351,12 @@
         &__title {
             width: 100%;
             min-height: 150px;
-            height: 0;
         }
         .button_black {
             margin-top: 0;
         }
         &__services {
-            margin-top: 200px;
+            margin-top: 300px;
         }
     }
 
@@ -492,6 +511,14 @@
     }
 }
 
+@media (max-width: 820px) {
+    .modal {
+        &__content {
+            width: 410px;
+        }
+    }
+}
+
 @media (max-width: 767px) {
     .fz-32-bn {
         font-size: 20px;
@@ -511,19 +538,19 @@
         height: auto;
         .title_promo {
             font-size: 40px;
+            line-height: 40px;
         }
         &__img {
-            top: 180px;
+            top: 110px;
         }
         &__services {
-            margin-top: 160px;
+            margin-top: 340px;
             display: flex;
             flex-direction: column;
             font-size: 20px;
             &_item {
                 width: 100%;
-                height: auto;
-                
+                min-height: 80px;
             }
         }
     }
@@ -693,8 +720,8 @@
     .promo {
         &__title {
             margin-top: 20px;
-            min-height: 194px;
-            width: 80%;
+            min-height: 80px;
+            width: 70%;
             .title_promo {
                 
                 line-height: 40px;
@@ -704,15 +731,15 @@
             width: 448px;
             display: block;
             padding: 0;
-            margin: 0 auto;
+            margin: 35px auto 0;
         }
         &__img {
             position: relative;
             width: 100%;
-            top: -10px;
+            top: -150px;
         }
         &__services {
-            margin-top: -67px;
+            margin-top: -360px;
             line-height: 20px;
         }
     }
@@ -756,6 +783,67 @@
             top: 236px;
         }
     }
+    .modal {
+        &__header {
+            min-height: 20px;
+        }
+        &__form {
+            min-height: 250px;
+        }
+        &__content {
+            padding: 15px;
+            width: 300px;
+            gap: 10px;
+            min-height: 442px;
+        }
+        &__title {
+            font-size: 24px;
+            line-height: 24px;
+        }
+        .button_form-modal {
+            margin-top: 30px;
+        }
+    }
+    ///////////////////////////стили на формочку
+    .form-main {
+        padding: 15px;
+        gap: 10px;
+        &__item {
+            font-size: 14px;
+            line-height: 14px;
+            &_policy {
+                
+                label {
+                    font-size: 9px;
+                    // display: block;
+                    // margin-left: 28px;
+                    // &:before {
+                    //     position: absolute;
+                    //     transform: translate(-200%, 50%);
+                    // }
+                    a {
+                        font-size: 9px;
+                        margin-left: 0;
+                    }
+                }
+            }
+            .checkbox + label {
+                display: block;
+            }
+        }
+        input {
+            font-size: 12px;
+            height: 32px;
+        }
+        .label-upload {
+            font-size: 12px;
+            height: 32px;
+            &:before {
+                transform: translateY(-2px) scale(0.7);
+            }
+        }
+    }
+
     .form-slider {
         min-height: 600px;
         padding-top: 38px;
@@ -773,41 +861,6 @@
             }
         }
         &__item {
-            .form-main {
-                padding: 15px;
-                gap: 10px;
-                &__item {
-                    font-size: 14px;
-                    line-height: 14px;
-                    &_policy {
-                        
-                        label {
-                            font-size: 9px;
-                            display: block;
-                            margin-left: 28px;
-                            &:before {
-                                position: absolute;
-                                transform: translate(-200%, 50%);
-                            }
-                            a {
-                                font-size: 9px;
-                                margin-left: 0;
-                            }
-                        }
-                    }
-                }
-                input {
-                    font-size: 12px;
-                    height: 32px;
-                }
-                .label-upload {
-                    font-size: 12px;
-                    height: 32px;
-                    &:before {
-                        transform: translateY(-2px) scale(0.7);
-                    }
-                }
-            }
             &__card__title {
                 padding: 15px;
                 font-size: 14px;
@@ -1017,13 +1070,63 @@
     }
 }
 
-@media (max-width: 458px) {
+@media (max-width: 498px) {
     .promo {
-        
-        .button_black {
-            width: 100%;
-            margin: 0;
+        &__services {
+            margin-top: -375px;
         }
        
+    }
+}
+
+@media (max-width: 463px) {
+    .promo {
+        &__services {
+            margin-top: -415px;
+        }  
+        &__img {
+            top: -180px;
+        }
+        .button_black {
+            width: 100%;
+        }  
+    }
+}
+
+@media (max-width: 456px) {
+    .promo {
+
+    }
+}
+
+@media (max-width: 400px) {
+    .promo {
+        &__img {
+            top: -200px;
+        }
+        &__services {
+            margin-top: -445px;
+        }  
+    }
+}
+
+@media (max-width: 364px) {
+    .promo {
+        &__title {
+            width: 75%;
+        }
+    }
+}
+@media (max-width: 334px) {
+    .promo {
+        &__title {
+            width: 80%;
+        }
+        &__img {
+            top: -222px;
+        }
+        &__services {
+            margin-top: -490px;
+        }  
     }
 }

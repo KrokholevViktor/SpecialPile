@@ -8,22 +8,22 @@
     height: 100%;
     background-color: rgba($black-color, 0.5);
     &__content {
+        display: block;
         background-color: $background-color-white;
         padding: 30px;
-        height: 637px;
-        width: 560px;
+        min-height: 637px;
+        max-width: 560px;
         position: fixed;
-        // top: 219px;
-        top: 10px;
+        top: 50%;
         left: 50%;
-        transform: translateX(-50%);
+        transform: translate(-50%, -50%);
         overflow: hidden;
         display: flex;
         flex-direction: column;
         gap: 40px;
     }
     &__form {
-        height: 393px;
+        min-height: 393px;
         .form {
             &-main {
                 padding: 0;
@@ -46,14 +46,14 @@
     &__header {
         display: flex;
         justify-content: space-between;
-        height: 48px;
+        min-height: 48px;
     }
     &__close {
         cursor: pointer;
         border: none;
         background: transparent;
         position: relative;
-        padding: 30px;
+        // padding: 30px;
         background-color: $background-color-white;
             &:before, &:after {
                 transform-origin: center;

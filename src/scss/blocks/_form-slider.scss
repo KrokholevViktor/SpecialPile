@@ -264,6 +264,15 @@
                 flex-direction: column;
                 row-gap: 7px;
                 width: 100%;
+                &_policy {
+                    label {
+                        margin-left: 28px;
+                        &:before {
+                            position: absolute;
+                            transform: translate(-200%, 50%);
+                        }
+                    }
+                }
                 label {
                     cursor: pointer;
                     width: 100%;
@@ -311,7 +320,7 @@
                     height: 40px;
                 }
                 a {
-                    margin-left: 5px;
+                    // margin-left: 5px;
                     color: $black-color;
                 }
                 .checkbox {
@@ -321,8 +330,6 @@
                     &:checked {
                         + label {
                             &:before {
-                                
-                                border-color: none;
                                 background-color: $pink-color;
                                 border: 1px solid $pink-color;
                                 background-image: url('../img/icon/checkbox-mark.svg');
@@ -333,7 +340,7 @@
                     }
                     + label {
                         cursor: pointer;
-                        display: inline-flex;
+                        // display: inline-flex;
                         align-items: center;
                         user-select: none;
                         &:before {
