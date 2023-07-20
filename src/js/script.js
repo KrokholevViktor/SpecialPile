@@ -22,7 +22,7 @@ window.addEventListener('DOMContentLoaded', function () {
     forms(formSliderState);
     modals();
     mask('[name="phone"]');
-    burger('.header__menu_burger', '.burger', '.header__menu_burger .header_link');
+    burger('.header__menu_burger', '.burger', '.header__menu_burger .header_link', '.header__menu_burger--scroll .modal-btn');
     advantagesSlider('.advantages__navigation .navigation_prev .button_black', '.advantages__navigation .navigation_next .button_black', '.advantages__slide', '.advantages__slider', '.advantages__inner');
     fixedHeader();
 });

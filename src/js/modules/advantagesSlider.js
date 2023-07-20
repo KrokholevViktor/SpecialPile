@@ -9,6 +9,10 @@ function advantagesSlider (prevBtn, nextBtn, slidesItems, sliderWrapper, sliderI
         
         window.addEventListener('resize', () => {
             width = window.getComputedStyle(slidesWrapper).width
+            if (slideIndex > 1) {
+                offset = +width.slice(0, width.length - 2) * (slideIndex - 1) + 130 * (slideIndex - 1); ///ошибка
+                slidesInner.style.transform = `translateX(-${offset}px) `;
+            }
         });
 
     let slideIndex = 1;

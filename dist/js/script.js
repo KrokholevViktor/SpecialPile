@@ -138,6 +138,10 @@ function advantagesSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderIn
   let width = window.getComputedStyle(slidesWrapper).width;
   window.addEventListener('resize', () => {
     width = window.getComputedStyle(slidesWrapper).width;
+    if (slideIndex > 1) {
+      offset = +width.slice(0, width.length - 2) * (slideIndex - 1) + 130 * (slideIndex - 1); ///ошибка
+      slidesInner.style.transform = `translateX(-${offset}px) `;
+    }
   });
   let slideIndex = 1;
   let offset = 0;
@@ -224,11 +228,13 @@ function advantagesSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderIn
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-const burger = (menuSelector, burgerSelector, menuLinks) => {
+const burger = (menuSelector, burgerSelector, menuLinks, modalBtn) => {
   const menuElem = document.querySelector(menuSelector),
     burgerElem = document.querySelector(burgerSelector),
     phone = document.querySelector('.header__info_e_p .header__info_phone '),
-    links = document.querySelectorAll(menuLinks);
+    links = document.querySelectorAll(menuLinks),
+    modalButton = document.querySelector(modalBtn),
+    scrollbarWidth = getScrollbarWidth();
   menuElem.style.display = 'none';
   function closeMenu() {
     menuElem.classList.add('fadeOut');
@@ -242,14 +248,25 @@ const burger = (menuSelector, burgerSelector, menuLinks) => {
       burgerElem.click();
     });
   });
+  modalButton.addEventListener('click', () => {
+    burgerElem.click();
+    document.body.style.overflow = "hidden";
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {} else {
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+    }
+  });
   burgerElem.addEventListener('click', () => {
     burgerElem.classList.toggle('active');
     if (burgerElem.classList.contains('active')) {
       phone.style.visibility = 'hidden';
       document.body.style.overflow = 'hidden';
+      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {} else {
+        document.body.style.paddingRight = `${scrollbarWidth}px`;
+      }
     } else {
       phone.style.visibility = 'visible';
       document.body.style.overflow = '';
+      document.body.style.paddingRight = '0px';
     }
     if (menuElem.style.display == 'none' && window.innerWidth < 993) {
       menuElem.style.display = '';
@@ -274,8 +291,20 @@ const burger = (menuSelector, burgerSelector, menuLinks) => {
       // menuElem.classList.remove('fadeIn')
     }
   });
-};
 
+  // Получаем ширину скролла
+  function getScrollbarWidth() {
+    const outer = document.createElement('div');
+    outer.style.visibility = 'hidden';
+    outer.style.overflow = 'scroll';
+    document.body.appendChild(outer);
+    const inner = document.createElement('div');
+    outer.appendChild(inner);
+    const scrollbarWidth = outer.offsetWidth - inner.offsetWidth;
+    outer.parentNode.removeChild(outer);
+    return scrollbarWidth;
+  }
+};
 /* harmony default export */ __webpack_exports__["default"] = (burger);
 
 /***/ }),
@@ -336,6 +365,10 @@ function examplesSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInne
   let width = window.getComputedStyle(slidesWrapper).width;
   window.addEventListener('resize', () => {
     width = window.getComputedStyle(slidesWrapper).width;
+    if (slideIndex > 1) {
+      offset = +width.slice(0, width.length - 2) * (slideIndex - 1) + 10 * (slideIndex - 1); ///ошибка
+      slidesInner.style.transform = `translateX(-${offset}px) `;
+    }
   });
   let slideIndex = 1;
   let offset = 0;
@@ -356,9 +389,9 @@ function examplesSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInne
     if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
       offset = 0;
     } else {
-      offset += +width.slice(0, width.length - 2);
+      offset += +width.slice(0, width.length - 2) + 10;
     }
-    slidesInner.style.transform = `translateX(-${offset + 10}px`;
+    slidesInner.style.transform = `translateX(-${offset}px`;
     if (slideIndex == slides.length) {
       slideIndex = 1;
     } else {
@@ -376,18 +409,13 @@ function examplesSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInne
     if (offset == 0) {
       offset = +width.slice(0, width.length - 2) * (slides.length - 1);
     } else {
-      offset -= +width.slice(0, width.length - 2);
+      offset -= +width.slice(0, width.length - 2) + 10;
     }
     slidesInner.style.transform = `translateX(-${offset}px)`;
     if (slideIndex == 1) {
       slideIndex = slides.length;
     } else {
       slideIndex--;
-    }
-    if (slides.length < 10) {
-      current.textContent = `0${slideIndex}`;
-    } else {
-      current.textContent = slideIndex;
     }
     disabledNext();
     disabledPrev();
@@ -408,6 +436,68 @@ function examplesSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInne
     }
   }
   ;
+
+  /////////////////////////функциональность перемещения слайдера
+  let isDragging = false;
+  let startPosition = 0;
+  let currentTranslate = 0;
+  function mousedown(e) {
+    isDragging = true;
+    startPosition = e.clientX;
+    slidesInner.style.cursor = 'grabbing';
+    slidesInner.style.transition = `0s all`;
+  }
+  function mousemove(e) {
+    if (isDragging) {
+      let currentPosition = e.clientX;
+      currentTranslate = currentPosition - startPosition;
+      updateSliderPosition();
+    }
+  }
+  function mouseup() {
+    isDragging = false;
+    slidesInner.style.cursor = 'grab';
+    slidesInner.style.transition = `0.5s all`;
+    if (currentTranslate < -100 && slideIndex != slides.length) {
+      next.click();
+    } else if (currentTranslate > 100 && slideIndex != 1) {
+      prev.click();
+    } else {
+      slidesInner.style.transform = `translateX(-${offset}px) `;
+    }
+  }
+  function updateSliderPosition() {
+    slidesInner.style.transform = `translateX(${-offset + currentTranslate}px)`;
+  }
+
+  /////touch
+  function touchstart(e) {
+    isDragging = true;
+    startPosition = e.touches[0].clientX;
+    ;
+    slidesInner.style.transition = `0s all`;
+  }
+  ;
+  function touchmove(e) {
+    if (isDragging) {
+      let currentPosition = e.touches[0].clientX;
+      currentTranslate = currentPosition - startPosition;
+      updateSliderPosition();
+    }
+  }
+  ;
+  ///touchEND
+
+  slidesInner.addEventListener('mousedown', mousedown);
+  slidesInner.addEventListener('touchstart', touchstart);
+  slidesInner.addEventListener('mousemove', mousemove);
+  slidesInner.addEventListener('touchmove', touchmove);
+  slidesInner.addEventListener('mouseup', mouseup);
+  slidesInner.addEventListener('touchend', mouseup);
+  slidesInner.addEventListener('mouseleave', () => {
+    isDragging = false;
+    slidesInner.style.cursor = 'grab';
+  });
 }
 ;
 /* harmony default export */ __webpack_exports__["default"] = (examplesSlider);
@@ -542,6 +632,9 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
     titles = document.querySelectorAll('.form-slider__title'),
     buttonForm = document.querySelector('.form-slider__navigation_btn-form');
   let width = window.getComputedStyle(slidesWrapper).width;
+
+  // moveSlide('.form-slider__inner');
+
   window.addEventListener('resize', () => {
     width = window.getComputedStyle(slidesWrapper).width;
   });
@@ -691,12 +784,8 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
           element.children[1].style.display = 'none';
         });
       }
-      // console.log(window.innerWidth < 768 || window.screen.availWidth < 768);
-      console.log(window.innerWidth);
-      console.log(window.screen.availWidth);
+      ;
       window.addEventListener('resize', () => {
-        console.log(window.innerWidth);
-        console.log(window.screen.availWidth);
         if (window.innerWidth < 768 || window.screen.availWidth < 768) {
           counterDivider.textContent = '';
           images.forEach(element => {
@@ -894,16 +983,32 @@ const modals = () => {
     const triggers = document.querySelectorAll(triggersSelector),
       modal = document.querySelector(modalSelctor),
       close = document.querySelector(closeSelector);
+
+    // Получаем ширину скролла
+    function getScrollbarWidth() {
+      const outer = document.createElement('div');
+      outer.style.visibility = 'hidden';
+      outer.style.overflow = 'scroll';
+      document.body.appendChild(outer);
+      const inner = document.createElement('div');
+      outer.appendChild(inner);
+      const scrollbarWidth = outer.offsetWidth - inner.offsetWidth;
+      outer.parentNode.removeChild(outer);
+      return scrollbarWidth;
+    }
     triggers.forEach(trigger => {
       trigger.addEventListener('click', e => {
         if (e.target) {
           e.preventDefault();
         }
+        const scrollbarWidth = getScrollbarWidth();
         modal.style.display = "block";
         document.body.style.overflow = "hidden";
+        document.body.style.paddingRight = `${scrollbarWidth}px`;
         close.addEventListener('click', () => {
           modal.style.display = "none";
           document.body.style.overflow = "";
+          document.body.style.paddingRight = '0px';
         });
         modal.addEventListener('click', e => {
           if (e.target === modal) {
@@ -920,6 +1025,74 @@ const modals = () => {
 
 /***/ }),
 
+/***/ "./src/js/modules/moveSlide.js":
+/*!*************************************!*\
+  !*** ./src/js/modules/moveSlide.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const moveSlide = (sliderTouch, offset, btnNext, btnPrev) => {
+  const slider = document.querySelector(sliderTouch);
+  let isDragging = false;
+  let startPosition = 0;
+  let currentTranslate = 0;
+  // let prevTranslate = 0;
+
+  slider.addEventListener('mousedown', e => {
+    console.log(`Offset при нажатии ${offset}`);
+    isDragging = true; //При нажатии на слайдер флаг в true
+    startPosition = e.clientX; //начальная позиция
+    slider.style.cursor = 'grabbing';
+    slider.style.transition = `0s all`;
+  });
+  slider.addEventListener('mousemove', e => {
+    if (isDragging) {
+      //проверка нажата мышка или нет
+      let currentPosition = e.clientX; //текущая позиция
+      // currentTranslate = prevTranslate + currentPosition - startPosition; //рассчитываем текущее смещение мышки
+      console.log(`Offset при перемещении ${offset}`);
+      currentTranslate = currentPosition - startPosition; //рассчитываем текущее смещение мышки
+      console.log(`текущая позиция ${currentPosition}`);
+      updateSliderPosition();
+    }
+  });
+  slider.addEventListener('mouseup', () => {
+    isDragging = false;
+    // prevTranslate = currentTranslate;
+    slider.style.cursor = 'grab';
+    slider.style.transform = `translateX(-${offset}px) `;
+    // startPosition = 0;
+    if (currentTranslate < -100) {
+      btnNext.click();
+      // prevTranslate = 0;
+      // startPosition = offset;
+    } else if (currentTranslate > 100) {
+      btnPrev.click();
+    }
+  });
+  slider.addEventListener('mouseleave', () => {
+    isDragging = false;
+    slider.style.cursor = 'grab';
+    console.log(`Offset мышка покинула слайдер ${offset}`);
+  });
+  function updateSliderPosition() {
+    slider.style.transform = `translateX(${-offset + currentTranslate}px)`;
+    // requestAnimationFrame(updateSliderPosition);
+    console.log(`текущее перемещение ${currentTranslate}`);
+    // console.log(prevTranslate);
+    console.log(`стартовая позиция ${startPosition}`);
+  }
+
+  // moveSlide(sliderTouch, offset, btnNext);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (moveSlide);
+
+/***/ }),
+
 /***/ "./src/js/modules/reviewsSlider.js":
 /*!*****************************************!*\
   !*** ./src/js/modules/reviewsSlider.js ***!
@@ -929,16 +1102,26 @@ const modals = () => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _moveSlide__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./moveSlide */ "./src/js/modules/moveSlide.js");
+
 function reviewsSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
   const slides = document.querySelectorAll(slidesItems),
     prev = document.querySelector(prevBtn),
     next = document.querySelector(nextBtn),
-    slidesWrapper = document.querySelector(sliderWrapper),
+    // slidesWrapper = document.querySelector(sliderWrapper),
     slidesInner = document.querySelector(sliderInner);
   slidesInner.style.width = 100 * slides.length + '%';
-  const width = window.getComputedStyle(document.querySelector('.reviews__slide')).width;
+  let width = window.getComputedStyle(document.querySelectorAll(slidesItems)[0]).width;
   let slideIndex = 1;
   let offset = 0;
+  window.addEventListener('resize', () => {
+    width = window.getComputedStyle(document.querySelectorAll(slidesItems)[0]).width;
+    if (slideIndex > 1) {
+      offset = +width.slice(0, width.length - 2) * (slideIndex - 1) + 20 * (slideIndex - 1); ///ошибка
+      slidesInner.style.transform = `translateX(-${offset}px) `;
+      console.log(offset);
+    }
+  });
   disabledNext();
   disabledPrev();
   next.addEventListener('click', () => {
@@ -952,11 +1135,6 @@ function reviewsSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner
       slideIndex = 1;
     } else {
       slideIndex++;
-    }
-    if (slides.length < 10) {
-      current.textContent = `0${slideIndex}`;
-    } else {
-      current.textContent = slideIndex;
     }
     disabledNext();
     disabledPrev();
@@ -972,11 +1150,6 @@ function reviewsSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner
       slideIndex = slides.length;
     } else {
       slideIndex--;
-    }
-    if (slides.length < 10) {
-      current.textContent = `0${slideIndex}`;
-    } else {
-      current.textContent = slideIndex;
     }
     disabledNext();
     disabledPrev();
@@ -997,6 +1170,68 @@ function reviewsSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner
     }
   }
   ;
+
+  /////////////////////////функциональность перемещения слайдера
+  let isDragging = false;
+  let startPosition = 0;
+  let currentTranslate = 0;
+  function mousedown(e) {
+    isDragging = true;
+    startPosition = e.clientX;
+    slidesInner.style.cursor = 'grabbing';
+    slidesInner.style.transition = `0s all`;
+  }
+  function mousemove(e) {
+    if (isDragging) {
+      let currentPosition = e.clientX;
+      currentTranslate = currentPosition - startPosition;
+      updateSliderPosition();
+    }
+  }
+  function mouseup() {
+    isDragging = false;
+    slidesInner.style.cursor = 'grab';
+    slidesInner.style.transition = `0.5s all`;
+    if (currentTranslate < -100 && slideIndex != slides.length) {
+      next.click();
+    } else if (currentTranslate > 100 && slideIndex != 1) {
+      prev.click();
+    } else {
+      slidesInner.style.transform = `translateX(-${offset}px) `;
+    }
+  }
+  function updateSliderPosition() {
+    slidesInner.style.transform = `translateX(${-offset + currentTranslate}px)`;
+  }
+
+  /////touch
+  function touchstart(e) {
+    isDragging = true;
+    startPosition = e.touches[0].clientX;
+    ;
+    slidesInner.style.transition = `0s all`;
+  }
+  ;
+  function touchmove(e) {
+    if (isDragging) {
+      let currentPosition = e.touches[0].clientX;
+      currentTranslate = currentPosition - startPosition;
+      updateSliderPosition();
+    }
+  }
+  ;
+  ///touchEND
+
+  slidesInner.addEventListener('mousedown', mousedown);
+  slidesInner.addEventListener('touchstart', touchstart);
+  slidesInner.addEventListener('mousemove', mousemove);
+  slidesInner.addEventListener('touchmove', touchmove);
+  slidesInner.addEventListener('mouseup', mouseup);
+  slidesInner.addEventListener('touchend', mouseup);
+  slidesInner.addEventListener('mouseleave', () => {
+    isDragging = false;
+    slidesInner.style.cursor = 'grab';
+  });
 }
 ;
 /* harmony default export */ __webpack_exports__["default"] = (reviewsSlider);
@@ -1046,7 +1281,7 @@ window.addEventListener('DOMContentLoaded', function () {
   Object(_modules_forms__WEBPACK_IMPORTED_MODULE_4__["default"])(formSliderState);
   Object(_modules_modals__WEBPACK_IMPORTED_MODULE_5__["default"])();
   Object(_modules_mask__WEBPACK_IMPORTED_MODULE_7__["default"])('[name="phone"]');
-  Object(_modules_burger__WEBPACK_IMPORTED_MODULE_8__["default"])('.header__menu_burger', '.burger', '.header__menu_burger .header_link');
+  Object(_modules_burger__WEBPACK_IMPORTED_MODULE_8__["default"])('.header__menu_burger', '.burger', '.header__menu_burger .header_link', '.header__menu_burger--scroll .modal-btn');
   Object(_modules_advantagesSlider__WEBPACK_IMPORTED_MODULE_9__["default"])('.advantages__navigation .navigation_prev .button_black', '.advantages__navigation .navigation_next .button_black', '.advantages__slide', '.advantages__slider', '.advantages__inner');
   Object(_modules_fixedHeader__WEBPACK_IMPORTED_MODULE_10__["default"])();
 });

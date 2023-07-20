@@ -1,5 +1,6 @@
 /// slider
 
+
 function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
         const slides = document.querySelectorAll(slidesItems),
         prev = document.querySelector(prevBtn),
@@ -14,6 +15,9 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
         buttonForm = document.querySelector('.form-slider__navigation_btn-form');
 
     let width = window.getComputedStyle(slidesWrapper).width;
+
+    // moveSlide('.form-slider__inner');
+
 
     window.addEventListener('resize', () => {
         width = window.getComputedStyle(slidesWrapper).width
@@ -40,7 +44,6 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
     }
     setSlideWidth();
 
-
     window.addEventListener('resize', () => {
         
         setSlideWidth();
@@ -50,8 +53,6 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
 
     });
 
-    
-
     hideElements();
     showTitle();
     hidePrev();
@@ -59,8 +60,6 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
         next.click();
         prev.click();
     }, 10);
-
-
 
     function showTitle() {
         titles.forEach(title => title.style.display = 'none')
@@ -190,14 +189,9 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
                 images.forEach(element => {
                     element.children[1].style.display = 'none'
                 });
-            }
-            // console.log(window.innerWidth < 768 || window.screen.availWidth < 768);
-            console.log(window.innerWidth);
-            console.log(window.screen.availWidth);
+            };
 
             window.addEventListener('resize', () => {
-                console.log(window.innerWidth);
-                console.log(window.screen.availWidth);
                 if (window.innerWidth < 768 || window.screen.availWidth < 768) {
                     counterDivider.textContent = '';
                     images.forEach(element => {
@@ -211,11 +205,7 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
                 }
             })
             /////////////////////////////////////////////
-
         });
-
-
-
     };
     slideSelect();
 
@@ -246,8 +236,6 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
         chek(slidesItems);
         chek(askitems);
     };
-
-
 }
 
 export default formSlider;

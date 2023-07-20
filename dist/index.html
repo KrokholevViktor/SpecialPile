@@ -16,7 +16,7 @@
             <div class="header__info">
                 <div class="header__info_e_p"> 
                     <a class="header__info_email fz-16-bn" href="#">irkutsk@specsvaya.ru</a>
-                    <div class="header__info_phone fz-16-bn">+7 (395) 278-86-45</div>
+                    <a href="tel:+73952788645"><div class="header__info_phone fz-16-bn">+7 (395) 278-86-45</div></a>
                 </div>
                 <button class="button modal-btn">Оставить заявку</button>
                 <button class="burger">
@@ -38,22 +38,27 @@
             <a href="#questions" class="header_link">FAQ</a>
             <a href="#contacts" class="header_link">Контакты</a>
         </div>
-        <div class="header__menu header__menu_burger fz-16-bn">
-            <a href="#characteristics" class="header_link">Характеристики</a>
-            <a href="#form-slider" class="header_link">Онлайн-калькулятор</a>
-            <a href="#advantages" class="header_link">Преимущества</a>
-            <a href="#stages" class="header_link">Этапы оказания услуги</a>
-            <a href="#info" class="header_link">Почему именно мы?</a>
-            <a href="#examples" class="header_link">Примеры работ</a>
-            <a href="#reviews" class="header_link">Отзывы</a>
-            <a href="#questions" class="header_link">FAQ</a>
-            <a href="#contacts" class="header_link">Контакты</a>
-            <div class="header__info_e_p"> 
-                <a class="header__info_email fz-16-bn" href="#">irkutsk@specsvaya.ru</a>
-                <div class="header__info_phone fz-16-bn">+7 (395) 278-86-45</div>
+        <div class="header__menu_burger--scroll">
+            <div class="header__menu header__menu_burger fz-16-bn">
+                <div class="header__menu__links--grid">
+                    <a href="#characteristics" class="header_link">Характеристики</a>
+                    <a href="#form-slider" class="header_link">Онлайн-калькулятор</a>
+                    <a href="#advantages" class="header_link">Преимущества</a>
+                    <a href="#stages" class="header_link">Этапы оказания услуги</a>
+                    <a href="#info" class="header_link">Почему именно мы?</a>
+                    <a href="#examples" class="header_link">Примеры работ</a>
+                    <a href="#reviews" class="header_link">Отзывы</a>
+                    <a href="#questions" class="header_link">FAQ</a>
+                    <a href="#contacts" class="header_link">Контакты</a>
+                </div>
+                <div class="header__info_e_p"> 
+                    <a class="header__info_email fz-16-bn" href="#">irkutsk@specsvaya.ru</a>
+                    <a href="tel:+73952788645"><div class="header__info_phone fz-16-bn">+7 (395) 278-86-45</div></a>
+                </div>
+                <button class="button modal-btn">Оставить заявку</button>
             </div>
-            <button class="button modal-btn">Оставить заявку</button>
         </div>
+        
     </div>
 
 
@@ -62,7 +67,7 @@
             <div class="promo__title">
                 <h1 class="title_promo">Фундамент из железобетонных свай «под ключ» за 1 день</h1>
             </div>
-            <button class="button_black fz-16-bn">Рассчитать стоимость</button>
+            <a href="#form-slider"><button id="promo-btn" class="button_black fz-16-bn" >Рассчитать стоимость</button></a>
             <div class="promo__img"><img src="img/promo_bg.jpg" alt="promo_bg" ></div>
             <div class="promo__services fz-24-bn">
                 <div class="promo__services_item">Для домов из любых материалов: <span>из дерева, газобетона, кирпича</span></div>
@@ -669,6 +674,44 @@
                             </div>
                         </div>
                     </div>
+                    <div class="examples__slide">
+                        <div class="examples__wrapper_row-1">
+                            <div class="examples__item examples__item_wide">
+                                <img src="img/examples/baikal.png" alt="baikal">
+                                <div class="examples__item_descr fz-24-bn"><p>17 км Байкальского тракта</p></div>
+                            </div>
+                            <div class="examples__item examples__item_harrow">
+                                <img src="img/examples/district.png" alt="district">
+                                <div class="examples__item_descr fz-24-bn"><p>Микрорайон «Славный»</p></div>
+                            </div>
+                            <div class="examples__item examples__item_wide">
+                                <img src="img/examples/village.png" alt="village">
+                                <div class="examples__item_descr fz-24-bn"><p>Посёлок «Молодёжный»</p></div>
+                            </div>
+                            <div class="examples__item examples__item_harrow">
+                                <img src="img/examples/resin.png" alt="resin">
+                                <div class="examples__item_descr fz-24-bn"><p>Село «Смоленщина»</p></div>
+                            </div>
+                        </div>
+                        <div class="examples__wrapper_row-2">
+                            <div class="examples__item examples__item_harrow">
+                                <img src="img/examples/medic.png" alt="medic">
+                                <div class="examples__item_descr fz-24-bn"><p>СНТ Медик</p></div>
+                            </div>
+                            <div class="examples__item examples__item_wide">
+                                <img src="img/examples/snt.png" alt="snt">
+                                <div class="examples__item_descr fz-24-bn"><p>СНТ «Иргорпромторг», Селиваниха</p></div>
+                            </div>
+                            <div class="examples__item examples__item_harrow">
+                                <img src="img/examples/crystal.png" alt="crystal">
+                                <div class="examples__item_descr fz-24-bn"><p>«Хрустальный»</p></div>
+                            </div>
+                            <div class="examples__item examples__item_wide">
+                                <img src="img/examples/angara.png" alt="angara">
+                                <div class="examples__item_descr fz-24-bn"><p>СНТ «Ангара», остров Комсомольский</p></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -686,7 +729,7 @@
 
     <div id="reviews" class="reviews">
         <h2 class="container title reviews__title">Отзывы</h2>
-        <div class="reviews__slide-container">
+        <div class="container reviews__slide-container">
             <div class="reviews__wrapper">
                 <div class="reviews__inner">
                     <div class="reviews__slide">
@@ -809,8 +852,8 @@
                         <a href="#contacts" class="footer__link">Контакты</a>
                     
                 </div>
-                <div class="footer__item">
-                    <a href="#" class="footer__privacy-policy fz-12-os sm-w">Политика конфиденциальности</a>
+                <div class="footer__item sm-w">
+                    <a href="#" class="footer__privacy-policy fz-12-os ">Политика конфиденциальности</a>
                 </div>
             </div>
         </div>
