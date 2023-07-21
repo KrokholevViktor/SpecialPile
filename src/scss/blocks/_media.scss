@@ -840,6 +840,7 @@
     }
 
     .form-slider {
+       
         min-height: 600px;
         padding-top: 38px;
         &__counter {
@@ -856,9 +857,11 @@
             }
         }
         &__item {
+
             &__card__title {
                 padding: 15px;
                 font-size: 14px;
+                line-height: 14px;
             }
         }
         &__inner {
@@ -895,16 +898,18 @@
         }
         &__navigation {
             padding: 15px;
-            // gap: 10px;
+            gap: 10px;
             height: auto;
             &_prev, &_next {
+                width: 100%;
                 .button_black {
-                    width: 130px;
+                    width: 100%;
                 }
             }
             &_btn-form {
+                width: 100%;
                 .button_form {
-                    width: 130px;
+                    width: 100%;
                 }
             }
         }

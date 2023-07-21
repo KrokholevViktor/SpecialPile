@@ -44,36 +44,226 @@ const forms = (state) => {
         })
     })
 
-    formWrapper.forEach(item => {
-        item.addEventListener('submit', (e) => {
-            e.preventDefault();
 
-            let statusMessage = document.createElement('div');
-            statusMessage.classList.add('status');
-            item.appendChild(statusMessage);
 
-            const formData = new FormData(item);
 
-            if (item.getAttribute('data-calc')  === "end") {
-                for (let key in state) {
-                    formData.append(key, state[key]);
+
+
+    // const buttonForm = document.querySelector('.form-slider__navigation_btn-form button');
+    // buttonForm.addEventListener('click', () => {
+    //     validateForm();
+    // })
+
+    // function validateForm() {
+        
+    //     const errorMessage = document.getElementById('error-message-empty');
+    //     inputs.forEach(input => {
+    //         console.log(input.value);
+    //         if (input.value.trim() === '') {
+
+    //             errorMessage.style.display = 'block';
+    //             return false; // Отменяем отправку формы, если поле пустое
+    //           } else {
+    //             errorMessage.style.display = 'none';
+    //             return true; // Разрешаем отправку формы, если поле заполнено
+    //           }
+    //     })
+    //   }
+    
+
+
+
+    function validation(form, inputFocus, event) {
+
+        let result = true;
+        let emailFlag = false;
+        const minLength = 18;
+
+        const tooltips = document.querySelectorAll('.tooltip');
+
+        function removeError(input) {
+            const parent = input.parentNode;
+
+            if(parent.classList.contains('form-main__item-error')){
+                parent.querySelector('.error-div').remove();
+                parent.classList.remove('form-main__item-error')
+                input.classList.remove('error-focus-border');
+                tooltips.forEach(tooltip => {
+                    if (parent.classList.contains('form-main__item-error') && parent.querySelector('.tooltip')) {
+                        tooltip.classList.remove('tooltip-error');
+                    }
+                })
+            }
+            
+        }
+
+        function createError(input, text) {
+            const parent = input.parentNode;
+            const errorDiv = document.createElement('div');
+            errorDiv.classList.add('error-div');
+            errorDiv.textContent = text;
+            parent.append(errorDiv);
+            parent.classList.add('form-main__item-error');
+            input.classList.add('error-focus-border');
+            tooltips.forEach(tooltip => {
+                if (parent.classList.contains('form-main__item-error') && parent.querySelector('.tooltip')) {
+                    tooltip.classList.add('tooltip-error');
+                }
+            })
+        }
+
+
+        
+
+        function createErrorMessage(inputFocusCurrent) {
+            if(inputFocusCurrent.value == "" && inputFocusCurrent.getAttribute('name') === 'phone') {
+                createError(inputFocusCurrent, 'Поле не заполнено');
+                result = false;
+            } else if (inputFocusCurrent.value == "" && inputFocusCurrent.getAttribute('name') === 'email') {
+                createError(inputFocusCurrent, 'Поле не заполнено');
+                result = false;
+            } else if(inputFocusCurrent.value.length < minLength && inputFocusCurrent.getAttribute('name') === 'phone') {
+                createError(inputFocusCurrent, 'Введите номер полностью');
+                result = false;
+            } else if ((emailFlag == false) && inputFocusCurrent.getAttribute('name') === 'email') {
+                createError(inputFocusCurrent, 'Неверный адрес электронной почты.');
+                result = false;
+            } else if (!inputFocusCurrent.checked && inputFocusCurrent.getAttribute('name') === 'checkbox' && event.type == 'submit') {
+                createError(inputFocusCurrent, 'Подтвердите свое согласие');
+                result = false;
+            }
+        }
+
+        
+
+        function isEmailValid(email) {
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailPattern.test(email);
+        }
+
+        if (inputFocus) {
+            const allInputs =  form.querySelectorAll('.input--required')
+            for (const input of allInputs) {
+                removeError(inputFocus);
+                if (isEmailValid(input.value)) {
+                    emailFlag = true
                 }
             }
+            createErrorMessage(inputFocus)
+        } else {
+            const allInputs =  form.querySelectorAll('.input--required')
+            for (const input of allInputs) {
+                removeError(input);
+                // let emailFlag = false;
 
-            postData('server.php', formData)
-                .then(res => {
-                    console.log(res);
-                    statusMessage.textContent = message.success;
-                })
-                .catch(() => {
-                    statusMessage.textContent = message.failure;
-                })
-                .finally(() => {
-                    clearInputs();
-                    setTimeout(() => {
-                        statusMessage.remove();
-                    }, 50000);
+                
+
+                if (isEmailValid(input.value)) {
+                    emailFlag = true
+                }
+
+                if(input.value == "" && input.getAttribute('name') === 'phone') {
+                    createError(input, 'Поле не заполнено');
+                    result = false;
+                } else if (input.value == "" && input.getAttribute('name') === 'email') {
+                    createError(input, 'Поле не заполнено');
+                    result = false;
+                } else if(input.value.length < minLength && input.getAttribute('name') === 'phone') {
+                    createError(input, 'Введите номер полностью');
+                    result = false;
+                } else if ((emailFlag == false) && input.getAttribute('name') === 'email') {
+                    createError(input, 'Неверный адрес электронной почты.');
+                    result = false;
+                } else if (!input.checked && input.getAttribute('name') === 'checkbox' && event.type == 'submit') {
+                    createError(input, 'Подтвердите свое согласие');
+                    result = false;
+                }
+            }
+        }
+
+        
+
+        return result;
+    }
+
+
+
+
+
+    formWrapper.forEach(item => {
+        const allRequireInputs =  item.querySelectorAll('.input--required');
+        allRequireInputs.forEach(input => {
+
+            input.addEventListener('change', (event) => {
+                validation(item, input, event);
+                input.addEventListener('input', (event) => {
+                    validation(item, input, event);
                 });
+            });
+        })
+
+
+        item.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            
+
+            if (validation(item, false, event)) {
+
+
+
+                let statusMessage = document.createElement('div');
+                statusMessage.classList.add('status');
+                item.appendChild(statusMessage);
+
+                const formData = new FormData(item);
+
+                if (item.getAttribute('data-calc')  === "end") {
+                    for (let key in state) {
+                        formData.append(key, state[key]);
+                    }
+                }
+
+                postData('server.php', formData)
+                    .then(res => {
+                        console.log(res);
+                        statusMessage.textContent = message.success;
+                    })
+                    .catch(() => {
+                        statusMessage.textContent = message.failure;
+                    })
+                    .finally(() => {
+                        clearInputs();
+                        setTimeout(() => {
+                            statusMessage.remove();
+                        }, 5000);
+                    });
+
+                    const checkbox = document.querySelector('input[name="checkbox"]');
+                    checkbox.checked = false;
+            }
+
+
+
+
+
+
+            
+
+            
+
+
+
+
+                
+
+
+
+
+
+
+
+
         });
     });
 };

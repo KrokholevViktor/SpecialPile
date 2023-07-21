@@ -159,6 +159,8 @@ function examplesSlider (prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInn
         isDragging = false;
         slidesInner.style.cursor = 'grab';
         });
+
+
 };
 
 export default examplesSlider;

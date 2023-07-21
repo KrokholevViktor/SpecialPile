@@ -513,59 +513,41 @@ function examplesSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInne
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-// const fixedHeader = () => {
-//     const promo = document.querySelector('.promo'),
-//           header = document.querySelector('.header');
-//     let counter = 0;
-
-//     function fixed() {
-//         window.addEventListener('scroll', () => {
-//             let promoCenter = promo.offsetHeight / 2,
-//                 scrollTop = window.scrollY;
-
-//             if (scrollTop >= promoCenter) {
-//                 header.classList.add('fixed');
-//                 promo.style.marginTop = `${header.offsetHeight}px`;
-//             }  else {
-//                 header.classList.remove('fixed');
-//                 promo.style.marginTop = `0px`;
-//             } 
-//         })
-//     }
-
-//     let prevScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-
-//     window.addEventListener('scroll', function() {
-//       const currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-
-//       if (currentScrollPosition < prevScrollPosition) {
-//         console.log(counter);
-//         counter++;
-//         if (counter > 100) {
-//             header.classList.remove('fixed');
-//             promo.style.marginTop = `0px`;
-//         }
-//       } else {
-//         console.log(counter);
-//         fixed();
-//         counter = 0;
-//       }
-
-//       prevScrollPosition = currentScrollPosition;
-//     });
-// }
-
-// export default fixedHeader;
-
 const fixedHeader = () => {
   const body = document.querySelector('body');
   const header = document.querySelector('.header');
+  const modalBtns = document.querySelectorAll('.header .modal-btn');
+  const links = document.querySelectorAll('.header__menu .header_link');
   let prevScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
   let isFixed = false;
   let scrollCounter = 0; // Добавляем счетчик прокрутки
   const scrollThreshold = 25; // Значение прокрутки, после которого удаляем класс
+  let clickLinkFlag = false;
+  let isScrolling = false;
+  let timeout;
+  function handleScroll() {
+    // Устанавливаем флаг, что страница находится в состоянии прокрутки
+    isScrolling = true;
+    // Если таймер уже запущен, сбрасываем его
+    clearTimeout(timeout);
 
+    // Запускаем таймер с задержкой 200 мс
+    timeout = setTimeout(function () {
+      // Код, который выполнится, когда страница закончит прокручиваться
+      // console.log('Страница закончила скроллиться');
+      // Устанавливаем флаг, что страница закончила скроллиться
+      isScrolling = false;
+      clickLinkFlag = false;
+    }, 200);
+  }
+  window.addEventListener('scroll', handleScroll);
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      clickLinkFlag = true;
+    });
+  });
   function fixHeader() {
+    // console.log(clickLinkFlag);
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     if (scrollTop > prevScrollPosition) {
       // Прямой скролл (scroll down)
@@ -577,8 +559,6 @@ const fixedHeader = () => {
     } else {
       // Обратный скролл (scroll up)
       if (isFixed) {
-        //   header.classList.remove('fixed');
-        //   body.style.marginTop = `0px`;
         isFixed = false;
       }
     }
@@ -589,18 +569,35 @@ const fixedHeader = () => {
     } else {
       scrollCounter = 0;
     }
+    if (clickLinkFlag) {
+      // Проверяем флаг нажатия на ссылку
 
-    // Удаляем класс, если счетчик достигнет определенного значения
-    if (scrollCounter >= scrollThreshold) {
-      header.classList.remove('fixed');
-      body.style.marginTop = `0px`;
-      isFixed = false;
-      scrollCounter = 0; // Сбрасываем счетчик
+      // Сбрасываем флаг после использования
+    } else {
+      // Удаляем класс, если счетчик достигнет определенного значения
+      if (scrollCounter >= scrollThreshold) {
+        header.classList.remove('fixed');
+        body.style.marginTop = `0px`;
+        isFixed = false;
+        scrollCounter = 0; // Сбрасываем счетчик
+        modalBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            if (isFixed) {
+              header.classList.remove('fixed');
+              body.style.marginTop = `0px`;
+              isFixed = false;
+              scrollCounter = 0;
+            }
+          });
+        });
+      }
+
+      // Код для установки класса "fixed" при скролле обратно
+      // ... (остальная логика оставляется без изменений)
     }
 
     prevScrollPosition = scrollTop;
   }
-
   // Добавляем слушатель события прокрутки
   window.addEventListener('scroll', fixHeader);
 };
@@ -623,6 +620,7 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
   const slides = document.querySelectorAll(slidesItems),
     prev = document.querySelector(prevBtn),
     next = document.querySelector(nextBtn),
+    navigationNext = document.querySelector('.form-slider__navigation_next'),
     total = document.querySelector('#total'),
     current = document.querySelector('#current'),
     counter = document.querySelector('.form-slider__counter'),
@@ -694,7 +692,9 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
     } else {
       current.textContent = slideIndex;
     }
-    next.disabled = true;
+    ////отключил для тестов слайдера disabled
+    // next.disabled = true; 
+    ////отключил для тестов слайдера disabled
     hideElements();
     showTitle();
     hidePrev();
@@ -736,11 +736,11 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
   function hideElements() {
     if (slideIndex == slides.length) {
       counter.style.visibility = 'hidden';
-      next.style.display = 'none';
+      navigationNext.style.display = 'none';
       buttonForm.style.display = '';
     } else {
       counter.style.visibility = '';
-      next.style.display = '';
+      navigationNext.style.display = '';
       buttonForm.style.display = 'none';
     }
   }
@@ -778,7 +778,10 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
 
       //////////////////////////////////////// заменяет чёрточку в counter у form-slider
       const counterDivider = document.querySelector('.form-slider__counter_divider');
-      if (window.innerWidth < 768 || window.screen.availWidth < 768) {
+      // 
+      console.log(`window.innerWidth ${window.innerWidth}`);
+      console.log(`window.screen.availWidth ${window.screen.availWidth}`);
+      if (window.innerWidth < 576 || window.screen.availWidth < 576) {
         counterDivider.textContent = '';
         images.forEach(element => {
           element.children[1].style.display = 'none';
@@ -786,7 +789,7 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
       }
       ;
       window.addEventListener('resize', () => {
-        if (window.innerWidth < 768 || window.screen.availWidth < 768) {
+        if (window.innerWidth < 576 || window.screen.availWidth < 576) {
           counterDivider.textContent = '';
           images.forEach(element => {
             element.children[1].style.display = 'none';
@@ -812,14 +815,16 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
       for (i = 0; i < typeSlide.length; i++) {
         try {
           if (!typeSlide[i].children[1].classList.contains('img-selected')) {
-            next.disabled = true;
+            // next.disabled = true;
+            ////отключил для тестов слайдера disabled
           } else {
             next.disabled = false;
             return;
           }
         } catch (error) {
           if (!typeSlide[i].classList.contains('ask-selected')) {
-            next.disabled = true;
+            // next.disabled = true;
+            ////отключил для тестов слайдера disabled
           } else {
             next.disabled = false;
             return;
@@ -887,29 +892,156 @@ const forms = state => {
       item.previousElementSibling.textContent = name;
     });
   });
-  formWrapper.forEach(item => {
-    item.addEventListener('submit', e => {
-      e.preventDefault();
-      let statusMessage = document.createElement('div');
-      statusMessage.classList.add('status');
-      item.appendChild(statusMessage);
-      const formData = new FormData(item);
-      if (item.getAttribute('data-calc') === "end") {
-        for (let key in state) {
-          formData.append(key, state[key]);
+
+  // const buttonForm = document.querySelector('.form-slider__navigation_btn-form button');
+  // buttonForm.addEventListener('click', () => {
+  //     validateForm();
+  // })
+
+  // function validateForm() {
+
+  //     const errorMessage = document.getElementById('error-message-empty');
+  //     inputs.forEach(input => {
+  //         console.log(input.value);
+  //         if (input.value.trim() === '') {
+
+  //             errorMessage.style.display = 'block';
+  //             return false; // Отменяем отправку формы, если поле пустое
+  //           } else {
+  //             errorMessage.style.display = 'none';
+  //             return true; // Разрешаем отправку формы, если поле заполнено
+  //           }
+  //     })
+  //   }
+
+  function validation(form, inputFocus, event) {
+    let result = true;
+    let emailFlag = false;
+    const minLength = 18;
+    const tooltips = document.querySelectorAll('.tooltip');
+    function removeError(input) {
+      const parent = input.parentNode;
+      if (parent.classList.contains('form-main__item-error')) {
+        parent.querySelector('.error-div').remove();
+        parent.classList.remove('form-main__item-error');
+        input.classList.remove('error-focus-border');
+        tooltips.forEach(tooltip => {
+          if (parent.classList.contains('form-main__item-error') && parent.querySelector('.tooltip')) {
+            tooltip.classList.remove('tooltip-error');
+          }
+        });
+      }
+    }
+    function createError(input, text) {
+      const parent = input.parentNode;
+      const errorDiv = document.createElement('div');
+      errorDiv.classList.add('error-div');
+      errorDiv.textContent = text;
+      parent.append(errorDiv);
+      parent.classList.add('form-main__item-error');
+      input.classList.add('error-focus-border');
+      tooltips.forEach(tooltip => {
+        if (parent.classList.contains('form-main__item-error') && parent.querySelector('.tooltip')) {
+          tooltip.classList.add('tooltip-error');
+        }
+      });
+    }
+    function createErrorMessage(inputFocusCurrent) {
+      if (inputFocusCurrent.value == "" && inputFocusCurrent.getAttribute('name') === 'phone') {
+        createError(inputFocusCurrent, 'Поле не заполнено');
+        result = false;
+      } else if (inputFocusCurrent.value == "" && inputFocusCurrent.getAttribute('name') === 'email') {
+        createError(inputFocusCurrent, 'Поле не заполнено');
+        result = false;
+      } else if (inputFocusCurrent.value.length < minLength && inputFocusCurrent.getAttribute('name') === 'phone') {
+        createError(inputFocusCurrent, 'Введите номер полностью');
+        result = false;
+      } else if (emailFlag == false && inputFocusCurrent.getAttribute('name') === 'email') {
+        createError(inputFocusCurrent, 'Неверный адрес электронной почты.');
+        result = false;
+      } else if (!inputFocusCurrent.checked && inputFocusCurrent.getAttribute('name') === 'checkbox' && event.type == 'submit') {
+        createError(inputFocusCurrent, 'Подтвердите свое согласие');
+        result = false;
+      }
+    }
+    function isEmailValid(email) {
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailPattern.test(email);
+    }
+    if (inputFocus) {
+      const allInputs = form.querySelectorAll('.input--required');
+      for (const input of allInputs) {
+        removeError(inputFocus);
+        if (isEmailValid(input.value)) {
+          emailFlag = true;
         }
       }
-      postData('server.php', formData).then(res => {
-        console.log(res);
-        statusMessage.textContent = message.success;
-      }).catch(() => {
-        statusMessage.textContent = message.failure;
-      }).finally(() => {
-        clearInputs();
-        setTimeout(() => {
-          statusMessage.remove();
-        }, 50000);
+      createErrorMessage(inputFocus);
+    } else {
+      const allInputs = form.querySelectorAll('.input--required');
+      for (const input of allInputs) {
+        removeError(input);
+        // let emailFlag = false;
+
+        if (isEmailValid(input.value)) {
+          emailFlag = true;
+        }
+        if (input.value == "" && input.getAttribute('name') === 'phone') {
+          createError(input, 'Поле не заполнено');
+          result = false;
+        } else if (input.value == "" && input.getAttribute('name') === 'email') {
+          createError(input, 'Поле не заполнено');
+          result = false;
+        } else if (input.value.length < minLength && input.getAttribute('name') === 'phone') {
+          createError(input, 'Введите номер полностью');
+          result = false;
+        } else if (emailFlag == false && input.getAttribute('name') === 'email') {
+          createError(input, 'Неверный адрес электронной почты.');
+          result = false;
+        } else if (!input.checked && input.getAttribute('name') === 'checkbox' && event.type == 'submit') {
+          createError(input, 'Подтвердите свое согласие');
+          result = false;
+        }
+      }
+    }
+    return result;
+  }
+  formWrapper.forEach(item => {
+    const allRequireInputs = item.querySelectorAll('.input--required');
+    allRequireInputs.forEach(input => {
+      input.addEventListener('change', event => {
+        validation(item, input, event);
+        input.addEventListener('input', event => {
+          validation(item, input, event);
+        });
       });
+    });
+    item.addEventListener('submit', event => {
+      event.preventDefault();
+      if (validation(item, false, event)) {
+        let statusMessage = document.createElement('div');
+        statusMessage.classList.add('status');
+        item.appendChild(statusMessage);
+        const formData = new FormData(item);
+        if (item.getAttribute('data-calc') === "end") {
+          for (let key in state) {
+            formData.append(key, state[key]);
+          }
+        }
+        postData('server.php', formData).then(res => {
+          console.log(res);
+          statusMessage.textContent = message.success;
+        }).catch(() => {
+          statusMessage.textContent = message.failure;
+        }).finally(() => {
+          clearInputs();
+          setTimeout(() => {
+            statusMessage.remove();
+          }, 5000);
+        });
+        const checkbox = document.querySelector('input[name="checkbox"]');
+        checkbox.checked = false;
+      }
     });
   });
 };
@@ -1285,6 +1417,12 @@ window.addEventListener('DOMContentLoaded', function () {
   Object(_modules_advantagesSlider__WEBPACK_IMPORTED_MODULE_9__["default"])('.advantages__navigation .navigation_prev .button_black', '.advantages__navigation .navigation_next .button_black', '.advantages__slide', '.advantages__slider', '.advantages__inner');
   Object(_modules_fixedHeader__WEBPACK_IMPORTED_MODULE_10__["default"])();
 });
+
+// window.addEventListener('resize', ()=> {
+//     console.log(window.innerWidth);
+//     console.log(window.screen.availWidth);
+
+// })
 
 /***/ })
 

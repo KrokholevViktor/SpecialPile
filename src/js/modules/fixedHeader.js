@@ -1,74 +1,62 @@
-// const fixedHeader = () => {
-//     const promo = document.querySelector('.promo'),
-//           header = document.querySelector('.header');
-//     let counter = 0;
-
-//     function fixed() {
-//         window.addEventListener('scroll', () => {
-//             let promoCenter = promo.offsetHeight / 2,
-//                 scrollTop = window.scrollY;
-    
-//             if (scrollTop >= promoCenter) {
-//                 header.classList.add('fixed');
-//                 promo.style.marginTop = `${header.offsetHeight}px`;
-//             }  else {
-//                 header.classList.remove('fixed');
-//                 promo.style.marginTop = `0px`;
-//             } 
-//         })
-//     }
-
-//     let prevScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-    
-//     window.addEventListener('scroll', function() {
-//       const currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-      
-//       if (currentScrollPosition < prevScrollPosition) {
-//         console.log(counter);
-//         counter++;
-//         if (counter > 100) {
-//             header.classList.remove('fixed');
-//             promo.style.marginTop = `0px`;
-//         }
-//       } else {
-//         console.log(counter);
-//         fixed();
-//         counter = 0;
-//       }
-      
-//       prevScrollPosition = currentScrollPosition;
-//     });
-// }
-
-// export default fixedHeader;
-
 const fixedHeader = () => {
     const body = document.querySelector('body');
     const header = document.querySelector('.header');
+    const modalBtns = document.querySelectorAll('.header .modal-btn');
+    const links = document.querySelectorAll('.header__menu .header_link');
     let prevScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
     let isFixed = false;
     let scrollCounter = 0; // Добавляем счетчик прокрутки
     const scrollThreshold = 25; // Значение прокрутки, после которого удаляем класс
+    let clickLinkFlag = false;
+    let isScrolling = false;
+    let timeout;
+
+    function handleScroll() {
+      // Устанавливаем флаг, что страница находится в состоянии прокрутки
+      isScrolling = true;
+       // Если таймер уже запущен, сбрасываем его
+      clearTimeout(timeout);
+
+      // Запускаем таймер с задержкой 200 мс
+      timeout = setTimeout(function () {
+        // Код, который выполнится, когда страница закончит прокручиваться
+        // console.log('Страница закончила скроллиться');
+        // Устанавливаем флаг, что страница закончила скроллиться
+        isScrolling = false;
+        clickLinkFlag = false;
+      }, 200);
+
+    }
     
+
+    window.addEventListener('scroll', handleScroll);
+
+
+    links.forEach(link => {
+      link.addEventListener('click', () => {
+        clickLinkFlag = true;
+      })
+    })
+    
+
     function fixHeader() {
+      // console.log(clickLinkFlag);
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      
+
       if (scrollTop > prevScrollPosition) {
         // Прямой скролл (scroll down)
-        if (!isFixed) {
-          header.classList.add('fixed');
-          body.style.marginTop = `${header.offsetHeight}px`;
-          isFixed = true;
-        }
+      if (!isFixed) {
+        header.classList.add('fixed');
+        body.style.marginTop = `${header.offsetHeight}px`;
+        isFixed = true;
+      }
       } else {
         // Обратный скролл (scroll up)
         if (isFixed) {
-        //   header.classList.remove('fixed');
-        //   body.style.marginTop = `0px`;
           isFixed = false;
         }
       }
-      
+
       // Увеличиваем счетчик прокрутки при скролле обратно
       if (!isFixed) {
         scrollCounter++;
@@ -76,19 +64,43 @@ const fixedHeader = () => {
         scrollCounter = 0;
       }
       
-      // Удаляем класс, если счетчик достигнет определенного значения
-      if (scrollCounter >= scrollThreshold) {
-        header.classList.remove('fixed');
-        body.style.marginTop = `0px`;
-        isFixed = false;
-        scrollCounter = 0; // Сбрасываем счетчик
+      if (clickLinkFlag) {
+        // Проверяем флаг нажатия на ссылку
+       
+         // Сбрасываем флаг после использования
+      } else {
+         // Удаляем класс, если счетчик достигнет определенного значения
+          if (scrollCounter >= scrollThreshold) {
+            header.classList.remove('fixed');
+            body.style.marginTop = `0px`;
+            isFixed = false;
+            scrollCounter = 0; // Сбрасываем счетчик
+            modalBtns.forEach(btn => {
+              btn.addEventListener('click', () => {
+                if (isFixed) {
+                  header.classList.remove('fixed');
+                  body.style.marginTop = `0px`;
+                  isFixed = false;
+                  scrollCounter = 0;
+                }
+              });
+            })
+          }
+
+        // Код для установки класса "fixed" при скролле обратно
+        // ... (остальная логика оставляется без изменений)
       }
+
+
+
+     
+
+     
       
       prevScrollPosition = scrollTop;
     }
-  
-    // Добавляем слушатель события прокрутки
-    window.addEventListener('scroll', fixHeader);
+      // Добавляем слушатель события прокрутки
+      window.addEventListener('scroll', fixHeader);
 };
 
 export default fixedHeader;

@@ -5,6 +5,7 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
         const slides = document.querySelectorAll(slidesItems),
         prev = document.querySelector(prevBtn),
         next = document.querySelector(nextBtn),
+        navigationNext = document.querySelector('.form-slider__navigation_next'),
         total = document.querySelector('#total'),
         current = document.querySelector('#current'),
         counter = document.querySelector('.form-slider__counter'),
@@ -88,7 +89,9 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
         } else {
             current.textContent = slideIndex;
         }
-        next.disabled = true;
+        ////отключил для тестов слайдера disabled
+        // next.disabled = true; 
+        ////отключил для тестов слайдера disabled
         hideElements();
         showTitle();
         hidePrev();
@@ -135,11 +138,11 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
     function hideElements() {
         if (slideIndex == slides.length) {
             counter.style.visibility = 'hidden';
-            next.style.display = 'none';
+            navigationNext.style.display = 'none';
             buttonForm.style.display = '';
         } else {
             counter.style.visibility = '';
-            next.style.display = '';
+            navigationNext.style.display = '';
             buttonForm.style.display = 'none';
         }
     };
@@ -183,8 +186,11 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
 
             //////////////////////////////////////// заменяет чёрточку в counter у form-slider
             const counterDivider = document.querySelector('.form-slider__counter_divider');
+            // 
+            console.log(`window.innerWidth ${window.innerWidth}` );
+            console.log(`window.screen.availWidth ${window.screen.availWidth}` );
+            if (window.innerWidth < 576 || window.screen.availWidth < 576) {
             
-            if (window.innerWidth < 768 || window.screen.availWidth < 768) {
                 counterDivider.textContent = '';
                 images.forEach(element => {
                     element.children[1].style.display = 'none'
@@ -192,7 +198,7 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
             };
 
             window.addEventListener('resize', () => {
-                if (window.innerWidth < 768 || window.screen.availWidth < 768) {
+                if (window.innerWidth < 576 || window.screen.availWidth < 576) {
                     counterDivider.textContent = '';
                     images.forEach(element => {
                         element.children[1].style.display = 'none'
@@ -218,14 +224,16 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
                 for (i = 0; i < typeSlide.length; i++) {
                     try {
                         if (!(typeSlide[i].children[1].classList.contains('img-selected'))) {
-                            next.disabled = true;
+                            // next.disabled = true;
+                            ////отключил для тестов слайдера disabled
                         } else {
                             next.disabled = false;
                             return
                         }
                     } catch (error) {
                         if (!(typeSlide[i].classList.contains('ask-selected'))) {
-                            next.disabled = true;
+                            // next.disabled = true;
+                            ////отключил для тестов слайдера disabled
                         } else {
                             next.disabled = false;
                             return

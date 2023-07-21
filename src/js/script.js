@@ -27,5 +27,8 @@ window.addEventListener('DOMContentLoaded', function () {
     fixedHeader();
 });
 
+// window.addEventListener('resize', ()=> {
+//     console.log(window.innerWidth);
+//     console.log(window.screen.availWidth);
 
-
+// })

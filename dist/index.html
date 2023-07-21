@@ -308,15 +308,16 @@
                                 <div class="form-main fz-16-bn">
                                     <div class="form-main__item">
                                         <label for="name">Имя</label>
-                                        <input class="fz-16-os" name="name" id="name" type="text" required placeholder="Иван">
+                                        <input class="fz-16-os" name="name" id="name" type="text" placeholder="Иван">
                                     </div>
                                     <div class="form-main__item">
-                                        <label for="phone">Номер телефона</label>
-                                        <input class="fz-16-os" name="phone" id="phone" type="text" required placeholder="+7 (999) 999-99-99">
+                                        <div><label for="phone">Номер телефона</label><span class="tooltip">*</span></div> 
+                                        <input class="input--required fz-16-os" name="phone" re id="phone" type="text"  placeholder="+7 (999) 999-99-99">
+                                        
                                     </div>
                                     <div class="form-main__item">
-                                        <label for="email">Электронная почта</label>
-                                        <input class="fz-16-os" name="email" id="email" type="email" required placeholder="mail@mail.ru">
+                                        <div><label for="email">Электронная почта</label><span class="tooltip">*</span></div>
+                                        <input class="input--required fz-16-os" name="email" id="email" type="email"   placeholder="mail@mail.ru">
                                     </div>
                                     <div class="form-main__item">
                                         <div>Прикрепить файл проекта</div>
@@ -324,7 +325,7 @@
                                         <input class="input-upload" name="file" id="file" type="file" value="Прикрепить файл">
                                     </div>
                                     <div class="form-main__item form-main__item_policy">
-                                        <input id="checkbox" name="checkbox" class="checkbox" type="checkbox" required>
+                                        <input id="checkbox" name="checkbox" class="input--required checkbox" type="checkbox">
                                         <label for="checkbox" class="fz-14-os">Я соглашаюсь с условиями <a class="fz-14-os" href="#"> политики конфиденциальности</a></label>
                                     </div>
                                 </div>
@@ -874,11 +875,11 @@
                         </div>
                         <div class="form-main__item">
                             <label for="phone1">Номер телефона</label>
-                            <input class="fz-16-os" name="phone" id="phone1" type="text" required placeholder="+7 (999) 999-99-99">
+                            <input class="input--required fz-16-os" name="phone" id="phone1" type="text" required placeholder="+7 (999) 999-99-99">
                         </div>
                         <div class="form-main__item">
                             <label for="email1">Электронная почта</label>
-                            <input class="fz-16-os" name="email" id="email1" type="email" required placeholder="mail@mail.ru">
+                            <input class="input--required fz-16-os" name="email" id="email1" type="email" required placeholder="mail@mail.ru">
                         </div>
                         <div class="form-main__item">
                             <div>Прикрепить файл проекта</div>
@@ -886,7 +887,7 @@
                             <input class="input-upload" name="file" id="file1" type="file" value="Прикрепить файл">
                         </div>
                         <div class="form-main__item form-main__item_policy">
-                            <input id="checkbox1" name="checkbox" class="checkbox" type="checkbox" required>
+                            <input id="checkbox1" name="checkbox" required class="input--required checkbox" type="checkbox">
                             <label for="checkbox1" class="fz-14-os">Я соглашаюсь с условиями <a class="fz-14-os" href="#"> политики конфиденциальности</a></label>
                         </div>
                     </div>
