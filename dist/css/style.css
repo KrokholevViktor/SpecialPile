@@ -1469,7 +1469,7 @@ img {
     line-height: 38px;
   }
 }
-@media screen and (max-width: 1439px), screen and (-webkit-min-device-pixel-ratio: 0) and (max-width: 1435px) {
+@media (max-width: 1439px), screen and (-webkit-min-device-pixel-ratio: 0) and (max-width: 1455px) {
   .fz-64-bn {
     font-size: 60px;
   }
@@ -1567,6 +1567,9 @@ img {
   }
   .contacts__wrapper {
     width: 100%;
+  }
+  .promo, .form-slider, .container__overflow_hidden, .advantages, .stages, .info, .examples, .reviews, .questions, .contacts {
+    display: none;
   }
 }
 @media (max-width: 1200px) {
@@ -2321,4 +2324,13 @@ img {
   .promo__services {
     margin-top: -490px;
   }
+}
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.footer {
+  margin-top: auto;
 }

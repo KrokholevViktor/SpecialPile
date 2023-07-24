@@ -693,7 +693,7 @@ async function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderIn
       current.textContent = slideIndex;
     }
     ////отключил для тестов слайдера disabled
-    // next.disabled = true; 
+    next.disabled = true;
     ////отключил для тестов слайдера disabled
     hideElements();
     showTitle();
@@ -820,7 +820,7 @@ async function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderIn
           }
         } catch (error) {
           if (!typeSlide[i].classList.contains('ask-selected')) {
-            // next.disabled = true;
+            next.disabled = true;
             ////отключил для тестов слайдера disabled
           } else {
             next.disabled = false;

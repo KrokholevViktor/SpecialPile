@@ -5,6 +5,7 @@
     margin: 0;
 }
 
+
 .container {
     max-width: 1160px;
     margin: 0 auto;
@@ -206,3 +207,13 @@ img {
 }
 
 @import "blocks/media";
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.footer {
+    margin-top: auto;
+}

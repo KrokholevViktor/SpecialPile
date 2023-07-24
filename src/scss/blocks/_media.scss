@@ -2,6 +2,20 @@
     body {
         overflow-x: hidden;
     }
+    // .promo {
+    //     &__img {
+    //         top: 70px;
+    //         height: 671px;
+    //         width: 543px;
+    //     }
+    //     &__services {
+            
+    //         &_item {
+    //             padding: 20px;
+               
+    //         }
+    //     }
+    // }
     .container {
         &__overflow_hidden {
             overflow: hidden;
@@ -51,8 +65,8 @@
     }
 }
 /////////////////////////////////////////////////////////next width
-@media  not screen and (-webkit-min-device-pixel-ratio: 0) and (max-width: 1439px),
-        screen and (-webkit-min-device-pixel-ratio: 0) and (max-width: 1435px) {
+@media (max-width: 1439px),
+        screen and (-webkit-min-device-pixel-ratio: 0) and (max-width: 1455px) {
 
     .fz-64-bn {
         font-size: 60px;
@@ -203,6 +217,10 @@
         }
     }
     .footer {
+    }
+
+    .promo, .form-slider, .container__overflow_hidden, .advantages, .stages, .info, .examples, .reviews, .questions, .contacts {
+        display: none;
     }
 }
 /////////////////////////////////////////////////////////next width
