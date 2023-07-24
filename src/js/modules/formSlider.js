@@ -1,7 +1,7 @@
 /// slider
 
 
-function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
+async function  formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
         const slides = document.querySelectorAll(slidesItems),
         prev = document.querySelector(prevBtn),
         next = document.querySelector(nextBtn),
@@ -186,9 +186,7 @@ function formSlider(prevBtn, nextBtn, slidesItems, sliderWrapper, sliderInner) {
 
             //////////////////////////////////////// заменяет чёрточку в counter у form-slider
             const counterDivider = document.querySelector('.form-slider__counter_divider');
-            // 
-            console.log(`window.innerWidth ${window.innerWidth}` );
-            console.log(`window.screen.availWidth ${window.screen.availWidth}` );
+
             if (window.innerWidth < 576 || window.screen.availWidth < 576) {
             
                 counterDivider.textContent = '';

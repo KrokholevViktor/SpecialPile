@@ -239,8 +239,11 @@ const forms = (state) => {
                         }, 5000);
                     });
 
-                    const checkbox = document.querySelector('input[name="checkbox"]');
-                    checkbox.checked = false;
+                    const checkboxs = document.querySelectorAll('input[name="checkbox"]');
+                    checkboxs.forEach(checkbox => {
+                        checkbox.checked = false;
+                    })
+                    
             }
 
 

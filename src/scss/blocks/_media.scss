@@ -51,7 +51,8 @@
     }
 }
 /////////////////////////////////////////////////////////next width
-@media (max-width: 1439px) {
+@media  screen and (max-width: 1439px),
+        screen and (-webkit-min-device-pixel-ratio: 0) and (max-width: 1435px) {
 
     .fz-64-bn {
         font-size: 60px;
@@ -554,42 +555,15 @@
             width: 225px;
         }
         &__counter {
+            display: flex;
             font-size: 32px;
             line-height: 42px;
-            display: flex;
-            flex-direction: column;
-            &_divider {
-                // color: $background-color-gray;
-                &:after {
-                    display: block;
-                    content: "";
-                    width: 36px;
-                    height: 4px;
-                    background-color: #333333;
-                    transform: translateX(-5px);
-                }
+            #total {
+                margin-left: 5px;
             }
         }
-        &__inner {
-            .item-1, .item-2, .item-3, .item-4 {
-                grid-template-columns: 1fr;
-                grid-template-rows: minmax(52px, auto);
-                grid-auto-rows: minmax(52px, auto);
 
-            }
-            .item-5 {
-                
-            }
-        }
-        &__item {
-            &__card {
-                &__title {
-                    height: 100%;
-                    border-bottom: none;
-                    padding: 15px;
-                }
-            }
-        }
+
     }
     .advantages {
         &__wrapper {
@@ -840,19 +814,35 @@
     }
 
     .form-slider {
-       
         min-height: 600px;
         padding-top: 38px;
+        &__inner {
+            .item-1, .item-2, .item-3, .item-4 {
+                grid-template-columns: 1fr;
+                grid-template-rows: minmax(52px, auto);
+                grid-auto-rows: minmax(52px, auto);
+
+            }
+        }
         &__counter {
+
+            display: flex;
+            flex-direction: column;
             line-height: 32px;
+            display: none;
             #current {
                 margin: 0;
             }
-            &_divider{
+            &_divider {
+                // color: $background-color-gray;
                 &:after {
-                    transform: translateX(-2.5px);
+                    display: block;
+                    content: "";
                     width: 28px;
                     height: 3px;
+                    background-color: #333333;
+                    transform: translateX(-5px);
+                    transform: translateX(-2.5px);
                 }
             }
         }
@@ -862,6 +852,9 @@
                 padding: 15px;
                 font-size: 14px;
                 line-height: 14px;
+                height: 100%;
+                border-bottom: none;
+                    // padding: 15px;
             }
         }
         &__inner {

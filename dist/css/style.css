@@ -340,7 +340,6 @@ img {
 .form-slider__item {
   width: 100%;
   padding: 1px;
-  border: 1px solid #000000;
   column-gap: 1px;
   row-gap: 1px;
   background-color: #000000;
@@ -1470,7 +1469,7 @@ img {
     line-height: 38px;
   }
 }
-@media (max-width: 1439px) {
+@media screen and (max-width: 1439px), screen and (-webkit-min-device-pixel-ratio: 0) and (max-width: 1435px) {
   .fz-64-bn {
     font-size: 60px;
   }
@@ -1823,28 +1822,12 @@ img {
     width: 225px;
   }
   .form-slider__counter {
+    display: flex;
     font-size: 32px;
     line-height: 42px;
-    display: flex;
-    flex-direction: column;
   }
-  .form-slider__counter_divider:after {
-    display: block;
-    content: "";
-    width: 36px;
-    height: 4px;
-    background-color: #333333;
-    transform: translateX(-5px);
-  }
-  .form-slider__inner .item-1, .form-slider__inner .item-2, .form-slider__inner .item-3, .form-slider__inner .item-4 {
-    grid-template-columns: 1fr;
-    grid-template-rows: minmax(52px, auto);
-    grid-auto-rows: minmax(52px, auto);
-  }
-  .form-slider__item__card__title {
-    height: 100%;
-    border-bottom: none;
-    padding: 15px;
+  .form-slider__counter #total {
+    margin-left: 5px;
   }
   .advantages__wrapper {
     display: none;
@@ -2048,21 +2031,35 @@ img {
     min-height: 600px;
     padding-top: 38px;
   }
+  .form-slider__inner .item-1, .form-slider__inner .item-2, .form-slider__inner .item-3, .form-slider__inner .item-4 {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(52px, auto);
+    grid-auto-rows: minmax(52px, auto);
+  }
   .form-slider__counter {
+    display: flex;
+    flex-direction: column;
     line-height: 32px;
+    display: none;
   }
   .form-slider__counter #current {
     margin: 0;
   }
   .form-slider__counter_divider:after {
-    transform: translateX(-2.5px);
+    display: block;
+    content: "";
     width: 28px;
     height: 3px;
+    background-color: #333333;
+    transform: translateX(-5px);
+    transform: translateX(-2.5px);
   }
   .form-slider__item__card__title {
     padding: 15px;
     font-size: 14px;
     line-height: 14px;
+    height: 100%;
+    border-bottom: none;
   }
   .form-slider__inner .item-1, .form-slider__inner .item-2, .form-slider__inner .item-3, .form-slider__inner .item-4 {
     grid-template-rows: minmax(51px, auto);
