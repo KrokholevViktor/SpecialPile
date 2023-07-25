@@ -83,26 +83,22 @@
     }
     .header {
         &__wrapper {
-            gap: 345px;
+            // gap: 345px;
         }
         &__devider {
-            width: 960px;
+            width: 100%;
         }
         &__info {
             &_phone {
                 white-space: nowrap;
             }
         }
-        &__menu {
-            white-space: nowrap;
-            gap: 25px;
-        }
     }
     .promo {
         &__img {
             top: 70px;
             height: 671px;
-            width: 543px;
+            width: 540px;
         }
         &__services {
             
@@ -219,9 +215,7 @@
     .footer {
     }
 
-    .promo, .form-slider, .container__overflow_hidden, .advantages, .stages, .info, .examples, .reviews, .questions, .contacts {
-        display: none;
-    }
+
 }
 /////////////////////////////////////////////////////////next width
 @media (max-width: 1200px) {
@@ -230,13 +224,13 @@
     }
     .header {
         &__wrapper {
-            gap: 315px;
+            // gap: 315px;
         }
         &__devider {
-            width: 900px;
+
         }
         &__menu {
-            gap: 19px;
+            // gap: 19px;
         }
     }
     .promo {
@@ -317,7 +311,7 @@
         padding-top: 30px;
         padding-bottom: 30px;
         &__wrapper {
-            gap: 360px;
+            // gap: 360px;
         }
         &__devider {
             display: none;
@@ -532,7 +526,7 @@
         }
     .header {
         &__wrapper {
-            gap: 185px;
+            // gap: 185px;
         }
     }
     .promo {
@@ -677,17 +671,17 @@
 }
 
 @media (max-width: 576px) {
-    .title {
-        line-height: 34px;
-    }
     .container {
         width: 100%;
         padding: 0 10px;
     }
+    .title {
+        line-height: 34px;
+    }
     .header {
         &__wrapper {
-            justify-content: space-between;
-            gap: 0px;
+            // justify-content: space-between;
+            // gap: 0px;
         }
         &__info {
             gap: 14px;
@@ -710,6 +704,7 @@
         }
     }
     .promo {
+        padding-bottom: 40px;
         &__title {
             margin-top: 20px;
             min-height: 80px;
@@ -736,7 +731,7 @@
         }
     }
     .characteristics {
-        margin-top: 72px;
+        padding-top: 32px;
         padding-bottom: 40px;
         &__wrapper {
             display: flex;
@@ -754,15 +749,13 @@
                 align-items: center;
                 margin-top: 0;
                 margin-left: 10px;
+                margin-right: 18px;
                 font-size: 16px;
             }
             .icon__wrapper {
-                
+                    width: 30px;
+                    height: 30px;
             }
-        }
-        &_icon {
-            width: 30px;
-            height: 30px;
         }
         &__bg {
             height: 295px;

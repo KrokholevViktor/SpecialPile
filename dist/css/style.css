@@ -35,14 +35,17 @@ img {
   background-color: #FFFFFF;
 }
 .header__logo {
-  width: 180px;
+  max-height: 44px;
+}
+.header img {
+  object-fit: contain;
 }
 .header__wrapper {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   padding: 0px;
-  gap: 545px;
 }
 .header__info {
   display: flex;
@@ -115,7 +118,9 @@ img {
   flex-direction: row;
   align-items: center;
   padding: 12px 0px 0px 0px;
-  gap: 35px;
+  flex-wrap: wrap;
+  white-space: nowrap;
+  gap: 20px;
 }
 .header__menu a {
   text-decoration: none;
@@ -155,6 +160,11 @@ img {
   line-height: 16px;
   letter-spacing: 0.43px;
   cursor: pointer;
+}
+.button_404 {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
 }
 .button:hover {
   background-color: #FF7590;
@@ -208,6 +218,9 @@ img {
   height: 746px;
   padding-top: 101px;
   padding-bottom: 60px;
+}
+.promo a {
+  text-decoration: none;
 }
 .promo__title {
   width: 560px;
@@ -272,7 +285,12 @@ img {
   padding: 30px;
   width: 100%;
 }
+.characteristics_item .icon__wrapper {
+  width: 80px;
+  height: 80px;
+}
 .characteristics_item_descr {
+  margin-right: 50px;
   margin-top: -8px;
   margin-left: 20px;
   text-align: left;
@@ -1151,21 +1169,30 @@ img {
   padding-top: 40px;
   padding-bottom: 40px;
 }
+.footer__logo {
+  max-height: 37px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.footer img {
+  object-fit: contain;
+}
 .footer__wrapper {
   display: flex;
+  flex-direction: row;
+  align-items: center;
   justify-content: space-between;
-  width: 100%;
 }
 .footer__item {
+  justify-content: end;
   width: 492px;
-  height: 47px;
   text-align: right;
 }
 .footer__item:first-child {
+  display: flex;
   padding: 0;
   text-align: left;
   width: 260px;
-  display: flex;
   flex-direction: column;
 }
 .footer__item:last-child {
@@ -1181,7 +1208,8 @@ img {
   gap: 15px;
 }
 .footer__privacy-policy {
-  display: inline-block;
+  display: flex;
+  flex-wrap: wrap;
   color: #FFFFFF;
   text-decoration: none;
 }
@@ -1482,23 +1510,16 @@ img {
   .container {
     max-width: 960px;
   }
-  .header__wrapper {
-    gap: 345px;
-  }
   .header__devider {
-    width: 960px;
+    width: 100%;
   }
   .header__info_phone {
     white-space: nowrap;
   }
-  .header__menu {
-    white-space: nowrap;
-    gap: 25px;
-  }
   .promo__img {
     top: 70px;
     height: 671px;
-    width: 543px;
+    width: 540px;
   }
   .promo__services_item {
     padding: 20px;
@@ -1568,22 +1589,10 @@ img {
   .contacts__wrapper {
     width: 100%;
   }
-  .promo, .form-slider, .container__overflow_hidden, .advantages, .stages, .info, .examples, .reviews, .questions, .contacts {
-    display: none;
-  }
 }
 @media (max-width: 1200px) {
   .fz-64-bn {
     font-size: 54px;
-  }
-  .header__wrapper {
-    gap: 315px;
-  }
-  .header__devider {
-    width: 900px;
-  }
-  .header__menu {
-    gap: 19px;
   }
   .promo {
     height: 720px;
@@ -1631,9 +1640,6 @@ img {
   .header {
     padding-top: 30px;
     padding-bottom: 30px;
-  }
-  .header__wrapper {
-    gap: 360px;
   }
   .header__devider {
     display: none;
@@ -1788,9 +1794,6 @@ img {
   .container {
     max-width: 540px;
   }
-  .header__wrapper {
-    gap: 185px;
-  }
   .promo {
     height: auto;
   }
@@ -1908,16 +1911,12 @@ img {
   }
 }
 @media (max-width: 576px) {
-  .title {
-    line-height: 34px;
-  }
   .container {
     width: 100%;
     padding: 0 10px;
   }
-  .header__wrapper {
-    justify-content: space-between;
-    gap: 0px;
+  .title {
+    line-height: 34px;
   }
   .header__info {
     gap: 14px;
@@ -1927,6 +1926,9 @@ img {
   }
   .header__logo {
     width: 141px;
+  }
+  .promo {
+    padding-bottom: 40px;
   }
   .promo__title {
     margin-top: 20px;
@@ -1952,7 +1954,7 @@ img {
     line-height: 20px;
   }
   .characteristics {
-    margin-top: 72px;
+    padding-top: 32px;
     padding-bottom: 40px;
   }
   .characteristics__wrapper {
@@ -1971,9 +1973,10 @@ img {
     align-items: center;
     margin-top: 0;
     margin-left: 10px;
+    margin-right: 18px;
     font-size: 16px;
   }
-  .characteristics_icon {
+  .characteristics_item .icon__wrapper {
     width: 30px;
     height: 30px;
   }
@@ -2333,4 +2336,13 @@ body {
 
 .footer {
   margin-top: auto;
+}
+
+.elementor img {
+  height: inherit;
+  max-width: inherit;
+}
+
+.elementor-column-gap-default > .elementor-column > .elementor-element-populated {
+  padding: 0;
 }

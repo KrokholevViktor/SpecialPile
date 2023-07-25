@@ -3,14 +3,18 @@
     padding-bottom: 15px;
     background-color: $background-color-white;
     &__logo {
-        width: 180px;
+        max-height: 44px;
+    }
+    img {
+        object-fit: contain;
     }
     &__wrapper {
         display: flex;
         flex-direction: row;
         align-items: center;
+        justify-content: space-between;
         padding: 0px;
-        gap: 545px;
+        // gap: auto;
     }
     &__info {
         display: flex;
@@ -86,7 +90,9 @@
         flex-direction: row;
         align-items: center;
         padding: 12px 0px 0px 0px;
-        gap: 35px;
+        flex-wrap: wrap;
+        white-space: nowrap;
+        gap: 20px;
         a {
             text-decoration: none;
             color:#000

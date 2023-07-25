@@ -11,6 +11,11 @@
     line-height: 16px;
     letter-spacing: 0.43px;
     cursor: pointer;
+    &_404{
+        display: flex;
+        justify-content: center;
+        margin-top: 50px;
+    }
     &:hover {
         background-color: $pink-color-hover;
     }

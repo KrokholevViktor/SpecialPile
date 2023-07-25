@@ -1,22 +1,35 @@
 .footer {
+    // display: flex;
     min-height: 150px;
     background-color: $footer-color;
     padding-top: 40px;
     padding-bottom: 40px;
+    &__logo {
+        max-height: 37px;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    img {
+        object-fit: contain;
+    }
     &__wrapper {
         display: flex;
+        flex-direction: row;
+        align-items: center;
         justify-content: space-between;
-        width: 100%;
+        // padding: 0px;
     }
     &__item {
+        justify-content: end;
         width: 492px;
-        height: 47px;
+        // height: 47px;
         text-align: right;
         &:first-child{
+            display: flex;
+
             padding: 0;
             text-align: left;
             width: 260px;
-            display: flex;
             flex-direction: column;
         }
         &:last-child {
@@ -33,8 +46,8 @@
         }
     }
     &__privacy-policy {
-        display: inline-block;
-        // margin-top: 15px;
+        display: flex;
+        flex-wrap: wrap;
         color: $footer-text-color;
         text-decoration: none;
         &:hover {
